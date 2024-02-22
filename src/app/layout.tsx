@@ -1,3 +1,5 @@
+import Foot from "@/components/UIUX/Foot";
+import Head from "@/components/UIUX/Head";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -17,13 +19,17 @@ export default function RootLayout({
 
     <html lang="en">
       <body>
-        <header></header>
+        <header>
+          <Head />
+        </header>
 
         <main>
-          
+
         </main>
 
-        <footer></footer>
+        <footer>
+          <Foot />
+        </footer>
 
 
         {children}
