@@ -1,12 +1,11 @@
-//헤더메뉴
 import React from 'react';
 
-function Head() {
+function page() {
     return (
         <div>
-            헤더
+            북마크
         </div>
     );
 }
 
-export default Head;
+export default page;
