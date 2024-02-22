@@ -5,6 +5,7 @@ import React from 'react';
 function Foot() {
     return (
         <div>
+            <Link href="/">login</Link>
             <Link href="/home">home</Link>
             <Link href="/search">search</Link>
             <Link href="/bookmark">bookmark</Link>

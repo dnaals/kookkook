@@ -5,7 +5,8 @@ export default function Home() {
   return (
 
     <div>
-      이게 로그인 페이지
+      이게 로그인 페이지<br />
+
     </div>
   );
 }
