@@ -4,7 +4,7 @@ import React from 'react';
 
 function Foot() {
     return (
-        <div>
+        <div id='a'>
             <Link href="/">login</Link>
             <Link href="/home">home</Link>
             <Link href="/search">search</Link>
