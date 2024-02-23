@@ -2,7 +2,6 @@ import Link from "next/link";
 // import '@/components/style/login.scss'
 export default function Home() {
 
-
   return (
     <>
       <div>

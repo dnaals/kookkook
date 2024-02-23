@@ -1,6 +1,10 @@
+"use client";
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 function page() {
+    const url = useRouter();
+    console.log(url);
 
     return (
         <div>

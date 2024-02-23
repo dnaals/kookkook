@@ -1,5 +1,3 @@
-//레시피 정사각형 모양
-//헤더메뉴
 'use client';
 
 import { useEffect } from "react";
@@ -7,6 +5,7 @@ import { useStore } from '@/components/recipe_store/all_store';
 import { useStore2 } from '@/components/recipe_store/my_store';
 import React from 'react';
 import { useRouter } from "next/navigation";
+
 
 
 function RecipeSq() {
@@ -20,17 +19,19 @@ function RecipeSq() {
         }, [])
         if (!data.length) return <>sadsadsa...</>
 
-const router = useRouter();
+const router:any = useRouter();
 
         const link = (a:any)=>{
             let aa = data.filter(obj=> a==obj.name)
-            let url = aa[0].seq;
-            router.push(`/home/seq=${url}`)
+            let url:any = aa[0].seq;
+            router.push({
+                pathname:'/home/[seq]',
+                query:{seq:url}
+            })
         }
     return (
         <>
             <button onClick={() => { dataCrl('카테고리', '반찬') }}>반찬</button>
-            
             <button onClick={() => { dataCrl('카테고리', '밥') }}>밥</button>
             <button onClick={() => { dataCrl('카테고리', '국&찌개') }}>국&찌개</button>
             <button onClick={() => { dataCrl('카테고리', '일품') }}>일품</button>
