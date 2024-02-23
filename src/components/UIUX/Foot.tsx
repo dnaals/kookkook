@@ -1,15 +1,18 @@
 //푸터메뉴 aaaa
 import Link from 'next/link';
 import React from 'react';
+import "../style/header_footer.scss";
+
+
 
 function Foot() {
     return (
-        <div id='a'>
-            <Link href="/">login</Link>
-            <Link href="/home">home</Link>
-            <Link href="/search">search</Link>
-            <Link href="/bookmark">bookmark</Link>
-            <Link href="/mypage">mypage</Link>
+        <div className='foot'>
+            {/* <Link href="/"></Link> */}
+            <Link href="/home"><img src="/images/home_yellow.png" /></Link>
+            <Link href="/search"><img src="/images/search_yellow.png" /></Link>
+            <Link href="/bookmark"><img src="/images/bookmark_before.png" /></Link>
+            <Link href="/mypage"><img src="/images/user_yellow.png" /></Link>
         </div>
     );
 }

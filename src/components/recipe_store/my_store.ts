@@ -20,7 +20,7 @@ export const useStore2 = create<Ty2>((set) => {
             set({ status1: false });
             let res2: any;
             switch (type2) {
-                case 'all': res2 = await request1.get('/api/google')
+                case 'all': res2 = await request1.get('/api/my_recipe')
                     break;
             }
             console.log(res2.data)

@@ -1,6 +1,6 @@
 //헤더메뉴
 import React from 'react';
-import "../style/common.scss";
+import "../style/header_footer.scss";
 
 function Head() {
     return (
