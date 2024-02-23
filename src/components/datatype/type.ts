@@ -12,3 +12,8 @@ export type initTy = {
     m_thumb?: string;
     like?: number;
 }
+
+export type initTy1 = {
+    user?:string;
+    email?:string
+}
