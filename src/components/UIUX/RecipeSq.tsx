@@ -30,6 +30,7 @@ const router = useRouter();
     return (
         <>
             <button onClick={() => { dataCrl('카테고리', '반찬') }}>반찬</button>
+            
             <button onClick={() => { dataCrl('카테고리', '밥') }}>밥</button>
             <button onClick={() => { dataCrl('카테고리', '국&찌개') }}>국&찌개</button>
             <button onClick={() => { dataCrl('카테고리', '일품') }}>일품</button>
