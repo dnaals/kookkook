@@ -6,29 +6,26 @@ import { useStore2 } from '@/components/recipe_store/my_store';
 import React from 'react';
 import { useRouter } from "next/navigation";
 
-
-
 function RecipeSq() {
-
-        let { data, dataCrl } = useStore();
-        let { data2, dataCrl2 } = useStore2();
+    let { data, dataCrl } = useStore();
+    let { data2, dataCrl2 } = useStore2();
     
-        useEffect(() => {
-            dataCrl('all', '');
-            dataCrl2('all', '');
-        }, [])
-        if (!data.length) return <>sadsadsa...</>
+    useEffect(() => {
+        dataCrl('all', '');
+        dataCrl2('all', '');
+    }, [])
 
-const router:any = useRouter();
+    if (!data.length) return <>sadsadsa...</>
 
-        const link = (a:any)=>{
-            let aa = data.filter(obj=> a==obj.name)
-            let url:any = aa[0].seq;
-            router.push({
-                pathname:'/home/[seq]',
-                query:{seq:url}
-            })
-        }
+    const router:any = useRouter(); 
+// "/home/asd"
+
+    const link = (a:any) => {
+        let aa = data.filter(obj => a == obj.name);
+        let url: any = aa[0].seq;
+        router.push(`/home/${url}`);
+    }
+
     return (
         <>
             <button onClick={() => { dataCrl('카테고리', '반찬') }}>반찬</button>
@@ -37,14 +34,12 @@ const router:any = useRouter();
             <button onClick={() => { dataCrl('카테고리', '일품') }}>일품</button>
             <button onClick={() => { dataCrl('카테고리', '후식') }}>후식</button><br />
             <button onClick={() => { dataCrl2('all', '') }}>구글계정 모두</button>
-            {data.map((obj,k)=>(
+            {data.map((obj, k) => (
                 <div key={k}>
-                    
-             <p onClick={()=>{link(obj.name)}}>{obj.name}</p>   
-             </div>
+                    <p onClick={() => { link(obj.name) }}>{obj.name}</p>
+                </div>
             ))}
         </>
-        
     );
 }
 

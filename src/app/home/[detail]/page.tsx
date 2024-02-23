@@ -1,15 +1,18 @@
 "use client";
-import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect } from 'react';
 
-function page() {
-    const url = useRouter();
-    console.log(url);
+function page({params}:any) {
+
+    console.log(params.detail)
+    
+    
+
 
     return (
         <div>
             상세페이지
-            <iframe
+            {/* <iframe
                 id="ytplayer"
                 type="text/html"
                 width="720"
@@ -17,7 +20,7 @@ function page() {
                 src="https://www.youtube.com/embed/bU3N9S_sNjI"
                 frameborder="0"
                 allowfullscreen="allowfullscreen">
-            </iframe>
+            </iframe> */}
 
         </div>
     );
