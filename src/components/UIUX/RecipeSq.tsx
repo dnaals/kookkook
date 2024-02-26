@@ -1,3 +1,4 @@
+//레시피 정사각형 모양
 'use client';
 
 import { useEffect } from "react";
@@ -6,7 +7,10 @@ import { useStore2 } from '@/components/recipe_store/my_store';
 import React from 'react';
 import { useRouter } from "next/navigation";
 
-function RecipeSq( { getData }:any) {
+import "../style/home.scss";
+
+
+function RecipeSq({ getData }: any) {
 
     let { data, dataCrl } = useStore();
     let { data2, dataCrl2 } = useStore2();
@@ -16,28 +20,27 @@ function RecipeSq( { getData }:any) {
     }, [])
     if (!data.length) return <>sadsadsa...</>
 
-    const router:any = useRouter(); 
+    const router: any = useRouter();
 
-    const link = (a:any) => {
+    const link = (a: any) => {
         let aa = data.filter(obj => a == obj.name);
         let url: any = aa[0].seq;
         router.push(`/home/${url}`);
     }
 
     return (
-        <div className="home_contents">
-            <button onClick={() => { dataCrl('카테고리', '반찬') }}>반찬</button>
-            <button onClick={() => { dataCrl('카테고리', '밥') }}>밥</button>
-            <button onClick={() => { dataCrl('카테고리', '국&찌개') }}>국&찌개</button>
-            <button onClick={() => { dataCrl('카테고리', '일품') }}>일품</button>
-            <button onClick={() => { dataCrl('카테고리', '후식') }}>후식</button><br />
-            <button onClick={() => { dataCrl2('all', '') }}>구글계정 모두</button>
+        <div className="recipeSq">
             {data.map((obj, k) => (
                 <div key={k}>
-                    <p onClick={() => { link(obj.name) }}>{obj.name}</p>
+                    <p onClick={() => { link(obj.name) }}>
+                        <img src={obj.m_thumb} />
+                        {obj.name}
+                        {obj.tip}
+                    </p>
                 </div>
             ))}
         </div>
+
     );
 }
 

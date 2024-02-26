@@ -26,8 +26,8 @@ export const useStore = create<Ty>((set) => {
                 case '카테고리': res = await request.get(`/api/all_recipe/${Kategorie}`)
                     break;
 
-                // case '국&찌개': res = await request.get('/api/국&찌개')
-                //   break;  
+                case '밥': res = await request.get('/api/밥')
+                    break;
 
                 case 'insert': res = await request.post('/api/all_recipe/', {})
                     break;
