@@ -1,0 +1,44 @@
+@import "../style/color.scss";
+@import "../style/scrap.scss";
+
+.recipeWid_box {
+    color: $color-black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+
+    .recipeWid {
+
+
+
+        figure {
+            display: flex;
+
+            img {
+                width: 180px;
+                height: 180px;
+                border-radius: 20px;
+            }
+
+            figcaption {
+                .flex {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    p {
+                        font-weight: 600;
+                    }
+
+                    .scrap {
+                        img {
+                            width: 30px;
+                            height: auto;
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+}

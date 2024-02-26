@@ -4,11 +4,12 @@
 import { useStore2 } from '@/components/recipe_store/my_store';
 import { useRouter } from "next/navigation";
 import FuncScrap from '@/components/UIUX/FuncScrap';
-import "../style/home.scss";
 import Button from "./Button";
 import { useStore } from '../recipe_store/all_store';
 import { useEffect } from 'react';
 
+import "../style/recipe_wid.scss";
+import "../style/scrap.scss";
 
 
 function RecipeWid({ }) {
@@ -31,25 +32,31 @@ function RecipeWid({ }) {
     }
 
     return (
-        <div className="home_contents">
-            <div className="recipeWid">
-                <Button dataCrl={dataCrl} />
-                {data.map((obj: any, k: number) => (
-                    <div key={k}>
-                        <p onClick={() => { link(obj.name) }}>
-                            <figure>
-                                <img src={obj.m_thumb} />
-                                <figcaption>
-                                    <FuncScrap />
-                                    <p>{obj.name}</p>
-                                    <p>{obj.tip}</p>
-                                </figcaption>
-                            </figure>
-                        </p>
-                    </div>
-                ))}
+        <>
+            <Button dataCrl={dataCrl} />
+            <div className="recipeWid_box">
+                <div className="recipeWid">
+                    {data.map((obj: any, k: number) => (
+                        <div key={k}>
+                            <p onClick={() => { link(obj.name) }}>
+                                <figure>
+                                    <img src={obj.m_thumb} />
+
+                                    <figcaption>
+                                        <div className='flex'>
+                                            <p>{obj.name}</p>
+                                            <FuncScrap />
+                                        </div>
+
+                                        <p>{obj.tip}</p>
+                                    </figcaption>
+                                </figure>
+                            </p>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
