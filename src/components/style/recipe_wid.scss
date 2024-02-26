@@ -1,5 +1,6 @@
 @import "../style/color.scss";
 @import "../style/scrap.scss";
+@import "../style/like.scss";
 
 .recipeWid_box {
     color: $color-black;
@@ -32,6 +33,15 @@
                     .scrap {
                         img {
                             width: 30px;
+                            height: auto;
+                        }
+                    }
+                }
+
+                .like {
+                    button {
+                        img {
+                            width: 17px;
                             height: auto;
                         }
                     }

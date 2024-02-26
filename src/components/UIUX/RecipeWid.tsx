@@ -51,8 +51,9 @@ function RecipeWid({ }) {
                                         </div>
 
                                         <p>{obj.tip}</p>
+                                        <FuncLike />
                                     </figcaption>
-                                    <FuncLike />
+
                                 </figure>
                             </p>
                         </div>

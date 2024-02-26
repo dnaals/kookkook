@@ -1,12 +1,23 @@
 //좋아요버튼 기능
 
 import React from 'react';
+// import { useStore } from '../recipe_store/all_store';
+// import { useEffect } from 'react';
 import "@/components/style/like.scss";
 
 function FuncLike() {
+    // let { data, dataCrl } = useStore();
+    // useEffect(() => {
+    //     dataCrl('all', '');
+    // }, [])
+
+
+
+
     return (
+
         <div className="like">
-            <button><img src="/images/heart_black.png" />4.9</button>
+            <button><img src="/images/heart_black.png" />like 값</button>
         </div>
     );
 }
