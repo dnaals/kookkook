@@ -2,37 +2,39 @@
 'use client';
 
 import { useStore2 } from '@/components/recipe_store/my_store';
-import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import FuncScrap from '@/components/UIUX/FuncScrap';
 import "../style/home.scss";
 import Button from "./Button";
+import { useStore } from '../recipe_store/all_store';
+import { useEffect } from 'react';
+
 
 
 function RecipeWid({ }) {
-    let { data2, dataCrl2 } = useStore2();
+    // let { data2, dataCrl2 } = useStore2();
     const router: any = useRouter();
-    const [data, setData]: any = useState();
-    const getData = (data: any) => {
-        setData(data)
+
+
+
+    let { data, dataCrl } = useStore();
+    useEffect(() => {
+        dataCrl('all', '');
+    }, [])
+    if (!data.length) return <>sadsadsa...</>
+
+
+    const link = (a: any) => {
+        let aa = data.filter(obj => a == obj.name);
+        let url: any = aa[0].seq;
+        router.push(`/home/${url}`);
     }
-    // useEffect(() => {
-    //     getData("")
-    // }, [])
-
-    console.log(data)
-
-    // const link = (a: any) => {
-    //     let aa = data.filter(obj => a == obj.name);
-    //     let url: any = aa[0].seq;
-    //     router.push(`/home/${url}`);
-    // }
 
     return (
         <div className="home_contents">
             <div className="recipeWid">
-                <Button getData={getData} />
-                {/* {data.map((obj: any, k: number) => (
+                <Button dataCrl={dataCrl} />
+                {data.map((obj: any, k: number) => (
                     <div key={k}>
                         <p onClick={() => { link(obj.name) }}>
                             <figure>
@@ -45,7 +47,7 @@ function RecipeWid({ }) {
                             </figure>
                         </p>
                     </div>
-                ))} */}
+                ))}
             </div>
         </div>
     );

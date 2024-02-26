@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react';
 import { useStore } from '@/components/recipe_store/all_store';
 
-function Button({ getData }: any) {
-    let { data, dataCrl } = useStore();
-    getData(data);
-    // useEffect(() => {
-    //     dataCrl('all', '');
-    // }, [])
-    // if (!data.length) return <>sadsadsa...</>
+function Button({ dataCrl }: any) {
     return (
         <div className="home_btn">
             <button onClick={() => { dataCrl('카테고리', '밥') }}><img src="/images/rice_black.png" />RICE</button>

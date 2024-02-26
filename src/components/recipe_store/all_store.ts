@@ -17,7 +17,7 @@ export const useStore = create<Ty>((set) => {
         data: [],
         data2: [],
         dataCrl: async function (type: string, Kategorie?: string) {
-            console.log(Kategorie)
+            // console.log(Kategorie)
             let res: any;
             switch (type) {
                 case 'all': res = await request.get('/api/all_recipe/')
