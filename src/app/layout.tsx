@@ -2,6 +2,7 @@
 import Foot from "@/components/UIUX/Foot";
 import Head from "@/components/UIUX/Head";
 import { usePathname } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
 import '@/components/style/common.scss'
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
@@ -14,7 +15,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <header>
           {urlPath && <Head />}
         </header>
-        <main>{children}</main>
+        <SessionProvider>
+          <main>{children}</main>  
+        </SessionProvider>
         <footer>
           {urlPath && <Foot />}
         </footer>

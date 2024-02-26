@@ -32,8 +32,8 @@ function RecipeSq({ getData }: any) {
                 <div key={k}>
                     <p onClick={() => { link(obj.name) }}>
                         <img src={obj.m_thumb} />
-                        {obj.name}
-                        {obj.tip}
+                        <div>{obj.name}</div>
+                        
                     </p>
                 </div>
             ))}
