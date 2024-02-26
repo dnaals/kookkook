@@ -13,10 +13,8 @@ import "../style/home.scss";
 function RecipeSq({ getData }: any) {
 
     let { data, dataCrl } = useStore();
-    let { data2, dataCrl2 } = useStore2();
     useEffect(() => {
         dataCrl('all', '');
-        dataCrl2('all', '');
     }, [])
     if (!data.length) return <>sadsadsa...</>
 
