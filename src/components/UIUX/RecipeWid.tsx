@@ -4,9 +4,11 @@
 import { useStore2 } from '@/components/recipe_store/my_store';
 import { useRouter } from "next/navigation";
 import FuncScrap from '@/components/UIUX/FuncScrap';
-import Button from "./Button";
 import { useStore } from '../recipe_store/all_store';
 import { useEffect } from 'react';
+
+import Button from "./Button";
+import FuncLike from './FuncLike';
 
 import "../style/recipe_wid.scss";
 import "../style/scrap.scss";
@@ -50,6 +52,7 @@ function RecipeWid({ }) {
 
                                         <p>{obj.tip}</p>
                                     </figcaption>
+                                    <FuncLike />
                                 </figure>
                             </p>
                         </div>
