@@ -6,19 +6,17 @@ import { useStore2 } from '@/components/recipe_store/my_store';
 import React from 'react';
 import { useRouter } from "next/navigation";
 
-function RecipeSq() {
+function RecipeSq( { getData }:any) {
+
     let { data, dataCrl } = useStore();
     let { data2, dataCrl2 } = useStore2();
-    
     useEffect(() => {
         dataCrl('all', '');
         dataCrl2('all', '');
     }, [])
-
     if (!data.length) return <>sadsadsa...</>
 
     const router:any = useRouter(); 
-// "/home/asd"
 
     const link = (a:any) => {
         let aa = data.filter(obj => a == obj.name);

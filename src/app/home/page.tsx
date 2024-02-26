@@ -9,11 +9,12 @@ import React from 'react';
 import { log } from "console";
 import RecipeSq from "@/components/UIUX/RecipeSq";
 function page() {
+
+
     return (
         <div>
             홈<br />
-            <RecipeSq/>
-            <Link href="/home/detail">상세페이지</Link>
+            <RecipeSq />
         </div>
     );
 }
