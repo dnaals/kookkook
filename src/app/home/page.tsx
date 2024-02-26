@@ -1,19 +1,12 @@
 'use client';
-
-import { useEffect } from "react";
-import { useStore } from '@/components/recipe_store/all_store';
-import { useStore2 } from '@/components/recipe_store/my_store';
-
-import Link from 'next/link';
 import React from 'react';
-import { log } from "console";
 import RecipeSq from "@/components/UIUX/RecipeSq";
+import "@/components/style/home.scss";
 function page() {
 
 
     return (
         <div>
-            홈<br />
             <RecipeSq />
         </div>
     );

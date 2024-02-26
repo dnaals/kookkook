@@ -25,7 +25,7 @@ function RecipeSq( { getData }:any) {
     }
 
     return (
-        <>
+        <div className="home_contents">
             <button onClick={() => { dataCrl('카테고리', '반찬') }}>반찬</button>
             <button onClick={() => { dataCrl('카테고리', '밥') }}>밥</button>
             <button onClick={() => { dataCrl('카테고리', '국&찌개') }}>국&찌개</button>
@@ -37,7 +37,7 @@ function RecipeSq( { getData }:any) {
                     <p onClick={() => { link(obj.name) }}>{obj.name}</p>
                 </div>
             ))}
-        </>
+        </div>
     );
 }
 
