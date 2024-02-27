@@ -6,13 +6,18 @@
     color: $color-black;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 30px;
+    width: 85%;
+    margin: 0 auto;
+
 
     .recipeWid {
-
+        width: 95%;
+        margin: 0 auto;
 
 
         figure {
             display: flex;
+            margin: 30px;
 
             img {
                 width: 180px;
@@ -21,6 +26,8 @@
             }
 
             figcaption {
+                margin-left: 20px;
+
                 .flex {
                     display: flex;
                     align-items: center;
@@ -39,6 +46,9 @@
                 }
 
                 .like {
+                    display: flex;
+                    justify-content: flex-end;
+
                     button {
                         img {
                             width: 17px;

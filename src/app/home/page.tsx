@@ -1,13 +1,27 @@
 'use client';
-import React from 'react';
-import "@/components/style/home.scss";
+import React, { useEffect } from 'react';
+import { useStore } from '@/components/recipe_store/all_store';
+import Button from "../../components/UIUX/Button";
+import { useRouter } from "next/navigation";
 import RecipeList from '@/components/service/RecipeList';
-function page() {
 
+import "@/components/style/home.scss";
+
+function page() {
+    let { data, dataCrl } = useStore();
+    useEffect(() => {
+        dataCrl('all', '');
+    }, [])
     const idx = "가로"
+
+
+
+
+
 
     return (
         <div>
+            <Button dataCrl={dataCrl} />
             <RecipeList idx={idx} />
         </div>
     );

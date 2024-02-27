@@ -7,16 +7,16 @@ import FuncScrap from '@/components/UIUX/FuncScrap';
 import { useStore } from '../recipe_store/all_store';
 import { useEffect } from 'react';
 
-import Button from "./Button";
+
 import FuncLike from './FuncLike';
 
 import "../style/recipe_wid.scss";
 import "../style/scrap.scss";
 
 
-function RecipeWid({ dataID,dataCrl }:any) {
+function RecipeWid({ dataID, dataCrl }: any) {
     const idx = "가로"
-    console.log(dataID,"asdasd");
+    console.log(dataID, "asdasd");
     const router: any = useRouter();
 
     const link = (a: any) => {
@@ -27,7 +27,6 @@ function RecipeWid({ dataID,dataCrl }:any) {
 
     return (
         <>
-            <Button dataCrl={dataCrl} />
             <div className="recipeWid_box">
                 <div className="recipeWid">
                     {dataID.map((obj: any, k: number) => (
@@ -41,10 +40,9 @@ function RecipeWid({ dataID,dataCrl }:any) {
                                             <p>{obj.name}</p>
                                             <FuncScrap />
                                         </div>
-
                                         <p>{obj.tip}</p>
+                                        <FuncLike />
                                     </figcaption>
-                                    <FuncLike />
                                 </figure>
                             </p>
                         </div>
