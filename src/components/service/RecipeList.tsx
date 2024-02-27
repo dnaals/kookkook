@@ -24,6 +24,7 @@ function RecipeList({idx}:any) {
         case "정사각형":
             comp=<RecipeSq dataID={data} dataCrl={dataCrl} />
             break;
+            
         case "홈세부":
             comp=<Home_detail dataID={data} dataCrl={dataCrl} />
             break;
