@@ -1,24 +1,23 @@
 //레시피 정사각형 모양
 'use client';
 
-import { useEffect } from "react";
 import { useStore } from '@/components/recipe_store/all_store';
-import { useStore2 } from '@/components/recipe_store/my_store';
-import React from 'react';
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useStore2 } from '@/components/recipe_store/my_store';
 
 import "../style/home.scss";
 
 
 function RecipeSq({ getData }: any) {
 
+    const router: any = useRouter();
     let { data, dataCrl } = useStore();
     useEffect(() => {
         dataCrl('all', '');
     }, [])
     if (!data.length) return <>sadsadsa...</>
 
-    const router: any = useRouter();
 
     const link = (a: any) => {
         let aa = data.filter(obj => a == obj.name);
@@ -32,7 +31,7 @@ function RecipeSq({ getData }: any) {
                 <div key={k}>
                     <p onClick={() => { link(obj.name) }}>
                         <img src={obj.m_thumb} />
-                        <div>{obj.name}</div>
+                        <span>{obj.name}</span>
                         
                     </p>
                 </div>
