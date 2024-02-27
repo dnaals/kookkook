@@ -1,6 +1,7 @@
 //좋아요버튼 기능
 
 import React from 'react';
+import RecipeList from '@/components/service/RecipeList';
 // import { useStore } from '../recipe_store/all_store';
 // import { useEffect } from 'react';
 import "@/components/style/like.scss";
