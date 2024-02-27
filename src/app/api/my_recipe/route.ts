@@ -8,9 +8,8 @@ export async function GET(){
 }
 
 export async function POST(req:Request){
-    
-    // console.log( await req.json());
-    
-    return NextResponse.json(await test2('post', await req.json()));
+    const aa = await req.json();
+       
+    return NextResponse.json(await test2('post', aa));
 }
 // 'post', req.json())

@@ -7,17 +7,15 @@ export async function GET(req:Request, {params}:any){
     console.log(params) 
     //req로 데이터 들어오고, parans로 url 맨뒤 값 가져옴
     
-    const data2 = await test2('detail', {user:params.user})
+    const data2 = await test2('detail', {seq:params.user})
     // console.log(req)
     return NextResponse.json(data2);
 }
 
 
-
-
 export async function DELETE(req:Request, {params}:any){
-    // console.log(params)
-    const data2 = await test2('delete', {user:params.user})
+    // console.log(params.user)
+    const data2 = await test2('delete', {seq:Number(params.user)})
     return NextResponse.json(data2);
 }
 
