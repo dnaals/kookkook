@@ -7,7 +7,7 @@ import '@/components/style/common.scss'
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   const url = usePathname();
-  const urlPath = url != '/';
+  const urlPath = url != ('/'||`/home/28`);
 
   return (
     <html lang="en">
