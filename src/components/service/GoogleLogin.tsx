@@ -20,7 +20,6 @@ function GoogleLogin() {
     return (
         <div>
             <button onClick={login}>google</button>
-            <button></button>
         </div>        
     );
 }    

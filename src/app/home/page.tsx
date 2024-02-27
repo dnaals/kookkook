@@ -1,13 +1,14 @@
 'use client';
 import React from 'react';
 import "@/components/style/home.scss";
-import RecipeWid from '@/components/UIUX/RecipeWid';
+import RecipeList from '@/components/service/RecipeList';
 function page() {
 
+    const idx = "가로"
 
     return (
         <div>
-            <RecipeWid />
+            <RecipeList idx={idx} />
         </div>
     );
 }
