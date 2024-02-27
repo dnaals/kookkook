@@ -1,9 +1,12 @@
+import RecipeList from '@/components/service/RecipeList';
 import React from 'react';
 
 function page() {
+    const idx = "정사각형";
     return (
+        
         <div>
-            북마크
+            <RecipeList idx={idx}/>
         </div>
     );
 }

@@ -1,1 +1,42 @@
-//레시피 모양잡은거 리스트로 map돌릴곳npmrsf
+"use client";
+import React, { useEffect } from 'react';
+import { useStore } from '../recipe_store/all_store';
+import RecipeWid from '../UIUX/RecipeWid';
+import RecipeSq from '../UIUX/RecipeSq';
+import Home_detail from '../UIUX/Home_detail';
+
+function RecipeList({idx}:any) {
+
+    
+    let { data, dataCrl } = useStore();
+    useEffect(() => {
+        dataCrl('all', '');
+    }, [])
+
+    if (!data.length) return <>sadsadsa...</>
+
+
+    let comp;
+    switch (idx) {
+        case "가로":
+            comp=<RecipeWid dataID={data} dataCrl={dataCrl} />
+            break;
+        case "정사각형":
+            comp=<RecipeSq dataID={data} dataCrl={dataCrl} />
+            break;
+        case "홈세부":
+            comp=<Home_detail dataID={data} dataCrl={dataCrl} />
+            break;
+        default:
+            break;
+    }
+
+
+    return (
+        <div style={{paddingTop:"100px"}}>
+            {comp}
+        </div>
+    );
+}
+
+export default RecipeList;
