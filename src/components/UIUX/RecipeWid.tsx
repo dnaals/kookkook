@@ -14,13 +14,21 @@ import "../style/recipe_wid.scss";
 import "../style/scrap.scss";
 
 
-function RecipeWid({ dataID,dataCrl }:any) {
-    const idx = "가로"
-    console.log(dataID,"asdasd");
+function RecipeWid({ }) {
+    // let { data2, dataCrl2 } = useStore2();
     const router: any = useRouter();
 
+
+
+    let { data, dataCrl } = useStore();
+    useEffect(() => {
+        dataCrl('all', '');
+    }, [])
+    if (!data.length) return <>sadsadsa...</>
+
+
     const link = (a: any) => {
-        let aa = dataID.filter((obj: any) => a == obj.name);
+        let aa = data.filter(obj => a == obj.name);
         let url: any = aa[0].seq;
         router.push(`/home/${url}`);
     }
@@ -30,7 +38,7 @@ function RecipeWid({ dataID,dataCrl }:any) {
             <Button dataCrl={dataCrl} />
             <div className="recipeWid_box">
                 <div className="recipeWid">
-                    {dataID.map((obj: any, k: number) => (
+                    {data.map((obj: any, k: number) => (
                         <div key={k}>
                             <p onClick={() => { link(obj.name) }}>
                                 <figure>
@@ -43,8 +51,9 @@ function RecipeWid({ dataID,dataCrl }:any) {
                                         </div>
 
                                         <p>{obj.tip}</p>
+                                        <FuncLike />
                                     </figcaption>
-                                    <FuncLike />
+
                                 </figure>
                             </p>
                         </div>
