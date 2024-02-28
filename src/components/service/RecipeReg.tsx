@@ -8,7 +8,7 @@ import MyrecipeReg from '../UIUX/MyrecipeReg';
 function RecipeReg({idx2}:any) {
     let { data2, dataCrl2 } = useStore2();
     useEffect(() => {
-        dataCrl2('all', '');
+        dataCrl2('all', '' , '');
     }, [])
     // console.log(idx2)
 

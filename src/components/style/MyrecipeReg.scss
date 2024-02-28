@@ -1,0 +1,24 @@
+div {
+    position: relative;
+    div {
+        .input_form {
+            position: absolute;
+            background-color: gray;
+            border: 1px solid black;
+            top: 200px;
+            left: 400px;
+            
+            
+        }
+        .input_form2 {
+            position: absolute;
+            background-color: gray;
+            border: 1px solid black;
+            top: 200px;
+            left: px;
+            // opacity: 0;
+            
+            
+        }
+    }
+}

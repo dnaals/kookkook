@@ -9,15 +9,15 @@ const request = axios.create({
 interface Ty {
     data: any[];
     dataCrl: (type: string, aaa: string) => void;
+
 }
 
 export const useStore = create<Ty>((set) => {
 
     return {
         data: [],
-        data2: [],
-        dataCrl: async function (type: string, Kategorie?: string) {
-            // console.log(Kategorie)
+        dataCrl: async function (type: string, Kategorie: string) {
+            console.log(Kategorie)
             let res: any;
             switch (type) {
                 case 'all': res = await request.get('/api/all_recipe/')
@@ -26,7 +26,7 @@ export const useStore = create<Ty>((set) => {
                 case '카테고리': res = await request.get(`/api/all_recipe/${Kategorie}`)
                     break;
 
-                case '밥': res = await request.get('/api/밥')
+                case '검색': res = await request.get(`/api/all_recipe/${Kategorie}`)
                     break;
 
                 case 'insert': res = await request.post('/api/all_recipe/', {})

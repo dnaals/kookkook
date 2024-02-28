@@ -10,6 +10,8 @@ function Button({ dataCrl }: any) {
             <button onClick={() => { dataCrl('카테고리', '일품') }}><img src="/images/special_black.png" />SPECIAL</button>
             <button onClick={() => { dataCrl('카테고리', '후식') }}><img src="/images/dessert_black.png" />DESSERT</button>
             <button onClick={() => { dataCrl('카테고리', '기타') }}><img src="/images/etc_black.png" />Etc</button><br />
+            <button onClick={() => { dataCrl('검색', '반찬') }}><img src="/images/etc_black.png" />Etc</button><br />
+            
         </div>
     );
 }
