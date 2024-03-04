@@ -2,24 +2,34 @@
 "use client";
 
 import React, { useEffect } from 'react';
-import { useStore2 } from '../recipe_store/my_store';
+import { useStore } from '../recipe_store/all_store';
+import { useSession } from "next-auth/react";
 import MyrecipeReg from '../UIUX/MyrecipeReg';
 
 function RecipeReg({idx2}:any) {
-    let { data2, dataCrl2 } = useStore2();
+    let { data, dataCrl } = useStore();
+    const { data: session, status }:any = useSession();
+
+    let myrecipe = data.filter((obj)=>obj?.user )
+
+    console.log(myrecipe)
+
     useEffect(() => {
-        dataCrl2('all', '' , '');
+        dataCrl('카테고리', '' , '');
+
     }, [])
+
+    
     // console.log(idx2)
 
 
-    if (!data2.length) return <>sadsadsa...</>
+    if (!data.length) return <>sadsadsa...</>
 
 
     let comp;
     switch (idx2) {
         case "마이페이지":
-            comp = <MyrecipeReg dataID={data2} dataCrl2={dataCrl2}/>
+            comp = <MyrecipeReg session={session}data={data} myrecipe={myrecipe} dataCrl={dataCrl}/>
             break;
         default:
             break;

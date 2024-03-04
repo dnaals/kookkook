@@ -9,6 +9,8 @@ export const test2 = async (type?: string, body?: initTy) => {
     let db, collection, data2
     db = client.db('Kook')
     collection = db.collection('kooktest')
+    console.log(body)
+    
     
     switch (type) {
         case "post":
@@ -23,13 +25,16 @@ export const test2 = async (type?: string, body?: initTy) => {
                     data2 = await collection.deleteOne(body);
                     break;
                     
-            // case 'put': await collection.updateOne({id:body.id}, {$set:{title:body.name}})
+            case 'put':
+                await collection.updateOne({seq:body?.seq}, {$set:body});
+                // console.log(typeof body?.seq,'sdfsdfsdsfdsdf')
+
             break;
         }
         
         if (type != 'detail') data2 = await collection.find({}).toArray(); //데이터 모두 가져오기
         client.close();
-        console.log('-----------------------')
+        
         
         return data2;
     }

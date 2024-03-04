@@ -1,25 +1,27 @@
 'use client';
 import React, { useRef, useState } from 'react';
-import { useSession } from "next-auth/react";
 import '../style/MyrecipeReg.scss'
 
-function MyrecipeReg({dataID, dataCrl2}:any) {
+function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
 
-    const { data: session, status }:any = useSession();
+    
     const elform = useRef<HTMLFormElement | null>(null)
     const elform1 = useRef<HTMLFormElement | null>(null)
-    const [abc, setAbc]:any = useState([])
+    const [putdata, setPutdata]:any = useState([])
+    const [putseq, setPutseq]:any = useState()
+
     
-    let aa = (e: any) => {
+    let addRecipe = (e: any) => {
+        
         
         e.preventDefault()
-        // console.log(session.user.email)
+        console.log(session.user.email)
         if (elform.current) {
         
             let formData = new FormData(elform.current);
             // console.log(dataID.length)
             const a = {
-                'seq': dataID.length+1,
+                'seq': `${Date.now()}`,
                 'name': `${formData.get("M_name")}`,
                 'm_cate': `${formData.get("kategori")}`,
                 's_cata': `${formData.get("whfl")}`,
@@ -59,20 +61,20 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
             }
 
             
-            dataCrl2('insert', a)
+            dataCrl('insert', '',a)
             
         }
     }
 
-    let bb = (e:any)=>{
-        let vlfxj = dataID.filter((obj:any)=>e == obj.seq)
+    let deleteRecipe = (e:any)=>{
+        let vlfxj = myrecipe.filter((obj:any)=>e == obj.seq)
         console.log(vlfxj[0].seq)
         let selectRecipe = vlfxj[0].seq
-        dataCrl2('delete', selectRecipe, '')
+        dataCrl('delete', selectRecipe, '')
 
     }
-    let cc = (e:any)=>{
-        let vlfxj2 = dataID.filter((obj:any)=>e == obj.seq)
+    let putPopup = (e:any)=>{
+        let vlfxj2 = myrecipe.filter((obj:any)=>e == obj.seq)
         console.log(vlfxj2[0].seq)
         let selectRecipenum = vlfxj2[0].seq
         console.log(vlfxj2[0])
@@ -116,20 +118,21 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
     
         }
         // console.log(selectData)
-        setAbc(selectData)
+        setPutdata(selectData)
+        setPutseq(selectRecipenum)
         
     }
 
-    let dd = (e: any) => {
+    let putRecipe = (e: any) => {
         
         e.preventDefault()
         // console.log(session.user.email)
         if (elform1.current) {
         
-            let formData = new FormData(elform.current);
+            let formData = new FormData(elform1.current);
             // console.log(dataID.length)
             const d= {
-                'seq': Date.now(),
+                'seq': `${putseq}`,
                 'name': `${formData.get("M_name")}`,
                 'm_cate': `${formData.get("kategori")}`,
                 's_cata': `${formData.get("whfl")}`,
@@ -169,18 +172,18 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
             }
 
             
-            dataCrl2('put', d)
+            dataCrl('put',putseq ,d)
             
         }
     }
     
-    console.log('abc', abc.name)
+    // console.log('abc', abc.name)
 
     
 
     return (
         <div>
-            <form className='add_form' ref={elform} onSubmit={aa}>
+            <form className='add_form' ref={elform} onSubmit={addRecipe}>
                 메뉴이름<input type="text" name='M_name'/><br />
                 메인이미지<input type="text" name='M_img'/><br />
                 서브이미지<input type="text" name='S_img'/><br />
@@ -219,14 +222,14 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
             </form>
 
 
-            <form className='put_form2' ref={elform1} onSubmit={cc}>
-                메뉴이름<input type="text" name='M_name' value={abc.name}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                메인이미지<input type="text" name='M_img' value={abc.m_cata}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                서브이미지<input type="text" name='S_img' value={abc.s_cata}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                메뉴소개<input type="text" name='tip' value={abc.tip}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                태그<input type="text" name='tag' value={abc.HASH_TAG}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
+            <form className='put_form' ref={elform1} onSubmit={putRecipe}>
+                메뉴이름<input type="text" name='M_name' value={putdata.name}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                메인이미지<input type="text" name='M_img' value={putdata.m_cata}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                서브이미지<input type="text" name='S_img' value={putdata.s_cata}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                메뉴소개<input type="text" name='tip' value={putdata.tip}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                태그<input type="text" name='tag' value={putdata.HASH_TAG}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
                 <label>카테고리 선택</label>
-                <select name="kategori" value={abc.m_cate} onChange={(e)=>{setAbc(e.target.value)}}>
+                <select name="kategori" value={putdata.m_cate} onChange={(e)=>{setPutdata(e.target.value)}}>
                     <option >반찬</option>
                     <option >국&찌개</option>
                     <option >후식</option>
@@ -235,7 +238,7 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
                     <option >기타</option>
                 </select><br />
                 <label>조리방식 선택</label>
-                <select name="whfl" value={abc.s_cate} onChange={(e)=>{setAbc(e.target.value)}}>
+                <select name="whfl" value={putdata.s_cate} onChange={(e)=>{setPutdata(e.target.value)}}>
                     <option >굽기</option>
                     <option >찌기</option>
                     <option >끓이기</option>
@@ -243,13 +246,13 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
                     <option >튀기기</option>
                     <option >기타</option>
                 </select><br />
-                재료<textarea name="재료" id="" value={abc.ingredient}  onChange={(e)=>{setAbc(e.target.value)}}></textarea><br />
-                조리순서1<input type="text" name='조리1' value={abc.MANUAL01}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                조리순서2<input type="text" name='조리2' value={abc.MANUAL02}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                조리순서3<input type="text" name='조리3' value={abc.MANUAL03}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                <input type="text" name='조리이미지1' value={abc.MANUAL_IMG01}  onChange={(e)=>{setAbc(e.target.value)}}/>
-                <input type="text" name='조리이미지2' value={abc.MANUAL_IMG02}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
-                <input type="text" name='조리이미지3' value={abc.MANUAL_IMG03}  onChange={(e)=>{setAbc(e.target.value)}}/><br />
+                재료<textarea name="재료" id="" value={putdata.ingredient}  onChange={(e)=>{setPutdata(e.target.value)}}></textarea><br />
+                조리순서1<input type="text" name='조리1' value={putdata.MANUAL01}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                조리순서2<input type="text" name='조리2' value={putdata.MANUAL02}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                조리순서3<input type="text" name='조리3' value={putdata.MANUAL03}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                <input type="text" name='조리이미지1' value={putdata.MANUAL_IMG01}  onChange={(e)=>{setPutdata(e.target.value)}}/>
+                <input type="text" name='조리이미지2' value={putdata.MANUAL_IMG02}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                <input type="text" name='조리이미지3' value={putdata.MANUAL_IMG03}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
                 <select name="open">
                     <option value="공개">공개</option>
                     <option value="비공개">비공개</option>
@@ -259,13 +262,13 @@ function MyrecipeReg({dataID, dataCrl2}:any) {
 
             <div>
                 {
-                    dataID.map((obj:any, k:any)=>(
+                    myrecipe.map((obj:any, k:any)=>(
                         <div key={k}>
                             <p>{obj.name}</p>
                             <p>{obj.m_cate}</p>
                             <p>{obj.open}</p>
-                            <button onClick={()=>{bb(obj.seq)}}>삭제</button>
-                            <button onClick={()=>{cc(obj.seq)}}>수정</button>
+                            <button onClick={()=>{deleteRecipe(obj.seq)}}>삭제</button>
+                            <button onClick={()=>{putPopup(obj.seq)}}>수정</button>
                         </div>
                     ))
                 }
