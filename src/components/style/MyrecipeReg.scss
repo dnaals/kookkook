@@ -1,0 +1,24 @@
+div {
+    position: relative;
+    div {
+        .add_form {
+            position: absolute;
+            background-color: gray;
+            border: 1px solid black;
+            top: 200px;
+            left: 400px;
+            
+            
+        }
+        .put_form {
+            position: absolute;
+            background-color: gray;
+            border: 1px solid black;
+            top: 200px;
+            left: px;
+            // opacity: 0;
+            
+            
+        }
+    }
+}

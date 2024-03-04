@@ -6,7 +6,7 @@ import RecipeList from '@/components/service/RecipeList';
 // import { useEffect } from 'react';
 import "@/components/style/like.scss";
 
-function FuncLike() {
+function FuncLike({obj}:any) {
     // let { data, dataCrl } = useStore();
     // useEffect(() => {
     //     dataCrl('all', '');

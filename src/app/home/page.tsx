@@ -17,11 +17,10 @@ function page() {
 
 
 
-
-
     return (
         <div>
             <Button dataCrl={dataCrl} />
+            
             <RecipeList idx={idx} />
         </div>
     );
