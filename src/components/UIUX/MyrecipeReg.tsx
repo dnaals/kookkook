@@ -2,22 +2,26 @@
 import React, { useRef, useState } from 'react';
 import '../style/MyrecipeReg.scss'
 
-function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
+function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
 
-    
+
     const elform = useRef<HTMLFormElement | null>(null)
     const elform1 = useRef<HTMLFormElement | null>(null)
-    const [putdata, setPutdata]:any = useState([])
-    const [putseq, setPutseq]:any = useState()
+    const elform2 = useRef<HTMLFormElement | null>(null)
+    const [putdata, setPutdata]: any = useState([])
+    const [putseq, setPutseq]: any = useState()
+    const [aa, setAa]: any = useState(false)
+    const [bb, setBb]: any = useState(false)
+    // console.log('session = ', session)
 
-    
+
     let addRecipe = (e: any) => {
-        
-        
+
+
         e.preventDefault()
         console.log(session.user.email)
         if (elform.current) {
-        
+
             let formData = new FormData(elform.current);
             // console.log(dataID.length)
             const a = {
@@ -60,21 +64,53 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
 
             }
 
-            
-            dataCrl('insert', '',a)
-            
+
+            dataCrl('insert', '', a)
+
         }
     }
 
-    let deleteRecipe = (e:any)=>{
-        let vlfxj = myrecipe.filter((obj:any)=>e == obj.seq)
+    let addComment = (e: any) => {
+        e.preventDefault()
+        if (elform2.current) {
+
+            let formData = new FormData(elform2.current)
+
+            const c = {
+                'id': `${Date.now()}`,
+                'seq': '300',
+                'comment': `${formData.get("comment")}`,
+                'user_email': `${session.user.email}`,
+                'user_name': `${session.user.name}`,
+                'like': 4
+            }
+            dataCrl3('insert', '', c)
+        }
+    }
+
+    let deleteRecipe = (e: any) => {
+        setBb(true)
+        console.log('e = ', e)
+        let vlfxj = myrecipe.filter((obj: any) => e == obj.seq)
         console.log(vlfxj[0].seq)
         let selectRecipe = vlfxj[0].seq
-        dataCrl('delete', selectRecipe, '')
+        // if ()
+        //     dataCrl('delete', selectRecipe, '')
 
     }
-    let putPopup = (e:any)=>{
-        let vlfxj2 = myrecipe.filter((obj:any)=>e == obj.seq)
+
+    let deleteComment = (e: any) => {
+        setBb(true)
+        console.log('e = ', e)
+        let vlfxj = data3.filter((obj: any) => e == obj.id)
+        console.log(vlfxj[0].id)
+        let selectRecipe = vlfxj[0].id
+        // if ()
+        dataCrl3('delete', selectRecipe, '')
+
+    }
+    let putPopup = (e: any) => {
+        let vlfxj2 = myrecipe.filter((obj: any) => e == obj.seq)
         console.log(vlfxj2[0].seq)
         let selectRecipenum = vlfxj2[0].seq
         console.log(vlfxj2[0])
@@ -115,23 +151,24 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
             'like': `${vlfxj2[0].like}`,
             'user': `${vlfxj2[0].user}`,
             'open': `${vlfxj2[0].open}`
-    
+
         }
-        // console.log(selectData)
+        console.log('수정 = ', selectRecipenum)
         setPutdata(selectData)
         setPutseq(selectRecipenum)
-        
+        setAa(true)
+
     }
 
     let putRecipe = (e: any) => {
-        
+
         e.preventDefault()
         // console.log(session.user.email)
         if (elform1.current) {
-        
+
             let formData = new FormData(elform1.current);
             // console.log(dataID.length)
-            const d= {
+            const d = {
                 'seq': `${putseq}`,
                 'name': `${formData.get("M_name")}`,
                 'm_cate': `${formData.get("kategori")}`,
@@ -171,24 +208,26 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
 
             }
 
-            
-            dataCrl('put',putseq ,d)
-            
+            setAa(false)
+            dataCrl('put', putseq, d)
+
         }
     }
-    
+
     // console.log('abc', abc.name)
 
-    
+
 
     return (
-        <div>
+        <div className='myrecipeList' style={{ paddingTop: 50 }}>
+
+
             <form className='add_form' ref={elform} onSubmit={addRecipe}>
-                메뉴이름<input type="text" name='M_name'/><br />
-                메인이미지<input type="text" name='M_img'/><br />
-                서브이미지<input type="text" name='S_img'/><br />
-                메뉴소개<input type="text" name='tip'/><br />
-                태그<input type="text" name='tag'/><br />
+                메뉴이름<input type="text" name='M_name' /><br />
+                메인이미지<input type="text" name='M_img' /><br />
+                서브이미지<input type="text" name='S_img' /><br />
+                메뉴소개<input type="text" name='tip' /><br />
+                태그<input type="text" name='tag' /><br />
                 <label>카테고리 선택</label>
                 <select name="kategori" >
                     <option value="반찬">반찬</option>
@@ -202,12 +241,12 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
                 <select name="whfl">
                     <option value="굽기">굽기</option>
                     <option value="찌기">찌기</option>
-                    <option value= "끓이기">끓이기</option>
+                    <option value="끓이기">끓이기</option>
                     <option value="볶기">볶기</option>
                     <option value="튀기기">튀기기</option>
                     <option value="기타">기타</option>
                 </select><br />
-                재료<textarea name="재료" id=""></textarea><br/>
+                재료<textarea name="재료" id=""></textarea><br />
                 조리순서1<input type="text" name='조리1' /><br />
                 조리순서2<input type="text" name='조리2' /><br />
                 조리순서3<input type="text" name='조리3' /><br />
@@ -221,15 +260,14 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
                 <input type="submit" value='추가하기' />
             </form>
 
-
-            <form className='put_form' ref={elform1} onSubmit={putRecipe}>
-                메뉴이름<input type="text" name='M_name' value={putdata.name}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                메인이미지<input type="text" name='M_img' value={putdata.m_cata}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                서브이미지<input type="text" name='S_img' value={putdata.s_cata}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                메뉴소개<input type="text" name='tip' value={putdata.tip}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                태그<input type="text" name='tag' value={putdata.HASH_TAG}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+            <form className={`put_form ${aa ? 'active' : ''}`} ref={elform1} onSubmit={putRecipe}>
+                메뉴이름<input type="text" name='M_name' value={putdata.name} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                메인이미지<input type="text" name='M_img' value={putdata.m_cata} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                서브이미지<input type="text" name='S_img' value={putdata.s_cata} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                메뉴소개<input type="text" name='tip' value={putdata.tip} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                태그<input type="text" name='tag' value={putdata.HASH_TAG} onChange={(e) => { setPutdata(e.target.value) }} /><br />
                 <label>카테고리 선택</label>
-                <select name="kategori" value={putdata.m_cate} onChange={(e)=>{setPutdata(e.target.value)}}>
+                <select name="kategori" value={putdata.m_cate} onChange={(e) => { setPutdata(e.target.value) }}>
                     <option >반찬</option>
                     <option >국&찌개</option>
                     <option >후식</option>
@@ -238,7 +276,7 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
                     <option >기타</option>
                 </select><br />
                 <label>조리방식 선택</label>
-                <select name="whfl" value={putdata.s_cate} onChange={(e)=>{setPutdata(e.target.value)}}>
+                <select name="whfl" value={putdata.s_cate} onChange={(e) => { setPutdata(e.target.value) }}>
                     <option >굽기</option>
                     <option >찌기</option>
                     <option >끓이기</option>
@@ -246,13 +284,13 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
                     <option >튀기기</option>
                     <option >기타</option>
                 </select><br />
-                재료<textarea name="재료" id="" value={putdata.ingredient}  onChange={(e)=>{setPutdata(e.target.value)}}></textarea><br />
-                조리순서1<input type="text" name='조리1' value={putdata.MANUAL01}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                조리순서2<input type="text" name='조리2' value={putdata.MANUAL02}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                조리순서3<input type="text" name='조리3' value={putdata.MANUAL03}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                <input type="text" name='조리이미지1' value={putdata.MANUAL_IMG01}  onChange={(e)=>{setPutdata(e.target.value)}}/>
-                <input type="text" name='조리이미지2' value={putdata.MANUAL_IMG02}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
-                <input type="text" name='조리이미지3' value={putdata.MANUAL_IMG03}  onChange={(e)=>{setPutdata(e.target.value)}}/><br />
+                재료<textarea name="재료" id="" value={putdata.ingredient} onChange={(e) => { setPutdata(e.target.value) }}></textarea><br />
+                조리순서1<input type="text" name='조리1' value={putdata.MANUAL01} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                조리순서2<input type="text" name='조리2' value={putdata.MANUAL02} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                조리순서3<input type="text" name='조리3' value={putdata.MANUAL03} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                <input type="text" name='조리이미지1' value={putdata.MANUAL_IMG01} onChange={(e) => { setPutdata(e.target.value) }} />
+                <input type="text" name='조리이미지2' value={putdata.MANUAL_IMG02} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                <input type="text" name='조리이미지3' value={putdata.MANUAL_IMG03} onChange={(e) => { setPutdata(e.target.value) }} /><br />
                 <select name="open">
                     <option value="공개">공개</option>
                     <option value="비공개">비공개</option>
@@ -260,19 +298,46 @@ function MyrecipeReg({data, myrecipe, dataCrl,session}:any) {
                 <input type="submit" value='수정하기' />
             </form>
 
+            <div className='delete_pop'>
+                <p>선택한 레시피를 삭제할까요?</p><br />
+                <button>삭제</button>
+                <button>취소</button>
+
+            </div>
+
             <div>
                 {
-                    myrecipe.map((obj:any, k:any)=>(
+                    myrecipe.map((obj: any, k: any) => (
                         <div key={k}>
                             <p>{obj.name}</p>
                             <p>{obj.m_cate}</p>
                             <p>{obj.open}</p>
-                            <button onClick={()=>{deleteRecipe(obj.seq)}}>삭제</button>
-                            <button onClick={()=>{putPopup(obj.seq)}}>수정</button>
+                            <button onClick={() => { deleteRecipe(obj.seq) }}>삭제</button>
+                            <button onClick={() => { putPopup(obj.seq) }}>수정</button>
+                        </div>
+                    ))
+                }
+                <form className='add_form active' ref={elform2} onSubmit={addComment}>
+                    댓글<input type="text" name='comment' /><br />
+                    <input type="submit" value='추가하기' />
+                </form>
+            </div>
+
+            <div style={{ paddingTop: 50 }}>
+                {
+                    data3.map((obj: any, k: any) => (
+                        <div key={k}>
+                            <p>{obj.user_name}</p>
+                            <p>{obj.user_email}</p>
+                            <p>{obj.comment}</p>
+                            <button onClick={() => { deleteComment(obj.id) }}>삭제</button>
+                            <button onClick={() => { }}>수정</button>
+
                         </div>
                     ))
                 }
             </div>
+
         </div>
     );
 }

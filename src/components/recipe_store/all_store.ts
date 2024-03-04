@@ -37,10 +37,10 @@ export const useStore = create<Ty>((set) => {
                 case 'insert': res = await request.post('/api/all_recipe/', overData)
                     break;
 
-                case 'delete': res = await request.delete('/api/all_recipe/1')
+                case 'delete': res = await request.delete(`/api/all_recipe/${id}`)
                     break;
 
-                case 'put': res = await axios.put(`/api/my_recipe/${id}`, overData)
+                case 'put': res = await axios.put(`/api/all_recipe/${id}`, overData)
                     break;
             }
             console.log(res.data)

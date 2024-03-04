@@ -10,7 +10,7 @@ import "@/components/style/home.scss";
 function page() {
     let { data, dataCrl } = useStore();
     useEffect(() => {
-        dataCrl('all', '');
+        dataCrl('all', '', '');
     }, [])
     const idx = "가로"
 
@@ -20,7 +20,7 @@ function page() {
     return (
         <div>
             <Button dataCrl={dataCrl} />
-            
+
             <RecipeList idx={idx} />
         </div>
     );
