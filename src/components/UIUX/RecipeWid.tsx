@@ -31,9 +31,9 @@ function RecipeWid({ dataID, dataCrl }: any) {
                 <div className="recipeWid">
                     {dataID.map((obj: any, k: number) => (
                         <div key={k}>
-                            <p onClick={() => { link(obj.name) }}>
+                            <div>
                                 <figure>
-                                    <img src={obj.m_thumb} />
+                                    <img onClick={() => { link(obj.name) }} src={obj.m_thumb} />
 
                                     <figcaption>
                                         <div className='flex'>
@@ -44,7 +44,7 @@ function RecipeWid({ dataID, dataCrl }: any) {
                                         <FuncLike />
                                     </figcaption>
                                 </figure>
-                            </p>
+                            </div>
                         </div>
                     ))}
                 </div>
