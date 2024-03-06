@@ -1,0 +1,105 @@
+.bugger_menu_on {
+    box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 497px;
+    height: 100vh;
+    background: linear-gradient(180deg, #FFD600 0%, #FF9F00 86.2%, #FF9900 100%);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    .close_btn {
+        color: white;
+        width:30px;
+        position: absolute;
+        right:0;
+        top:0;
+    }
+    .close_btn:hover{
+        cursor: pointer;
+    }
+
+    .member {
+        margin : 50px 0;
+        .memberImg {
+            background-color: white;
+            border-radius: 50px;
+        }
+        p{
+            color:white;
+        }
+        margin-left: 50px;
+        display:flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .menu {
+        color:#646060;
+        font-weight: bold;
+        a{
+            .menu_contents {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid white;
+                margin:30px 0;
+                margin-left: 200px;
+                margin-right:10px;
+                img {
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 10px;
+                }
+                p {
+                    color:#646060;
+        font-weight: bold;
+                    font-size: 30px;
+                }
+            }
+        }
+        .menu_contents {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid white;
+            margin:30px 0;
+            margin-left: 200px;
+            margin-right:10px;
+            img {
+                width: 50px;
+                height: 50px;
+                margin-right: 10px;
+            }
+            p {
+                font-size: 30px;
+            }
+        }
+        
+        div{
+            // width:40%;
+            margin-left:55%; 
+            p{
+                margin:10px 0;
+                font-size: 24px;
+                text-align: left;
+            }
+        }
+    }
+
+    .login_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        margin :0 auto;
+        border-radius: 20px;
+        border:1px solid none;
+        width:230px;
+        margin-top: 150px;
+        p{
+            font-size: 30px;
+            color:#FF8A00;
+            font-weight: bolder;
+
+        }
+    }
+}

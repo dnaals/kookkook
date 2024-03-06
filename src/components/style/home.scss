@@ -2,17 +2,16 @@
 
 body {
     main {
-
-
+        .home_main_backcolor{
+            background-image: linear-gradient(180deg, rgba(255, 217, 80, 0.3) 0%, rgba(255, 255, 255, 0.3) 22.63%, rgba(255, 253, 246, 0.3) 69.99%, rgba(255, 249, 228, 0.3) 92.09%, rgba(255, 255, 255, 0.3) 105.25%);
         .home_btn {
             padding-top: 70px;
             display: flex;
             justify-content: space-evenly;
 
 
-
             button {
-                background-color: $color-yellow;
+                background-color: $color-white;
                 border: none;
                 width: 100px;
                 height: 100px;
@@ -29,5 +28,6 @@ body {
                 }
             }
         }
+    }
     }
 }

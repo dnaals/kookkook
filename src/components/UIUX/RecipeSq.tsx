@@ -23,11 +23,11 @@ function RecipeSq({ dataID,dataCrl }: any) {
         <div className="recipeSq">
             {dataID.map((obj:any, k:number) => (
                 <div key={k}>
-                    <p onClick={() => { link(obj.name) }}>
+                    <div onClick={() => { link(obj.name) }}>
                         <img src={obj.m_thumb} />
                         <div>{obj.name}</div>
                         
-                    </p>
+                    </div>
                 </div>
             ))}
         </div>

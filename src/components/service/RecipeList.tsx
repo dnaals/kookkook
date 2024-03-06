@@ -13,7 +13,7 @@ function RecipeList({idx,detailUrl}:any) {
         dataCrl('all', '');
     }, [])
 
-    if (!data.length) return <>sadsadsa...</>
+    if (!data.length) return <div>sadsadsa...</div>
 
 
     let comp;
@@ -34,9 +34,9 @@ function RecipeList({idx,detailUrl}:any) {
 
 
     return (
-        <div style={{paddingTop:"100px"}}>
+        <>
             {comp}
-        </div>
+        </>
     );
 }
 
