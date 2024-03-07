@@ -1,8 +1,22 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
+import "@/components/style/mypage.scss";
+import MypageButton from '@/components/UIUX/MypageButton';
+import Profile from '@/components/UIUX/Profile';
+import Comment from '@/components/UIUX/Comment';
+import RecipeReg from '@/components/service/RecipeReg';
+
+
+
+
 function page() {
+
+
     return (
         <div>
-            마이페이지
+            <Profile />
+            <MypageButton />
+            <Comment />
         </div>
     );
 }
