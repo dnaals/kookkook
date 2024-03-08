@@ -1,31 +1,174 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { storage } from "@/lib/firebaseInit";
+import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "firebase/storage";
 import '../style/MyrecipeReg.scss'
 
-function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
+function MyrecipeReg({ data3, dataCrl3, myRecipe, dataCrl, session, newrecipe, bb }: any) {
 
+    console.log(myRecipe)
 
     const elform = useRef<HTMLFormElement | null>(null)
     const elform1 = useRef<HTMLFormElement | null>(null)
     const elform2 = useRef<HTMLFormElement | null>(null)
+    const eldelrecipe = useRef<string | null>(null)
+    const eldelcomment = useRef<string | null>(null)
+
+
+
+    //수정 레시피
     const [putdata, setPutdata]: any = useState([])
     const [putseq, setPutseq]: any = useState()
-    const [aa, setAa]: any = useState(false)
-    const [bb, setBb]: any = useState(false)
-    // console.log('session = ', session)
+    const [correctionPop, setCorrectionPop]: any = useState(false)
+
+    //삭제 레시피, 댓글
+    const [delRePop, setDelRePop]: any = useState(false);
+    const [delComPop, setDelComPop]: any = useState(false);
+
+    // const file1 = (e) => {
+    //     // 미리보기
+    //     const fileReader = new FileReader();
+    //     fileReader.readAsDataURL(e.target.files[0]);
+    //     fileReader.onload = (e) => {
+    //       setPreImage(e.target.result);
+    //     }
+
+    //     let t = new Date(e.target.files[0].lastModified)
+    //     t.setSeconds(t.getSeconds() + 10)
+
+    //     setTest(e.target.files[0])
 
 
-    let addRecipe = (e: any) => {
+
+    //     const megaApiUrl = ' '; // yourApiId를 발급받은 API 키로 대체
+    //     const headers = {
+    //       'Content-Type': 'application/json',
+    //     };
+
+    //     // 이미지를 MEGA에 업로드
+    //     fetch(megaApiUrl, {
+    //       method:'post',
+    //       headers:{
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body:e.target.files[0]
+    //     })
+    //     .then(res=>res.text())
+    //     .then(res=>{
+    //     //   console.log(res)
+    //     });
+
+
+
+
+    //     //서버에 이\\322-t\프론트엔드\react\r-pwa\src\Camera.js미지 저장
+    //     const formData = new FormData();
+    //     formData.append('image', e.target.files[0]);
+
+    //     /* fetch(basicUrl+'/camera/save',{
+    //       method:'post',
+    //       body:formData
+    //     })
+    //     .then(res=>res.json())
+    //     .then(res=>{
+    //       setData([...data,res.fileUrl])
+    //     }) */
+    //   }
+
+    //firebase
+    // const [imgs, setImgs] = useState<any>([]);
+    const firebase = {
+
+        upload: async (file: any, idx: any, id: any) => {
+            console.log(idx)
+            const fileName = file.name.replace('.', `-${idx}.`);
+            const storageRef = ref(storage, `/${session.user.email}/${id}/` + fileName);
+            await uploadBytes(storageRef, file).then((snapshot) => {
+                // console.log(snapshot);
+            });
+
+        },
+        getImages: async (id: any) => {
+            const res = await listAll(ref(storage, `/${session.user.email}/${id}`));
+
+            let imgUrl = [];
+            for (let i = 0; i < res.items.length; i++) {
+                let a = await getDownloadURL(res.items[i]);
+                imgUrl.push({ url: a, name: res.items[i].fullPath })
+            }
+            return imgUrl;
+        },
+        delImage: (id: any, urls: any) => {
+
+            urls.forEach((url: any) => {
+                const start = url.lastIndexOf('%2F') + 3; //url 뒤 부터 %2f부분의 인덱스값 
+                const end = url.lastIndexOf('?');
+                const str = url.substring(start, end);
+                console.log(str)
+                deleteObject(ref(storage, `/${session.user.email}/${id}/${str}`))
+            })
+            // const url = 'https://firebasestorage.googleapis.com/v0/b/kookkook-99003.appspot.com/o/jsg8733%40gmail.com%2F1709775110201%2Ftest_img1.jpg?alt=media&token=101ccc9a-e67b-45fc-b4ea-a8993bc22527'
+
+        }
+    }
+
+
+    //레시피 추가
+    let addRecipe = async (e: any) => {
 
 
         e.preventDefault()
-        console.log(session.user.email)
+        // console.log(session.user.email)
+
+
+        // const testFile = [
+        //     { url: "https://firebasestorage.googleapis.com/v0/b/kookkook-99003.appspot.com/o/jsg8733%40gmail.com%2F1709793051340%2Ftest_img1-3.jpg?alt=media&token=6ecf903e-3517-4be1-95ea-64d010b93de7" },
+        //     { url: "https://firebasestorage.googleapis.com/v0/b/kookkook-99003.appspot.com/o/jsg8733%40gmail.com%2F1709793051340%2Ftest_img2-6.jpg?alt=media&token=f95525c8-c9f1-4735-93c0-90860bdaa0b5" }
+        // ]
+
+        
+        // return;
+
         if (elform.current) {
 
             let formData = new FormData(elform.current);
             // console.log(dataID.length)
+            const files = formData.getAll('M_img');
+
+            console.log(files)
+
+            let id = Date.now()
+            let fileName: any = []
+            for (let idx in files) {
+                // console.log('file = ', file)
+                await firebase.upload(files[idx], idx, id);
+            };
+            const imgUrl = await firebase.getImages(id)
+
+            const fileTemplate = [
+                'm_thumb', 's_thumb', 'MANUAL_IMG01', 'MANUAL_IMG02', 'MANUAL_IMG03', 'MANUAL_IMG04', 'MANUAL_IMG05', 'MANUAL_IMG06', 'MANUAL_IMG07', 'MANUAL_IMG08', 'MANUAL_IMG09', 'MANUAL_IMG10', 'MANUAL_IMG11', 'MANUAL_IMG12'
+            ]
+    
+            const inputImage: any = Array(14);
+    
+            fileTemplate.forEach((obj, k) => {
+                const str = imgUrl[k]?.url.split('?')[0];
+                const start = str?.lastIndexOf('-') + 1;
+                const end = str?.lastIndexOf('.');
+                const num = str?.substring(start, end);           
+    
+                if(num){
+                    inputImage[num]= {[obj]:imgUrl[k]?.url};
+                }
+    
+            })
+            console.log(inputImage)
+
+
+
+
             const a = {
-                'seq': `${Date.now()}`,
+                'seq': `${id}`,
                 'name': `${formData.get("M_name")}`,
                 'm_cate': `${formData.get("kategori")}`,
                 's_cata': `${formData.get("whfl")}`,
@@ -43,21 +186,21 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
                 'MANUAL10': '',
                 'MANUAL11': '',
                 'MANUAL12': '',
-                'MANUAL_IMG01': `${formData.get("조리이미지1")}`,
-                'MANUAL_IMG02': `${formData.get("조리이미지2")}`,
-                'MANUAL_IMG03': `${formData.get("조리이미지3")}`,
-                'MANUAL_IMG04': '',
-                'MANUAL_IMG05': '',
-                'MANUAL_IMG06': '',
-                'MANUAL_IMG07': '',
-                'MANUAL_IMG08': '',
-                'MANUAL_IMG09': '',
-                'MANUAL_IMG10': '',
-                'MANUAL_IMG11': '',
-                'MANUAL_IMG12': '',
+                'MANUAL_IMG01': `${String(inputImage[2]?.MANUAL_IMG01)}`,
+                'MANUAL_IMG02': `${String(inputImage[3]?.MANUAL_IMG02)}`,
+                'MANUAL_IMG03': `${String(inputImage[4]?.MANUAL_IMG03)}`,
+                'MANUAL_IMG04': `${String(inputImage[5]?.MANUAL_IMG04)}`,
+                'MANUAL_IMG05': `${String(inputImage[6]?.MANUAL_IMG05)}`,
+                'MANUAL_IMG06': `${String(inputImage[7]?.MANUAL_IMG06)}`,
+                'MANUAL_IMG07': `${String(inputImage[8]?.MANUAL_IMG07)}`,
+                'MANUAL_IMG08': `${String(inputImage[9]?.MANUAL_IMG08)}`,
+                'MANUAL_IMG09': `${String(inputImage[10]?.MANUAL_IMG09)}`,
+                'MANUAL_IMG10': `${String(inputImage[11]?.MANUAL_IMG10)}`,
+                'MANUAL_IMG11': `${String(inputImage[12]?.MANUAL_IMG11)}`,
+                'MANUAL_IMG12': `${String(inputImage[13]?.MANUAL_IMG12)}`,
                 'HASH_TAG': `${formData.get("tag")}`,
-                'm_thumb': `${formData.get("M_name")}`,
-                's_thumb': `${formData.get("S_name")}`,
+                'm_thumb': `${String(inputImage[0]?.m_thumb)}`,
+                's_thumb': `${String(inputImage[1]?.s_thumb)}`,
                 'like': 0,
                 'user': `${session.user.email}`,
                 'open': `${formData.get("open")}`
@@ -66,10 +209,14 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
 
 
             dataCrl('insert', '', a)
+            bb()
+
+
 
         }
     }
 
+    //댓글 추가
     let addComment = (e: any) => {
         e.preventDefault()
         if (elform2.current) {
@@ -78,7 +225,7 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
 
             const c = {
                 'id': `${Date.now()}`,
-                'seq': '300',
+                'seq': '300', //상세페이지 들어온 데이터값의 seq 
                 'comment': `${formData.get("comment")}`,
                 'user_email': `${session.user.email}`,
                 'user_name': `${session.user.name}`,
@@ -88,32 +235,66 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
         }
     }
 
-    let deleteRecipe = (e: any) => {
-        setBb(true)
-        console.log('e = ', e)
-        let vlfxj = myrecipe.filter((obj: any) => e == obj.seq)
-        console.log(vlfxj[0].seq)
+    //삭제 버튼 누르면 팝업창 활성화
+    let delRecipe = () => {
+
+        // console.log('e = ', e)
+        let vlfxj = myRecipe.filter((obj: any) => eldelrecipe.current == obj.seq)
         let selectRecipe = vlfxj[0].seq
-        // if ()
-        //     dataCrl('delete', selectRecipe, '')
+
+        console.log(vlfxj[0].MANUAL_IMG01)
+        let aaaaa = []
+        aaaaa.push(vlfxj[0].m_thumb, vlfxj[0].s_thumb)
+
+        for (let i = 1; i < 4; i++) {
+            let aa = vlfxj[0]['MANUAL_IMG0' + i];
+            aaaaa.push(aa)
+        }
+
+        console.log(aaaaa)
+
+
+
+        firebase.delImage(selectRecipe, aaaaa)
+        // return;
+        dataCrl('delete', selectRecipe, '')
+
+        setDelRePop(false)
 
     }
 
-    let deleteComment = (e: any) => {
-        setBb(true)
-        console.log('e = ', e)
-        let vlfxj = data3.filter((obj: any) => e == obj.id)
-        console.log(vlfxj[0].id)
+    //레시피 삭제 취소 버튼
+    let notdelRecipe = () => {
+        setDelRePop(false)
+    }
+
+    // 댓글 삭제 버튼
+    let delComment = () => {
+        console.log('eldelcomment.current = ', eldelcomment.current)
+        let vlfxj = data3.filter((obj: any) => eldelcomment.current == obj.id)
+        console.log('선택된 댓글', vlfxj[0].id)
         let selectRecipe = vlfxj[0].id
         // if ()
         dataCrl3('delete', selectRecipe, '')
-
+        setDelComPop(false)
     }
-    let putPopup = (e: any) => {
-        let vlfxj2 = myrecipe.filter((obj: any) => e == obj.seq)
-        console.log(vlfxj2[0].seq)
+
+    //댓글 삭제 취소 버튼
+    let notdelComment = () => {
+        setDelComPop(false)
+    }
+
+    //레시피 수정 버튼 클릭시 나오는 팝업
+    let putRePopup = async (e: any) => {
+        let vlfxj2 = myRecipe.filter((obj: any) => e == obj.seq)
+        // console.log(vlfxj2[0].seq)
         let selectRecipenum = vlfxj2[0].seq
-        console.log(vlfxj2[0])
+        // console.log(vlfxj2[0])
+
+        let imgs2 = await firebase.getImages(selectRecipenum)
+
+        console.log(imgs2)
+        // return;
         const selectData = {
             'seq': vlfxj2[0].seq,
             'name': `${vlfxj2[0].name}`,
@@ -133,9 +314,9 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
             'MANUAL10': `${vlfxj2[0].MANUAL10}`,
             'MANUAL11': `${vlfxj2[0].MANUAL11}`,
             'MANUAL12': `${vlfxj2[0].MANUAL12}`,
-            'MANUAL_IMG01': `${vlfxj2[0].MANUAL_IMG01}`,
-            'MANUAL_IMG02': `${vlfxj2[0].MANUAL_IMG02}`,
-            'MANUAL_IMG03': `${vlfxj2[0].MANUAL_IMG03}`,
+            // 'MANUAL_IMG01': `${imgs2[2].url}`,
+            // 'MANUAL_IMG02': `${imgs2[3].url}`,
+            // 'MANUAL_IMG03': `${imgs2[4].url}`,
             'MANUAL_IMG04': `${vlfxj2[0].MANUAL_IMG04}`,
             'MANUAL_IMG05': `${vlfxj2[0].MANUAL_IMG05}`,
             'MANUAL_IMG06': `${vlfxj2[0].MANUAL_IMG06}`,
@@ -146,20 +327,21 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
             'MANUAL_IMG11': `${vlfxj2[0].MANUAL_IMG11}`,
             'MANUAL_IMG12': `${vlfxj2[0].MANUAL_IMG12}`,
             'HASH_TAG': `${vlfxj2[0].HASH_TAG}`,
-            'm_thumb': `${vlfxj2[0].m_thumb}`,
-            's_thumb': `${vlfxj2[0].s_thumb}`,
+            // 'm_thumb': `${imgs2[0].url}`,
+            // 's_thumb': `${imgs2[1].url}`,
             'like': `${vlfxj2[0].like}`,
             'user': `${vlfxj2[0].user}`,
             'open': `${vlfxj2[0].open}`
 
         }
-        console.log('수정 = ', selectRecipenum)
+        // console.log('수정 = ', selectRecipenum)
         setPutdata(selectData)
         setPutseq(selectRecipenum)
-        setAa(true)
+        setCorrectionPop(true)
 
     }
 
+    //수정하기 누를시 수정된 데이터 저장
     let putRecipe = (e: any) => {
 
         e.preventDefault()
@@ -208,24 +390,27 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
 
             }
 
-            setAa(false)
+            setCorrectionPop(false)
             dataCrl('put', putseq, d)
 
         }
     }
 
-    // console.log('abc', abc.name)
-
-
+    // useEffect(()=>{
+    //     firebase.getImages( 1709772535810) //맞는 아이디 맞춰 업로드
+    // },[])
+    // console.log('imgs = ',imgs)
 
     return (
         <div className='myrecipeList' style={{ paddingTop: 50 }}>
 
 
-            <form className='add_form' ref={elform} onSubmit={addRecipe}>
-                메뉴이름<input type="text" name='M_name' /><br />
-                메인이미지<input type="text" name='M_img' /><br />
-                서브이미지<input type="text" name='S_img' /><br />
+
+            {/* 추가하기 폼 */}
+            <form className={`add_form ${newrecipe ? 'active' : ''}`} encType='multipart/form-data' ref={elform} onSubmit={addRecipe}>
+                메뉴이름<input type="text" name='M_name' /> <p onClick={bb}>X</p><br />
+                메인이미지<input type="file" name='M_img' /><br />
+                서브이미지<input type="file" name='M_img' /><br />
                 메뉴소개<input type="text" name='tip' /><br />
                 태그<input type="text" name='tag' /><br />
                 <label>카테고리 선택</label>
@@ -250,9 +435,9 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
                 조리순서1<input type="text" name='조리1' /><br />
                 조리순서2<input type="text" name='조리2' /><br />
                 조리순서3<input type="text" name='조리3' /><br />
-                <input type="text" name='조리이미지1' />
-                <input type="text" name='조리이미지2' /><br />
-                <input type="text" name='조리이미지3' /><br />
+                <input type="file" name='M_img' />
+                <input type="file" name='M_img' /><br />
+                <input type="file" name='M_img' /><br />
                 <select name="open">
                     <option value="공개">공개</option>
                     <option value="비공개">비공개</option>
@@ -260,10 +445,11 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
                 <input type="submit" value='추가하기' />
             </form>
 
-            <form className={`put_form ${aa ? 'active' : ''}`} ref={elform1} onSubmit={putRecipe}>
-                메뉴이름<input type="text" name='M_name' value={putdata.name} onChange={(e) => { setPutdata(e.target.value) }} /><br />
-                메인이미지<input type="text" name='M_img' value={putdata.m_cata} onChange={(e) => { setPutdata(e.target.value) }} /><br />
-                서브이미지<input type="text" name='S_img' value={putdata.s_cata} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+            {/* 수정하기 폼 */}
+            <form className={`put_form ${correctionPop ? 'active' : ''}`} ref={elform1} onSubmit={putRecipe}>
+                메뉴이름<input type="text" name='M_name' value={putdata.name} onChange={(e) => { setPutdata(e.target.value) }} /> <button>X</button><br />
+                메인이미지<input type="file" name='M_img' /><br />
+                서브이미지<input type="file" name='M_img' /><br />
                 메뉴소개<input type="text" name='tip' value={putdata.tip} onChange={(e) => { setPutdata(e.target.value) }} /><br />
                 태그<input type="text" name='tag' value={putdata.HASH_TAG} onChange={(e) => { setPutdata(e.target.value) }} /><br />
                 <label>카테고리 선택</label>
@@ -288,9 +474,10 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
                 조리순서1<input type="text" name='조리1' value={putdata.MANUAL01} onChange={(e) => { setPutdata(e.target.value) }} /><br />
                 조리순서2<input type="text" name='조리2' value={putdata.MANUAL02} onChange={(e) => { setPutdata(e.target.value) }} /><br />
                 조리순서3<input type="text" name='조리3' value={putdata.MANUAL03} onChange={(e) => { setPutdata(e.target.value) }} /><br />
-                <input type="text" name='조리이미지1' value={putdata.MANUAL_IMG01} onChange={(e) => { setPutdata(e.target.value) }} />
-                <input type="text" name='조리이미지2' value={putdata.MANUAL_IMG02} onChange={(e) => { setPutdata(e.target.value) }} /><br />
-                <input type="text" name='조리이미지3' value={putdata.MANUAL_IMG03} onChange={(e) => { setPutdata(e.target.value) }} /><br />
+                <input type="file" name='M_img' /><br />
+                <input type="file" name='M_img' /><br />
+                <input type="file" name='M_img' /><br />
+                
                 <select name="open">
                     <option value="공개">공개</option>
                     <option value="비공개">비공개</option>
@@ -298,31 +485,44 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
                 <input type="submit" value='수정하기' />
             </form>
 
-            <div className='delete_pop'>
+            {/* 레시피삭제 팝업창 */}
+            <div className={`delete_pop ${delRePop ? 'active' : ''}`}>
                 <p>선택한 레시피를 삭제할까요?</p><br />
-                <button>삭제</button>
-                <button>취소</button>
+                <button onClick={delRecipe}>삭제</button>
+                <button onClick={notdelRecipe}>취소</button>
+            </div>
+
+            {/* 댓글삭제 팝업창 */}
+            <div className={`delete_pop2 ${delComPop ? 'active' : ''}`}>
+                <p>작성한 댓글를 삭제할까요?</p><br />
+                <button onClick={delComment}>삭제</button>
+                <button onClick={notdelComment}>취소</button>
 
             </div>
 
+            {/* 나의 레시피 데이터 출력 */}
             <div>
                 {
-                    myrecipe.map((obj: any, k: any) => (
+                    myRecipe.map((obj: any, k: any) => (
                         <div key={k}>
                             <p>{obj.name}</p>
                             <p>{obj.m_cate}</p>
                             <p>{obj.open}</p>
-                            <button onClick={() => { deleteRecipe(obj.seq) }}>삭제</button>
-                            <button onClick={() => { putPopup(obj.seq) }}>수정</button>
+                            <button onClick={() => { setDelRePop(true); eldelrecipe.current = obj.seq; }}>삭제</button>
+                            <button onClick={() => { putRePopup(obj.seq) }}>수정</button>
                         </div>
                     ))
                 }
-                <form className='add_form active' ref={elform2} onSubmit={addComment}>
+
+                {/* 댓글 입력창 폼 */}
+                <form className='add_comment' ref={elform2} onSubmit={addComment}>
                     댓글<input type="text" name='comment' /><br />
                     <input type="submit" value='추가하기' />
                 </form>
             </div>
 
+
+            {/* 댓글 데이터 출력 */}
             <div style={{ paddingTop: 50 }}>
                 {
                     data3.map((obj: any, k: any) => (
@@ -330,8 +530,8 @@ function MyrecipeReg({ data3, dataCrl3, myrecipe, dataCrl, session }: any) {
                             <p>{obj.user_name}</p>
                             <p>{obj.user_email}</p>
                             <p>{obj.comment}</p>
-                            <button onClick={() => { deleteComment(obj.id) }}>삭제</button>
-                            <button onClick={() => { }}>수정</button>
+
+                            <button onClick={() => { setDelComPop(true); eldelcomment.current = obj.id; }}>삭제</button>
 
                         </div>
                     ))

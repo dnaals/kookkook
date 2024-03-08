@@ -9,7 +9,7 @@ export const test3 = async (type?: string, body?: initTy3) => {
     let db, collection, data3
     db = client.db('Kook')
     collection = db.collection('comment')
-    console.log(body)
+    // console.log(body)
 
 
     switch (type) {

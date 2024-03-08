@@ -14,6 +14,14 @@ export type initTy = {
     user?: string;
 }
 
+export type initTy2 = {
+    id?: string;
+    user_email?: string;
+    user_name?: string;
+    seq?: string;
+    date?: string;
+}
+
 export type initTy3 = {
     id?: string;
     user_email?: string;

@@ -14,24 +14,24 @@ export const useStore2 = create<Ty2>((set) => {
     return {
         data2: [],
         dataCrl2: async function (type2, id, overData) {
-            console.log('type =', type2);
-            console.log('id =', id);
-            console.log('overData =', overData);
+            // console.log('type =', type2);
+            // console.log('id =', id);
+            // console.log('overData =', overData);
             let res2: any;
             switch (type2) {
-                case "all": res2 = await request1.get("/api/my_recipe");
+                case "all": res2 = await request1.get("/api/bookmark");
                     break;
 
-                case "insert": res2 = await request1.post("/api/my_recipe", overData);
+                case "insert": res2 = await request1.post("/api/bookmark", overData);
                     break;
 
-                case "delete": res2 = await request1.delete(`/api/my_recipe/${id}`);
+                case "delete": res2 = await request1.delete(`/api/bookmark/${id}`);
                     break;
                     
-                case "put": res2 = await axios.put(`/api/my_recipe/${id}`, overData);
+                case "put": res2 = await axios.put(`/api/bookmark/${id}`, overData);
                     break;
             }
-            console.log(res2.data);
+            // console.log(res2.data);
             set({ data2: res2.data });
         },
     };

@@ -17,9 +17,9 @@ export const useStore = create<Ty>((set) => {
     return {
         data: [],
         dataCrl: async function (type, id, overData) {
-            console.log('type =', type)
-            console.log('id = ', id)
-            console.log('overData = ', overData)
+            // console.log('type =', type)
+            // console.log('id = ', id)
+            // console.log('overData = ', overData)
             let res: any;
             switch (type) {
                 case 'all': res = await request.get('/api/all_recipe/')
@@ -43,7 +43,7 @@ export const useStore = create<Ty>((set) => {
                 case 'put': res = await axios.put(`/api/all_recipe/${id}`, overData)
                     break;
             }
-            console.log(res.data)
+            // console.log('res = ', res.data)
             set({ data: res.data });
 
 

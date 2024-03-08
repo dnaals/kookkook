@@ -5,7 +5,7 @@ import "@/components/style/home_detail.scss";
 import axios from 'axios';
 
 function Home_detail({dataID,dataCrl, params}:any) {
-    console.log(params.detail)
+    // console.log(params.detail)
 
     // let detailData = dataID.filter((obj:any)=>obj.seq==params.detail)
 
