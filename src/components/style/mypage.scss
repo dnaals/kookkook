@@ -1,0 +1,62 @@
+@import "../style/color.scss";
+
+.profile {
+    color: $color-black;
+    padding-top: 100px;
+
+    figure {
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 133px;
+            height: 133px;
+            border: 1px solid $color-orange ;
+            border-radius: 100px;
+            background-color: $color-white;
+        }
+
+        figcaption {
+            display: flex;
+            flex-direction: column;
+            margin: 0 20px;
+
+            p {
+                margin: 5px 0;
+            }
+
+            p:nth-of-type(1) {
+                font-size: 1.8rem;
+            }
+
+            p:nth-of-type(2) {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+
+.my_btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 57px;
+
+    button {
+        background-color: $color-white;
+        border: 1px solid $color-yellow;
+        width: 132px;
+        height: 132px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        font-size: 1.1rem;
+    }
+}
+
+img {
+    width: 55px;
+    height: auto;
+}

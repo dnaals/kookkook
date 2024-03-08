@@ -5,7 +5,7 @@ import RecipeWid from '../UIUX/RecipeWid';
 import RecipeSq from '../UIUX/RecipeSq';
 import Home_detail from '../UIUX/Home_detail';
 
-function RecipeList({idx}:any) {
+function RecipeList({idx,detailUrl}:any) {
 
     
     let { data, dataCrl } = useStore();
@@ -13,20 +13,20 @@ function RecipeList({idx}:any) {
         dataCrl('all', '');
     }, [])
 
-    if (!data.length) return <>sadsadsa...</>
+    if (!data.length) return <div>sadsadsa...</div>
 
 
     let comp;
     switch (idx) {
         case "가로":
-            comp=<RecipeWid dataID={data} dataCrl={dataCrl} />
+            comp=<RecipeWid dataID={data} dataCrl={dataCrl}/>
             break;
         case "정사각형":
             comp=<RecipeSq dataID={data} dataCrl={dataCrl} />
             break;
             
         case "홈세부":
-            comp=<Home_detail dataID={data} dataCrl={dataCrl} />
+            comp=<Home_detail dataID={data} detailUrl={detailUrl} />
             break;
         default:
             break;
@@ -34,9 +34,9 @@ function RecipeList({idx}:any) {
 
 
     return (
-        <div style={{paddingTop:"100px"}}>
+        <>
             {comp}
-        </div>
+        </>
     );
 }
 

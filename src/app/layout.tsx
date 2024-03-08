@@ -7,19 +7,19 @@ import '@/components/style/common.scss'
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   const url = usePathname();
-  const urlPath = url != '/';
-
+  const isHomePage = url === '/';
+  const isVariablePage = url.startsWith('/home/') && url.split('/').length > 2;
   return (
     <html lang="en">
       <body>
         <header>
-          {urlPath && <Head />}
+        {!isHomePage && !isVariablePage && <Head />}
         </header>
         <SessionProvider>
           <main>{children}</main>  
         </SessionProvider>
         <footer>
-          {urlPath && <Foot />}
+        {!isHomePage && !isVariablePage && <Foot />}
         </footer>
 
       </body>
