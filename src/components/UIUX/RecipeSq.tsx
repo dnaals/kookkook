@@ -18,12 +18,22 @@ function RecipeSq({ dataID, dataCrl }: any) {
 
     return (
         <div className="recipeSq">
+<<<<<<< HEAD
             {dataID.map((obj: any, k: number) => (
                 <div key={k} className='sq_contents' >
                     <div><img id='sq_img' src={obj.m_thumb}  /><FuncScrap/> </div>
                     <p onClick={() => { link(obj.name) }}>{obj.name}</p>
                     <FuncLike/>
                     
+=======
+            {dataID.map((obj:any, k:number) => (
+                <div key={k}>
+                    <div onClick={() => { link(obj.name) }}>
+                        <img src={obj.m_thumb} />
+                        <div>{obj.name}</div>
+                        
+                    </div>
+>>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
                 </div>
             ))}
         </div>
