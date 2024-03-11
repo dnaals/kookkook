@@ -1,0 +1,26 @@
+.recipeSq {
+    padding: 100px 70px;
+    display:flex;
+    gap:50px;
+    overflow: auto;
+    
+    .sq_contents {
+        
+
+        >div {
+            position: relative;
+            width:180px;
+            height:180px;
+            #sq_img {
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+            }
+        }
+
+        p {
+            padding : 10px 0; 
+            font-size: 16px;
+        }
+    }
+}

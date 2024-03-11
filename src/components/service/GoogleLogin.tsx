@@ -4,11 +4,9 @@ import React from 'react';
 
 function GoogleLogin() {
     const { data: session, status }:any = useSession();
-    console.log(status)
     
     if (status === 'authenticated') {
         console.log(session)
-        
         return <p>Signed in as {session.user.email}</p>
     }
 

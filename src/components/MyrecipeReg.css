@@ -1,0 +1,63 @@
+div {
+  position: relative;
+}
+div .myrecipeList .add_form {
+  position: absolute;
+  background-color: gray;
+  border: 1px solid black;
+  top: 200px;
+  left: 400px;
+  opacity: 0;
+  z-index: 9999;
+}
+div .myrecipeList .add_form.active {
+  opacity: 1;
+}
+div .myrecipeList .put_form {
+  position: absolute;
+  background-color: gray;
+  border: 1px solid black;
+  top: 200px;
+  opacity: 0;
+}
+div .myrecipeList .put_form.active {
+  opacity: 1;
+}
+div .myrecipeList .delete_pop {
+  position: absolute;
+  background-color: gray;
+  border: 1px solid black;
+  top: 130px;
+  left: 400px;
+  opacity: 0;
+  z-index: 9999;
+}
+div .myrecipeList .delete_pop.active {
+  opacity: 1;
+}
+div .myrecipeList .delete_pop2 {
+  position: absolute;
+  background-color: gray;
+  border: 1px solid black;
+  top: 130px;
+  left: 600px;
+  opacity: 0;
+  z-index: 9999;
+}
+div .myrecipeList .delete_pop2.active {
+  opacity: 1;
+}
+div .myrecipeList .add_comment {
+  position: absolute;
+  background-color: gray;
+  border: 1px solid black;
+  top: 20px;
+  left: 400px;
+}
+div .myrecipeList .put_comment {
+  position: absolute;
+  background-color: gray;
+  border: 1px solid black;
+  top: 20px;
+  left: 700px;
+}

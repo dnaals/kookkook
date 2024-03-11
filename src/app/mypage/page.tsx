@@ -1,15 +1,38 @@
-'use client';
-import MypageButton from '@/components/UIUX/MypageButton';
-import MypageUser from '@/components/UIUX/MypageUser';
+"use client";
+import React, { useEffect, useState } from 'react';
+
+import "@/components/style/mypage.scss";
 import { useStore } from '@/components/recipe_store/all_store';
-import RecipeReg from '@/components/service/RecipeReg';
-import React from 'react';
+import { useStore4 } from '@/components/recipe_store/comment_store';
+import { useSession } from 'next-auth/react';
+import Profile from '@/components/UIUX/Profile';
+import MypageButton from '@/components/UIUX/MypageButton';
+import Mypageview from '@/components/service/Mypageview';
+
+
+
+
 function page() {
-    const { dataCrl } = useStore();
-    const idx2 = '마이페이지';
+
+    let { data, dataCrl } = useStore();
+    let { data4, dataCrl4 } = useStore4();
+    const { data: session, status }: any = useSession();
+    const [idx, setIdx] = useState('내 레시피');
+
+    let idxdata = (a:any)=> {
+        setIdx(a)
+    }
+
+    
+
+    if (!session) return <>sadsadsa...</>
+
+
     return (
         <div>
-            <RecipeReg idx2={idx2} />
+            <Profile session={session} />
+            <MypageButton idxdata={idxdata} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4}/>
+            <Mypageview idx ={idx} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4}/>
         </div>
     );
 }

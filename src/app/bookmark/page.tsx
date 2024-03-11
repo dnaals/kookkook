@@ -1,12 +1,13 @@
+import Bookmark from '@/components/service/Bookmark';
 import RecipeList from '@/components/service/RecipeList';
 import React from 'react';
 
 function page() {
-    const idx = "정사각형";
+    const idx = "북마크";
     return (
         
         <div>
-            <RecipeList idx={idx}/>
+            <Bookmark idx={idx}/>
         </div>
     );
 }
