@@ -13,13 +13,16 @@ function FuncScrap({ dataID, obj }: any) {
     let [b_click, setB_click] = useState(false);
     const bookmarkClick = (aa: any) => {
 
-        let id = Date.now()
+        let Dateid = Date.now()
         let bookmarkOne = dataID.filter((obj: any) => aa == obj.name)
+        let aaa = data2.filter((obj:any)=> aa==obj.name)
+        // console.log('삭제 = ', aaa[0].id)
+        
 
         if (!b_click) {
 
             const bookmarkData = {
-                "id": id,
+                "id": `${Dateid}`,
                 "seq": `${bookmarkOne[0].seq}`,
                 "name": `${bookmarkOne[0].name}`,
                 "user_name": `${session.user.name}`,
@@ -31,7 +34,7 @@ function FuncScrap({ dataID, obj }: any) {
 
             dataCrl2('insert', '', bookmarkData)
         }else {
-            dataCrl2('delete', id, '')
+            dataCrl2('delete', aaa[0].id, '')
         }
         console.log('b_click = ',b_click)
 
@@ -39,7 +42,8 @@ function FuncScrap({ dataID, obj }: any) {
 
     }
 
-    // let bbbb = dataID.filter((obj:any)=>)
+    // let bbbb = data2.filter((obj:any)=>obj.seq == dataID.seq)
+    // console.log("bbbb = ",bbbb)
 
     return (
 
