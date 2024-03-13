@@ -23,8 +23,9 @@ export const test = async (type?: string, body?: initTy) => {
             data = await collection.deleteOne(body);
             break;
 
-            // case 'put': await collection.updateOne({id:body.id}, {$set:{title:body.name}})
-            break;
+        case 'put':
+            await collection.updateOne({seq:body?.seq}, {$set:body});
+            // console.log(typeof body?.seq,'sdfsdfsdsfdsdf')
     }
 
     if (type != 'detail') data = await collection.find({}).toArray(); //데이터 모두 가져오기
@@ -33,32 +34,5 @@ export const test = async (type?: string, body?: initTy) => {
     return data;
 }
 
-export const test2 = async (type?: string, body?: initTy) => {
-    await client.connect();
 
-    let db, collection, data
-    db = client.db('Kook')
-    collection = db.collection('google')
-
-    switch (type) {
-        case 'post': await collection.insertOne(body);
-            break;
-
-        case 'detail':
-            data = await collection.find(body).toArray();
-            break;
-
-        case 'delete':
-            data = await collection.deleteOne(body);
-            break;
-
-            // case 'put': await collection.updateOne({id:body.id}, {$set:{title:body.name}})
-            break;
-    }
-
-    if (type != 'detail') data = await collection.find({}).toArray(); //데이터 모두 가져오기
-    client.close();
-
-    return data;
-}
 

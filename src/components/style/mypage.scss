@@ -1,5 +1,8 @@
 @import "../style/color.scss";
+@import "../style/mixin.scss";
 
+
+//프로필-pad
 .profile {
     color: $color-black;
     padding-top: 100px;
@@ -37,6 +40,7 @@
 }
 
 
+//버튼-pad
 .my_btn {
     display: flex;
     justify-content: space-between;
@@ -59,4 +63,37 @@
 img {
     width: 55px;
     height: auto;
+}
+
+
+//프로필-mobile
+@include mobile {
+    .profile figure img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile figure figcaption p:nth-of-type(1) {
+        font-size: 1.2rem;
+    }
+
+    .profile figure figcaption p:nth-of-type(2) {
+        font-size: 0.9rem;
+    }
+
+    .my_btn {
+        gap: 3%;
+        margin-top: 10%;
+
+        button {
+            width: 80px;
+            height: 80px;
+            font-size: 0.8rem;
+
+
+            img {
+                width: 30px;
+            }
+        }
+    }
 }

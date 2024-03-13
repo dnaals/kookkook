@@ -1,19 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface keyInterface {
-    id: number
+    id: number,
     text: string
 }
 
-function Recent({ setValue, setKeyName, handleSearch2 }: any) {
+function Recent({ setValue, handleSearch2 }: any) {
 
-    const router = useRouter();
     const [keywords, setKeywords] = useState<keyInterface[]>([])
-
-
+    
+    
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const result = localStorage.getItem('keywords') || '[]';
@@ -41,7 +39,6 @@ function Recent({ setValue, setKeyName, handleSearch2 }: any) {
         setValue(name);
         handleSearch2(name);
     }
-
 
     return (
         <div className="recently">

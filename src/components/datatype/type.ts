@@ -11,6 +11,7 @@ export type initTy = {
     s_thumb?: string;
     m_thumb?: string;
     like?: number;
+    user?:string;
 }
 
 export type initTy1 = {

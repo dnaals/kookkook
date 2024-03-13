@@ -1,12 +1,11 @@
 import GoogleLogin from "@/components/service/GoogleLogin";
 import Link from "next/link";
-import '@/components/style/loginpage.scss'
 export default function Home() {
 
   return (
     <>
       <div className="Login_page">
-        <h1>WelCome!!</h1>
+        <h1>Welcome!</h1>
         <h2>Kook Kook</h2>
         <img src="/images/loginImg.png" alt="asdasd" />
         <GoogleLogin/>

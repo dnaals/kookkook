@@ -1,19 +1,71 @@
 //스크랩버튼 기능
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "@/components/style/scrap.scss";
+import { useSession } from 'next-auth/react';
+import { useStore2 } from '../recipe_store/bookmark_store';
 
-function FuncScrap() {
-    let [b_click,setB_click] = useState(false);
-    const bookmarkClick = ()=>{
-        setB_click(prevState => !prevState)
+function FuncScrap({ obj }: any) {
+
+    const { data2, dataCrl2 } = useStore2()
+
+    const { data: session, status }: any = useSession();
+    let [b_click, setB_click] = useState(false);
+    const bookmarkClick = (aa: any) => {
+
+        let Dateid = Date.now()
+        let bookmarkOne = obj;
+        let aaa = data2.filter((obj:any)=> aa.name==obj.name)
+        // console.log('삭제 = ', aaa[0].id)
+        
+
+        if (!b_click) {
+
+            const bookmarkData = {
+                "id": `${Dateid}`,
+                "seq": `${bookmarkOne.seq}`,
+                "name": `${bookmarkOne.name}`,
+                "user_name": `${session.user.name}`,
+                "user_email": `${session.user.email}`,
+                "m_thumb": `${bookmarkOne.m_thumb}`,
+                "tip": `${bookmarkOne.tip}`,
+                "like": `${bookmarkOne.like}`
+            }
+
+            dataCrl2('insert', '', bookmarkData)
+        }else {
+            dataCrl2('delete', aaa[0].id, '')
+        }
+        console.log('b_click = ',b_click)
+
+        setB_click(!b_click)
+
     }
+    
+    useEffect(()=>{
+        if(!session){
+            setB_click(false);
+        }
+        
+    },[session])
+    useEffect(()=>{
+        
+        const checkBook = data2.filter(book=>book.seq == obj.seq)
+        if(checkBook.length){
+            setB_click(true)
+        }else{
+            setB_click(false)
+        }
+    },[obj])
+
+    // let bbbb = data2.filter((obj:any)=>obj.seq == dataID.seq)
+    // console.log("bbbb = ",bbbb)
 
     return (
-        
+
         <div className="scrap">
-            <button onClick={bookmarkClick}>
-                <img src={ b_click? "/images/bookmark_after.png" : "/images/bookmark_before.png" } alt='asd'/>
+            <button onClick={() => { bookmarkClick(obj) }}>
+                <img src={b_click ? "/images/bookmark_after.png" : "/images/bookmark_before.png"} alt='asd' />
             </button>
         </div>
     );

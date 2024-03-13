@@ -2,16 +2,9 @@
 import Search from '@/components/UIUX/Search';
 import RecipeList from '@/components/service/RecipeList';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useStore } from '@/components/recipe_store/all_store';
 import '../../components/style/search.scss';
-
-// import { Pagination, Navigation } from 'swiper/modules';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-
-// import 'swiper/css';
-// import 'swiper/css/pagination';
-// import 'swiper/css/navigation';
 
 
 function page() {
@@ -24,7 +17,7 @@ function page() {
     let { data, dataCrl } = useStore();
     
     useEffect(() => {
-        dataCrl('all', '');
+        dataCrl('all', '','');
     }, [])
 
     return (

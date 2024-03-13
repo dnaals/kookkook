@@ -1,49 +1,35 @@
 //좋아요버튼 기능
-<<<<<<< HEAD
-=======
-
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "@/components/style/like.scss";
 
 function FuncLike({ obj }: any) {
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
-    let like: any = Math.floor(obj);
-    if (like >= 99) {
-        like = '+' + 99;
-    }
+    let num = Math.floor(obj.like)
 
     const [isLike, setIsLike] = useState(false);
+    const [pluslike, setPluslike] = useState(num+1);
 
-    let [pluslike, setPluslike] = useState(like);
-<<<<<<< HEAD
-    
     const changeLike = () => {
-        setIsLike(!isLike);
-        setPluslike(like+1)
+        setIsLike(!isLike);       
     }
-    
-    return (
 
+    useEffect(()=>{
+        let like: any = Math.floor(obj.like);
+        setPluslike(like);
+    },[obj])
+
+    useEffect(()=>{
+       isLike ?  setPluslike(pluslike +1) :  setPluslike(pluslike -1);
+    },[isLike])
+
+
+    return (
         <span className="like">
-            <button onClick={changeLike}><img src={isLike ? "/images/heart_red.png" : "/images/heart_black.png"} />{pluslike}</button>
+            <button onClick={changeLike}>
+                <img src={isLike ? "/images/heart_red.png" : "/images/heart_black.png"} alt="heart" />
+                {pluslike >= 99 ? '+' + 99 : pluslike}
+            </button>
         </span>
-=======
-    const changeLike = () => {
-        setIsLike(!isLike);
-        setPluslike(like + 1);
-    }
-    // console.log(pluslike)
-    return (
-
-        <div className="like">
-            <button onClick={changeLike}><img src={isLike ? "/images/heart_red.png" : "/images/heart_black.png"} />{pluslike}</button>
-        </div>
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
     );
 }
 

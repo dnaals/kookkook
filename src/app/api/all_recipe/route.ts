@@ -8,9 +8,9 @@ export async function GET(){
 }
 
 export async function POST(req:Request){
+    const aa = await req.json();
+    // console.log( aa);
     
-    // console.log( await req.json());
-    
-    return NextResponse.json(await test('post', await req.json()));
+    return NextResponse.json(await test('post', aa));
 }
 // 'post', req.json())

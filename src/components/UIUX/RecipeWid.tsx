@@ -1,74 +1,60 @@
 'use client';
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FuncScrap from '@/components/UIUX/FuncScrap';
 import FuncLike from './FuncLike';
 import "../style/scrap.scss";
 import "../style/recipe_wid.scss";
 
-function RecipeWid({ dataID,cateName }: any) {
+function RecipeWid({ dataID,selectName }: any) {
     const router: any = useRouter();
-
+    const url = usePathname();
     const link = (name: any) => {
         let urlname = dataID.filter((obj: any) => name == obj.name);
         let url: any = urlname[0].seq;
         router.push(`/home/${url}`);
     }
 
-    // console.log(dataID)
+    const sortRecipesBySeq = (recipes: any[]) => {
+        return recipes.slice().sort((a, b) => a.seq - b.seq);
+    }
 
-    const items = dataID;
+    const sortRecipesByLike = (recipes: any[]) => {
+        return recipes.slice().sort((a, b) => a.like - b.like);
+    }
 
-    //최신순 : seq 내림차순
-    // items.sort(function (a, b) {
-    //     if (a.seq > b.seq) {
-    //         return 1;
-    //     }
-    //     if (a.seq < b.seq) {
-    //         return -1;
-    //     }
-    //     // a must be equal to b
-    //     return 0;
-    // })
 
-    //댓글순 : seq 오름차순 
-    items.sort(function (b: any, a: any) {
-        if (a.seq > b.seq) {
-            return 1;
-        }
-        if (a.seq < b.seq) {
-            return -1;
-        }
-        // a must be equal to b
-        return 0;
-    })
+    let sortedRecipes = [...dataID];
 
-    console.log(items)
 
+    if(selectName=='latest'){
+        sortedRecipes = sortRecipesBySeq(dataID);
+    } else if (selectName=='comment'){
+
+    } else if (selectName=='star'){
+        sortedRecipes = sortRecipesByLike(dataID);
+    }
 
     return (
         <>
-            <div>
-                <select name="search_cate" id="search_cate">
-                    <option value="latest">최신순</option>
-                    <option value="comment">댓글순</option>
-                    <option value="star">별점순</option>
-                </select>
-            </div>
             <div className="recipeWid_box">
                 <div className="recipeWid">
-                    <p>{cateName}</p>
-                    {dataID.map((obj: any, k: number) => (
+                    {sortedRecipes.map((obj: any, k: number) => (
                         <div key={k}>
                             <div>
                                 <figure>
-                                    <div className='scrap_position'><img className='menu_img' src={obj.m_thumb} /><FuncScrap /></div>   
+                                    <div className='scrap_position'><img className='menu_img' src={obj.m_thumb} /><FuncScrap obj ={obj} /></div>   
                                     <figcaption>
                                         <div className='flex'>
                                             <h2 onClick={() => { link(obj.name) }}>{obj.name}</h2>
                                         </div>
                                         
                                         <p>{obj.tip}</p>
-                                        <FuncLike obj={obj.like} />
+                                        <div className="recipeWidBtn">
+                                            <div onClick={() => { link(obj.name) }}>0</div>
+                                            <FuncLike obj={obj} />
+                                            <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>수정</div>
+                                            <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>삭제</div>
+                                        </div>
                                     </figcaption>
                                 </figure>
                             </div>

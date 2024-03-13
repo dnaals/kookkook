@@ -1,5 +1,10 @@
+@import "../style/mixin.scss";
 body {
-    background-color: #b3b3b3;
+    background-image: url("/images/bg.png");
+    background-attachment: fixed;
+    background-position: center top;
+
+
     main {
         padding: 0 70px;
         width: 768px;
@@ -7,5 +12,18 @@ body {
         position: relative;
         background-color: #FFFEF9;
     }
-    
+}
+
+
+@include mobile {
+    body main {
+        width: 100%;
+        padding: 0 10%;
+    }
+}
+@include pad {
+    body main {
+        width: 100%;
+        padding: 0 10%;
+    }
 }

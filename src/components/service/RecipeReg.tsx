@@ -1,9 +1,56 @@
 //레시피 등록
-
+"use client";
 import React from 'react';
+import { storage } from "@/lib/firebaseInit";
+import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "firebase/storage";
 import "@/components/style/recipe_reg.scss";
+import { useSession } from 'next-auth/react';
 
 function RecipeReg() {
+
+    const { data: session, status }: any = useSession();
+
+    //firebase
+    const firebase = {
+
+        upload: async (file: any, idx: any, id: any) => {
+            // console.log(idx)
+            if (idx < 10) {
+                idx = '0' + idx;
+            }
+            // console.log(idx)
+            const fileName = `${idx}_${file.name}`;
+            const storageRef = ref(storage, `/${session.user.email}/${id}/` + fileName);
+            await uploadBytes(storageRef, file).then((snapshot) => {
+                // console.log(snapshot);
+            });
+
+        },
+        getImages: async (id: any) => {
+            const res = await listAll(ref(storage, `/${session.user.email}/${id}`));
+
+            let imgUrl = [];
+            for (let i = 0; i < res.items.length; i++) {
+                let a = await getDownloadURL(res.items[i]);
+                imgUrl.push({ url: a, name: res.items[i].fullPath })
+            }
+            return imgUrl;
+        },
+        delImage: (id: any, urls: any) => {
+
+            urls.forEach((url: any) => {
+                if (url) {
+                    const start = url.lastIndexOf('%2F') + 3; //url 뒤 부터 %2f부분의 인덱스값 
+                    const end = url.lastIndexOf('?');
+                    const str = url.substring(start, end);
+                    // console.log(str)
+                    deleteObject(ref(storage, `/${session.user.email}/${id}/${str}`))
+                }
+            })
+            // const url = 'https://firebasestorage.googleapis.com/v0/b/kookkook-99003.appspot.com/o/jsg8733%40gmail.com%2F1709775110201%2Ftest_img1.jpg?alt=media&token=101ccc9a-e67b-45fc-b4ea-a8993bc22527'
+
+        }
+    }
     return (
         <div className='reg'>
             {/* 추가하기 폼 */}
@@ -160,19 +207,19 @@ function RecipeReg() {
                 </article>
             </form>
 
-            {/* 레시피삭제 팝업창 */}
+            {/* 레시피삭제 팝업창
             <div className='delete_pop'>
                 <p>선택한 레시피를 삭제할까요?</p><br />
                 <button>삭제</button>
                 <button>취소</button>
             </div>
             <br />
-            {/* 댓글삭제 팝업창 */}
+            댓글삭제 팝업창
             <div className='delete_pop2'>
                 <p>작성한 댓글을 삭제할까요?</p><br />
                 <button>삭제</button>
                 <button>취소</button>
-            </div>
+            </div> */}
         </div>
 
     );

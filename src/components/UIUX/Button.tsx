@@ -1,69 +1,43 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+import { useStore } from '../recipe_store/all_store';
 
-function Button({ dataCrl, setCateName }: any) {
+function Button() {
     const [clickedIndex, setClickedIndex] = useState(0);
+    const {cateName,cateIdx,category} = useStore()
 
     const buttons = [
         { label: 'RICE', category: '밥', image: '/images/rice_black.png' },
         { label: 'SOUP', category: '국&찌개', image: '/images/soup_black.png' },
-        { label: 'SIDE DISH', category: '반찬', image: '/images/sidedish_black.png' },
+        { label: 'SIDE', category: '반찬', image: '/images/sidedish_black.png' },
         { label: 'SPECIAL', category: '일품', image: '/images/special_black.png' },
         { label: 'DESSERT', category: '후식', image: '/images/dessert_black.png' },
-        { label: 'Etc', category: '기타', image: '/images/etc_black.png' }
+        { label: 'ETC', category: '기타', image: '/images/etc_black.png' }
     ];
 
     const handleClick = (index: number, category: string) => {
-        dataCrl("카테고리", category);
-        setCateName(category);
-        setClickedIndex(index);
+        
+        // dataCrl("카테고리", category);
+        // setCateName(category);
+        // setClickedIndex(index);
+
+        // handleClick(index, obj.category)
     };
 
     useEffect(() => {
-        setClickedIndex(0);
-        dataCrl("카테고리", buttons[0].category);
-        setCateName(buttons[0].category);
+        category(cateName,cateIdx);
+        // setClickedIndex(0);
+        // dataCrl("카테고리", buttons[0].category);
+        // setCateName(buttons[0].category);
     }, []);
 
-=======
-import React, { useEffect, useState } from 'react';
-import { useStore } from '@/components/recipe_store/all_store';
-
-function Button({ dataCrl,setCateName }: any) {
-    let [clickColor, setClickColor] = useState(false);
-    const backColor = (cate_name:any) => {
-        setClickColor(prevColor => !prevColor);
-        setCateName(cate_name);
-    }
-    const buttons = [
-        { label: 'RICE', category: '밥', image: '/images/rice_black.png' },
-        { label: 'SOUP', category: '국&찌개', image: '/images/soup_black.png' },
-        { label: 'SIDE DISH', category: '반찬', image: '/images/sidedish_black.png' },
-        { label: 'SPECIAL', category: '일품', image: '/images/special_black.png' },
-        { label: 'DESSERT', category: '후식', image: '/images/dessert_black.png' },
-        { label: 'Etc', category: '기타', image: '/images/etc_black.png' }
-
-    ];
-
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
     return (
         
         <div className="home_btn">
-<<<<<<< HEAD
             {buttons.map((obj, index) => (
-                <button key={index} onClick={() => handleClick(index, obj.category)} style={{ backgroundColor: clickedIndex === index ? '#FFC700' : 'white' }}>
+                <button key={index} onClick={() => category(obj.category, index)} style={{ backgroundColor: cateIdx === index ? '#FFC700' : 'white' }}>
                     <img src={obj.image} alt={obj.label} /> {obj.label}
                 </button>
             ))}
-=======
-            {
-                buttons.map((obj,k) => (
-                    <button key={k} onClick={() => { dataCrl("카테고리", obj.category); backColor(obj.category) }} style={{ backgroundColor: clickColor ? '#FFC700' : 'white' }}>
-                        <img src={obj.image} /> {obj.label}
-                    </button>
-                ))
-            }
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
         </div>
     );
 }

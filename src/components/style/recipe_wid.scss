@@ -1,51 +1,25 @@
 @import "../style/color.scss";
 @import "../style/scrap.scss";
 @import "../style/like.scss";   
-
-.swiper {
-    height: 100vh;
-}
+@import "../style/mixin.scss";
 
 .recipeWid_box {
     color: $color-black;
     border-radius: 30px;
-<<<<<<< HEAD
     width: 100%;
-    height: 100vh;
-    margin: 0 auto;
     padding-bottom: 100px;
     .recipeWid::-webkit-scrollbar {
         display: none;
     }
-=======
-    width: 85%;
-    height: 100vh;
-    margin: 0 auto;
-    
-
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
     .recipeWid {
         width: 100%;
         margin: 0 auto;
-<<<<<<< HEAD
-        height: 93vh;
-        overflow: auto;
         figure {
             display: flex;
             margin: 30px 0;
             align-items: center;
             gap: 40px;
             
-=======
-        height: 18vh;
-
-
-        figure {
-            display: flex;
-            margin: 30px;
-            align-items: center;
-            gap: 40px;
->>>>>>> 218c5aaf20a8b7f76c8990c168ebaacd453c0468
 
             .scrap_position {
                 position: relative;
@@ -59,10 +33,24 @@
             }
 
             figcaption {
-
-                h2{
-                    font-size: 24px;
+                .recipeWidBtn{
+                    display:flex;
+                    div{
+                        border: 1px solid rgba(0, 0, 0, 0.2);
+                        border-radius: 50px;
+                        width: 70px;
+                        text-align: center;
+                    }
                 }
+                .flex{
+                    h2{
+                        margin:0;
+                        font-size: 24px;
+                    }
+                    
+                    
+                }
+                
                 p{
                     font-size: 16px;
                     margin:20px 0;
@@ -76,5 +64,65 @@
             }
         }
 
+    }
+}
+
+//mobile
+@include mobile {
+    .recipeWid_box {
+        height: auto;
+
+        .recipeWid {
+            height: auto;
+            div{
+                div{
+                    figure{
+                        figcaption{
+                            .flex{
+                                h2{
+                                    font-size: 1.0rem;
+                                }
+                            }
+                            p{
+                                margin:10px 0;
+                            }
+                            .recipeWidBtn{
+                                div{
+                                    display:flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    width:50px;
+                                    font-size: 0.8rem;
+                                }
+                            
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .recipeWid_box .recipeWid figure .scrap_position .menu_img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .recipeWid_box .recipeWid figure figcaption h2 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .recipeWid_box .recipeWid figure figcaption p {
+        font-size: 0.8rem;
+        // margin: 10px 0;
+    }
+
+
+    .scrap button img {
+        width: 23px;
+        height: auto;
     }
 }

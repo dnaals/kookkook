@@ -1,14 +1,14 @@
 import React from 'react';
 import "@/components/style/mypage.scss";
 
-function Profile() {
+function Profile({session}:any) {
     return (
         <div className='profile'>
             <figure>
                 <img src=""></img>
                 <figcaption>
-                    <p>Kook</p>
-                    <p>kook@gmail.com</p>
+                    <p>{session.user.name}</p>
+                    <p>{session.user.email}</p>
                 </figcaption>
             </figure>
         </div>

@@ -1,22 +1,45 @@
 "use client";
-import React, { useState } from 'react';
-import "@/components/style/mypage.scss";
-import MypageButton from '@/components/UIUX/MypageButton';
-import Profile from '@/components/UIUX/Profile';
-import Comment from '@/components/UIUX/Comment';
-import RecipeReg from '@/components/service/RecipeReg';
+import React, { useEffect, useState } from 'react';
 
+import "@/components/style/mypage.scss";
+import { useStore } from '@/components/recipe_store/all_store';
+import { useStore4 } from '@/components/recipe_store/comment_store';
+import { useSession } from 'next-auth/react';
+import Profile from '@/components/UIUX/Profile';
+import MypageButton from '@/components/UIUX/MypageButton';
+import Mypageview from '@/components/service/Mypageview';
+import GoogleLogin from '@/components/service/GoogleLogin';
+import '../../components/style/bookmark.scss';
 
 
 
 function page() {
 
+    let { data, dataCrl } = useStore();
+    let { data4, dataCrl4 } = useStore4();
+    const { data: session, status }: any = useSession();
+    const [idx, setIdx] = useState('내 레시피');
+
+
+    if(!session){
+        return  <div className='isLogin'><p>로그인을 하지않으면 보여주지않는다</p><GoogleLogin/></div>
+    }
+
+
+    let idxdata = (a:any)=> {
+        setIdx(a)
+    }
+
+    
+
+    if (!session) return <>sadsadsa...</>
+
 
     return (
         <div>
-            <Profile />
-            <MypageButton />
-            <Comment />
+            <Profile session={session} />
+            <MypageButton idxdata={idxdata} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4}/>
+            <Mypageview idx ={idx} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4}/>
         </div>
     );
 }

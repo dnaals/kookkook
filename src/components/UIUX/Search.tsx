@@ -1,5 +1,4 @@
 //검색기능
-
 "use client";
 
 import { useRouter } from 'next/navigation';
@@ -19,7 +18,6 @@ const Search = ({ defaultValue }: iDefault) => {
     const router = useRouter();
     let { data, dataCrl } = useStore();
     let { data3 , resultData} = useStore3();
-    let [keyName,setKeyName] = useState('');    
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -30,8 +28,9 @@ const Search = ({ defaultValue }: iDefault) => {
     const handleSearch = (e: any) => {
 
         e.preventDefault();
-        let result:any = data.filter((obj:any) => obj.name.includes(inputValue));
         
+        let result:any = data.filter((obj:any) => obj.name.includes(inputValue));
+
         if (typeof window !== 'undefined') {
             const result = localStorage.getItem('keywords') || '[]';
             const resultObj = JSON.parse(result);
@@ -39,15 +38,19 @@ const Search = ({ defaultValue }: iDefault) => {
                 id: Date.now(),
                 text: inputValue
             }
-            localStorage.setItem('keywords', JSON.stringify([...resultObj,newKeyword]))
+            const filteredKeyword = resultObj.filter((obj:any)=>obj.text.includes(inputValue));
+            
+            if(!filteredKeyword.length){
+                localStorage.setItem('keywords', JSON.stringify([...resultObj,newKeyword]))
+            }
         }
         resultData(result)
-        if (inputValue) return router.push(`/search/detail${inputValue}/`);
+        if (inputValue) return router.push(`/search/${inputValue}`);
     }
 
 
     const handleSearch2 = (e: any) => {
-
+        
         let result:any = data.filter((obj:any) => obj.name.includes(e));
         
         if (typeof window !== 'undefined') {
@@ -57,11 +60,14 @@ const Search = ({ defaultValue }: iDefault) => {
                 id: Date.now(),
                 text: e
             }
+            const filteredKeyword = resultObj.filter((obj:any)=>obj.text.includes(e));
             
-            localStorage.setItem('keywords', JSON.stringify([...resultObj,newKeyword]))
+            if(!filteredKeyword.length){
+                localStorage.setItem('keywords', JSON.stringify([...resultObj,newKeyword]))
+            }
         }
         resultData(result)
-        if (e) return router.push(`/search/detail${e}/`);
+        if (e) return router.push(`/search/${e}`);
     }
 
 
@@ -71,7 +77,7 @@ const Search = ({ defaultValue }: iDefault) => {
 
 
     useEffect(() => {
-        dataCrl('all', '');
+        dataCrl('all', '','');
     }, [])
 
 
@@ -81,7 +87,7 @@ const Search = ({ defaultValue }: iDefault) => {
                 <input type='text' className='search-bar' id="inputId" value={inputValue ?? ""} onChange={handleChange} onKeyDown={handleKeyPress} placeholder='레시피 키워드를 입력하세요!'></input>
                 <img onClick={handleSearch} src="/images/search_black.png" alt="" className='search-btn'/>
             </form>
-            <Recent handleSearch2 = {handleSearch2} setValue={setValue} setKeyName={setKeyName} inputValue = {inputValue}/>
+            <Recent handleSearch2 = {handleSearch2} setValue={setValue} inputValue={inputValue}/>
         </div>
     );
 }
