@@ -4,25 +4,27 @@ import { useStore } from '@/components/recipe_store/all_store';
 import "../style/bugger.scss";
 import Link from 'next/link';
 import GoogleLogin from '../service/GoogleLogin';
+import { useSession } from 'next-auth/react';
+import NaverLogin from '../service/NaverLogin';
+
 function Bugger({setOn,setSelName}:any) {
     
-
+    const { data: session, status }: any = useSession();
     const {category} = useStore()
-
-    let { dataCrl } = useStore();
+    console.log(status)
+    console.log(session)
     const close_btn = (name:string)=>{
         setOn(false);
-        //setSelName(name);
-
     }
+
     return (
         <div className='bugger_menu_on' >
             <p className='close_btn' onClick={()=>close_btn('')}>×</p>
             <div className='member'>
                 <div className='memberImg'>
-                    <img src="/images/user_white.png" alt="" />
+                    <img src={!session? ``:`${session.user.image}`} alt="" />
                 </div>
-                <p>name</p>
+                <p className='email'>{!session? "로그인해주세요" :session.user.name}</p>
             </div>
             <div className='menu'>
                 <Link href="/home">
@@ -44,6 +46,9 @@ function Bugger({setOn,setSelName}:any) {
             </div>
             <div onClick={()=>close_btn('')} className='login_button'>
                 <GoogleLogin/>
+            </div>
+            <div  style={session?{display:"none"} : {}}  onClick={()=>close_btn('')} className='login_button'>
+            <NaverLogin/>
             </div>
         </div>
 

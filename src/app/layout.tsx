@@ -11,6 +11,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const isHomePage = url === '/';
   const isVariablePage = url.startsWith('/home/') && url.split('/').length > 2;
   let [selName,setSelName] = useState('');
+
   return (
     <html lang="en">
       <body>
@@ -18,7 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <header>
         {!isHomePage && !isVariablePage && <Head setSelName={setSelName}/>}
         </header>
-        <main>{children}</main>
+        <main style={url=="/bookmark" || url=="/mypage" ? {height:"100vh"}:{}}>{children}</main>
         <footer>
         {!isHomePage && !isVariablePage && <Foot />}
         </footer>

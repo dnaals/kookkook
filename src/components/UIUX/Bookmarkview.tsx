@@ -1,30 +1,28 @@
 "use client";
-import React from 'react';
+import React, { useEffect } from 'react';
 import FuncScrap from './FuncScrap';
 import FuncLike from './FuncLike';
 import { useRouter } from 'next/navigation';
 
 
-// onClick={() => { link(obj.name) }}
 
 function Bookmarkview({ data2, dataCrl2 }: any) {
-
-    
-    // console.log(data2)
-
     const router: any = useRouter();
-
     const link = (name: any) => {
-        // console.log(name)
         let urlname = data2.filter((obj: any) => name == obj.seq);
         let url: any = urlname[0].seq;
         router.push(`/home/${url}`);
     }
+    useEffect(()=>{
+        dataCrl2('all', '', '')
+    },[])
 
-    if (!data2) return <div>dsad</div>
+    if (data2.length==0) return <p className='noBookmark'>북마크가 없습니다.</p>
+    console.log(data2,"dmld")
     return (
         <>
             <div className="recipeWid_box1">
+                <h1>Bookmark</h1>
                 <div className="recipeWid1">
                     {data2.map((obj: any, k: number) => (
                         <div key={k}>

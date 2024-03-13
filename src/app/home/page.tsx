@@ -8,11 +8,26 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 function page({ selName }: any) {
 
-    const {cateName,category} = useStore()
+    const {data,cateName,category} = useStore()
     
     const idx = "가로"
     let [cateName2, setCateName2] = useState('');
     let [selectName, setSelectName] = useState('latest');
+    let [fameImg,setFameImg] = useState<any>();
+    
+    useEffect(()=>{
+        if(data.length){
+            const maxLike = data.reduce((max: number, obj: any) => {
+                const like = parseFloat(obj.like); 
+                return like > max ? like : max;
+            }, 0);
+            const maxData = data.filter((obj:any)=>obj.like==maxLike)
+            console.log(maxData[0].m_thumb);
+                setFameImg(maxData[0].m_thumb);
+        }
+    },[data])
+
+
     useEffect(() => {
         if (cateName == "밥") {
             setCateName2('RICE');
@@ -46,7 +61,7 @@ function page({ selName }: any) {
             <Button  />
             <div className='fame'>
                 <p>명예의 전당</p>
-                <img src="https://www.foodsafetykorea.go.kr/uploadimg/cook/10_00028_1.png" alt="" />
+                <img src={fameImg} alt="" />
             </div>
             <div className='sub_category'>
                 <p>{cateName2}</p>
@@ -56,7 +71,7 @@ function page({ selName }: any) {
                     <option value="star">별점순</option>
                 </select>
             </div>
-            <RecipeList selectName={selectName} idx={idx} />
+            <RecipeList  selectName={selectName} idx={idx} />
             <div className='arrow_btn' onClick={topMove}>
                 <img src="/images/top.png" alt="" />
             </div>

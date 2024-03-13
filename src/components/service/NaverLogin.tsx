@@ -1,17 +1,16 @@
 "use client";
 import { signIn,signOut,useSession } from "next-auth/react";
 import React from 'react';
-import '@/components/style/loginpage.scss'
 
-function GoogleLogin() {
+function NaverLogin() {
     const { data: session, status }:any = useSession();
     
     if (status === 'authenticated') {
-        return <div><p onClick={logout}>Logout</p></div>
+        return ;
     }
 
     async function login(){
-        const result = await signIn("google", {
+        const result = await signIn("naver", {
             redirect: true,
             callbackUrl: "/home",
         });    
@@ -23,13 +22,10 @@ function GoogleLogin() {
 
     return (
         <div>
-            <img src="/images/google.png" alt="" />
+            <img src="/images/naver.png" alt="" />
             <p onClick={login}>Login</p>
         </div>       
     );
 }    
 
-export default GoogleLogin;
-
-
-
+export default NaverLogin;

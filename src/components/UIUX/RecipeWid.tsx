@@ -4,6 +4,7 @@ import FuncScrap from '@/components/UIUX/FuncScrap';
 import FuncLike from './FuncLike';
 import "../style/scrap.scss";
 import "../style/recipe_wid.scss";
+import { useEffect } from "react";
 
 function RecipeWid({ dataID,selectName }: any) {
     const router: any = useRouter();
@@ -19,12 +20,11 @@ function RecipeWid({ dataID,selectName }: any) {
     }
 
     const sortRecipesByLike = (recipes: any[]) => {
-        return recipes.slice().sort((a, b) => a.like - b.like);
+        return recipes.slice().sort((a, b) => b.like - a.like );
     }
 
 
     let sortedRecipes = [...dataID];
-
 
     if(selectName=='latest'){
         sortedRecipes = sortRecipesBySeq(dataID);

@@ -10,6 +10,7 @@ import MypageButton from '@/components/UIUX/MypageButton';
 import Mypageview from '@/components/service/Mypageview';
 import GoogleLogin from '@/components/service/GoogleLogin';
 import '../../components/style/bookmark.scss';
+import NaverLogin from '@/components/service/NaverLogin';
 
 
 
@@ -21,16 +22,21 @@ function page() {
     const [idx, setIdx] = useState('내 레시피');
 
 
-    if(!session){
-        return  <div className='isLogin'><p>로그인을 하지않으면 보여주지않는다</p><GoogleLogin/></div>
+    if (!session) {
+        return <div className='isLogin'>
+        <h1>Hello!</h1>
+        <p>지금 로그인하고 다양한 서비스를 이용해보세요.</p>
+        <GoogleLogin />
+        <NaverLogin/>
+        </div>
     }
 
 
-    let idxdata = (a:any)=> {
+    let idxdata = (a: any) => {
         setIdx(a)
     }
 
-    
+
 
     if (!session) return <>sadsadsa...</>
 
@@ -38,8 +44,8 @@ function page() {
     return (
         <div>
             <Profile session={session} />
-            <MypageButton idxdata={idxdata} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4}/>
-            <Mypageview idx ={idx} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4}/>
+            <MypageButton idxdata={idxdata} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4} />
+            <Mypageview idx={idx} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4} />
         </div>
     );
 }

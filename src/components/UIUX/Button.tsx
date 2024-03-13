@@ -14,20 +14,9 @@ function Button() {
         { label: 'ETC', category: '기타', image: '/images/etc_black.png' }
     ];
 
-    const handleClick = (index: number, category: string) => {
-        
-        // dataCrl("카테고리", category);
-        // setCateName(category);
-        // setClickedIndex(index);
-
-        // handleClick(index, obj.category)
-    };
 
     useEffect(() => {
         category(cateName,cateIdx);
-        // setClickedIndex(0);
-        // dataCrl("카테고리", buttons[0].category);
-        // setCateName(buttons[0].category);
     }, []);
 
     return (

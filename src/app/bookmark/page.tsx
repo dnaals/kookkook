@@ -6,7 +6,7 @@ function page() {
     const idx = "북마크";
     return (
         
-        <div>
+        <div className='bookmark_page'>
             <Bookmark idx={idx}/>
         </div>
     );

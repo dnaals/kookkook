@@ -5,7 +5,7 @@ function Profile({session}:any) {
     return (
         <div className='profile'>
             <figure>
-                <img src=""></img>
+                <img src={`${session.user.image}`}></img>
                 <figcaption>
                     <p>{session.user.name}</p>
                     <p>{session.user.email}</p>

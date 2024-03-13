@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from 'next-auth/providers/google';
+import NaverProvider from 'next-auth/providers/naver';
 
 export const option = {
 
@@ -8,6 +9,10 @@ export const option = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+        }),
+        NaverProvider({
+            clientId: process.env.NAVER_CLIENT_ID as string,
+            clientSecret: process.env.NAVER_CLIENT_SECRET as string,
         }),
         // CredentialsProvider({
         //     name: 'Credentials',

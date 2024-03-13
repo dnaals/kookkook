@@ -26,7 +26,7 @@ function FuncScrap({ obj }: any) {
                 "seq": `${bookmarkOne.seq}`,
                 "name": `${bookmarkOne.name}`,
                 "user_name": `${session.user.name}`,
-                "user_email": `${session.user.email}`,
+                "user_email": `${session.user.id}`,
                 "m_thumb": `${bookmarkOne.m_thumb}`,
                 "tip": `${bookmarkOne.tip}`,
                 "like": `${bookmarkOne.like}`
@@ -50,7 +50,7 @@ function FuncScrap({ obj }: any) {
     },[session])
     useEffect(()=>{
         
-        const checkBook = data2.filter(book=>book.seq == obj.seq)
+        const checkBook = data2.filter(book=> (book.seq == obj.seq) && (book.user_email == session?.user.id))
         if(checkBook.length){
             setB_click(true)
         }else{

@@ -19,13 +19,15 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     }, [])
     // console.log(data2,'================================')
 
+    
+
     if (!data.length) return <div>sadsadsa...</div>
 
 
     let comp;
     switch (idx) {
         case "가로":
-            comp=<RecipeWid selectName={selectName} dataID={data} dataCrl={dataCrl}/>
+            comp=<RecipeWid  selectName={selectName} dataID={data} dataCrl={dataCrl}/>
             break;
         case "정사각형":
             comp=<RecipeSq dataID={data} dataCrl={dataCrl} />
