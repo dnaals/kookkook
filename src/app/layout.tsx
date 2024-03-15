@@ -21,7 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <header>
             {!isHomePage && !isVariablePage && <Head setSelName={setSelName} />}
           </header>
-          <main style={url == "/bookmark" || url == "/mypage" ? { height: "100vh" } : {}}>
+          <main>
             <Suspense fallback={<Loading />}>{children}</Suspense></main>
           <footer>
             {!isHomePage && !isVariablePage && <Foot />}
