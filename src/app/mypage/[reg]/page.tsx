@@ -1,7 +1,7 @@
 import RecipeReg from '@/components/service/RecipeReg';
 import React from 'react';
 
-function page() {
+function Page() {
     
     return (
         <div>
@@ -10,4 +10,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

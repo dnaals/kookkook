@@ -13,12 +13,11 @@ function Bookmarkview({ data2, dataCrl2 }: any) {
         let url: any = urlname[0].seq;
         router.push(`/home/${url}`);
     }
-    useEffect(()=>{
+    useEffect(() => {
         dataCrl2('all', '', '')
-    },[])
+    }, [])
 
-    if (data2.length==0) return <p className='noBookmark'>북마크가 없습니다.</p>
-    console.log(data2,"dmld")
+    if (data2.length == 0) return;
     return (
         <>
             <div className="recipeWid_box1">
@@ -28,7 +27,7 @@ function Bookmarkview({ data2, dataCrl2 }: any) {
                         <div key={k}>
                             <div>
                                 <figure>
-                                    <div className='scrap_position'><img className='menu_img' src={obj.m_thumb} /><FuncScrap obj={obj}/></div>
+                                    <div className='scrap_position'><img className='menu_img' src={obj.m_thumb} /><FuncScrap obj={obj} /></div>
                                     <figcaption>
                                         <div className='flex'>
                                             <h2 onClick={() => { link(obj.seq) }}>{obj.name}</h2>

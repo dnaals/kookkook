@@ -27,14 +27,15 @@
         margin: 80px 0;
 
         .memberImg {
-            img{
-                width:150px;
+            img {
+                width: 110PX;
                 border-radius: 100px;
             }
         }
 
         p {
             color: white;
+            font-size: 2.0rem;
         }
 
         margin-left: 50px;
@@ -144,6 +145,14 @@
     .bugger_menu_on {
         width: 70%;
 
+        .member {
+            margin: 50px 0 20px 20px;
+
+            .memberImg img {
+                width: 80px;
+            }
+        }
+
         .member p {
             font-size: 70%;
         }
@@ -166,7 +175,9 @@
                 }
             }
 
-            div {
+            a div {
+                margin-left: 54%;
+
                 p {
                     font-size: 1.1rem;
                 }
@@ -176,7 +187,11 @@
 
         .login_button {
             width: 40%;
-            height: 5%;
+            height: 4%;
+
+            div {
+                align-items: center;
+            }
 
             img {
                 width: 25px;
@@ -185,6 +200,7 @@
 
             p {
                 font-size: 0.9rem;
+                margin-left: 5px;
             }
         }
     }

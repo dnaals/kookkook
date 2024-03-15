@@ -3,12 +3,12 @@ import { create } from "zustand";
 
 const request = axios.create({
     baseURL: 'http://localhost:3000/',
-    timeout: 2000
+    timeout: 3000
 })
 
 interface Ty {
     data: any[];
-    dataCrl: (type: string, id: string, overData: string) => void;
+    dataCrl: (type: string, id: string, overData: any) => void;
     category:(cateName: string, index: number) => void;
     cateName:string;
     cateIdx:number;
@@ -23,9 +23,6 @@ export const useStore = create<Ty>((set) => {
         cateName:'밥',
         cateIdx:0,
         dataCrl: async function (type, id, overData) {
-            // console.log('type =', type)
-            // console.log('id = ', id)
-            // console.log('overData = ', overData)
             let res: any;
             switch (type) {
                 case 'all': res = await request.get('/api/all_recipe/')
@@ -49,7 +46,6 @@ export const useStore = create<Ty>((set) => {
                 case 'put': res = await axios.put(`/api/all_recipe/${id}`, overData)
                     break;
             }
-            // console.log('res = ', res.data)
             set({ data: res.data });
 
 

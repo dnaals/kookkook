@@ -19,6 +19,8 @@ function RecipeWid({ dataID,selectName }: any) {
         return recipes.slice().sort((a, b) => a.seq - b.seq);
     }
 
+    
+
     const sortRecipesByLike = (recipes: any[]) => {
         return recipes.slice().sort((a, b) => b.like - a.like );
     }
@@ -34,11 +36,13 @@ function RecipeWid({ dataID,selectName }: any) {
         sortedRecipes = sortRecipesByLike(dataID);
     }
 
+    const recipeList= sortedRecipes.filter((obj:any) => obj.m_thumb !="")
+
     return (
         <>
             <div className="recipeWid_box">
                 <div className="recipeWid">
-                    {sortedRecipes.map((obj: any, k: number) => (
+                    {recipeList.map((obj: any, k: number) => (
                         <div key={k}>
                             <div>
                                 <figure>

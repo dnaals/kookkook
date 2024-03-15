@@ -14,7 +14,7 @@ import NaverLogin from '@/components/service/NaverLogin';
 
 
 
-function page() {
+function Page() {
 
     let { data, dataCrl } = useStore();
     let { data4, dataCrl4 } = useStore4();
@@ -38,7 +38,7 @@ function page() {
 
 
 
-    if (!session) return <>sadsadsa...</>
+    if (!session) return
 
 
     return (
@@ -50,4 +50,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

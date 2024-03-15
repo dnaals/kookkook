@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "@/components/style/home_detail.scss";
 import axios from 'axios';
 import FuncScrap from './FuncScrap';
 import Link from 'next/link';
 
-function Home_detail({ dataID, detailUrl }: any) {
+function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
     let detailData = dataID.filter((obj: any) => obj.seq == detailUrl)
     let menual = []
 
@@ -22,6 +22,9 @@ function Home_detail({ dataID, detailUrl }: any) {
     }
     let [book, setBook] = useState(false);
     let [heart, setHeart] = useState(false);
+    const [delComPop, setDelComPop]: any = useState(false);
+    const elform2 = useRef<HTMLFormElement | null>(null)
+    const eldelcomment = useRef<string | null>(null)
 
     const bookmarkClick = () => {
         setBook(!book)
@@ -29,6 +32,8 @@ function Home_detail({ dataID, detailUrl }: any) {
     const heartClick = () => {
         setHeart(!heart)
     }
+
+    let myComment = data4.filter((obj:any)=> obj.seq == detailUrl)
 
 
 
@@ -44,6 +49,57 @@ function Home_detail({ dataID, detailUrl }: any) {
         .catch(() => {});
     }, []);
     const youtubeSrc = `https://www.youtube.com/embed/${youtubeID}`
+
+    let addComment = (e: any) => {
+        e.preventDefault()
+        if (elform2.current) {
+
+            let formData = new FormData(elform2.current)
+            let today = new Date();
+
+            let year = today.getFullYear(); // 년도
+            let month = today.getMonth() + 1;  // 월
+            let date = today.getDate();  // 날짜
+
+
+            const c = {
+                'id': `${Date.now()}`,
+                'seq': `${detailUrl}`, //상세페이지 들어온 데이터값의 seq 
+                'name':`${detailData[0].name}`,
+                'date': `${year}년 ${month}월 ${date}일`,
+                'comment': `${formData.get("comment")}`,
+                'user_id': `${session.user.id}`,
+                'user_email': `${session.user.email}`,
+                'user_name': `${session.user.name}`,
+                'm_thumb': `${detailData[0].m_thumb}`,
+                'tip': `${detailData[0].tip}`,
+                'like': `${detailData[0].like}`
+            }
+            if (formData.get("comment") !== '') {
+                dataCrl4('insert', '', c)
+                // formData.get("comment") == '' 
+                // 입력창 초기화해
+
+            } else {
+                alert('댓글을 입력해주세요')
+            }
+        }
+    }
+
+    // 댓글 삭제 버튼
+    let delComment = () => {
+        let vlfxj = data4.filter((obj: any) => eldelcomment.current == obj.id)
+        let selectRecipe = vlfxj[0].id
+        dataCrl4('delete', selectRecipe, '')
+        setDelComPop(false)
+    }
+
+    //댓글 삭제 취소 버튼
+    let notdelComment = () => {
+        setDelComPop(false)
+    }
+
+
 
     return (
         <>
@@ -64,7 +120,7 @@ function Home_detail({ dataID, detailUrl }: any) {
                 <h2>조리순서</h2>
 
                 {
-                    menual.map((obj: any,k:number) => (
+                    menual.map((obj: any, k: number) => (
                         <div key={k} className='detail_menual'>
                             <p>{obj.menual}</p>
                             <p><img src={obj.menualImg} alt="" /></p>
@@ -75,38 +131,44 @@ function Home_detail({ dataID, detailUrl }: any) {
                 <div className="youtube-ly">
                     <iframe className='youtube_api'
                     id="ytplayer"
-                    type="text/html"
                     src= {youtubeSrc}
-                    frameborder="0"
                     >
                 </iframe>
                 </div>
-            
-                <div className='detail_comment'>
-                    <h2>댓글</h2>
-                    <div className='comment_box'>
-                        <div>
-                            <p><img src="/images/user_full.png" alt="" /></p>
-                            <div>
-                                <p>정승관  /  진짜 맛없네요!! 감사합니다 ㅎㅎ</p>
-                                <p>2024.03.11</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p><img src="/images/user_full.png" alt="" /></p>
-                            <div>
-                                <p>송우민  /  감사합니다 ㅎㅎ</p>
-                                <p>2024.03.11</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <form>
-                        <input type="text" placeholder='댓글을 입력하세요' />
-                        <input type="submit" value="등록" />
-                    </form>
+
+
+                <h2>댓글</h2>
+                <div className={`delete_pop2 ${delComPop ? 'active' : ''}`}>
+                    <p>작성한 댓글를 삭제할까요?</p><br />
+                    <button onClick={delComment}>삭제</button>
+                    <button onClick={notdelComment}>취소</button>
 
                 </div>
+                {
+                    myComment.map((obj: any, k: any) => (
+
+                        <div key={k} className='detail_comment'>
+                            <div className='comment_box'>
+                                <div>
+                                    <p><img src={`${session.user.image}`} alt="" /></p>
+                                    <div>
+                                        <p>{session.user.name}  /  {obj.comment}</p>
+                                        <p>{obj.date}</p>
+                                    </div>
+                                </div>
+                                <p onClick={() => { setDelComPop(true); eldelcomment.current = obj.id; }}>삭제</p>
+                            </div>
+
+
+                        </div>
+                    ))
+                }
+                <form ref={elform2} onSubmit={addComment}>
+                    <input type="text" placeholder='댓글을 입력하세요' name='comment' />
+                    <input type="submit" value="등록" />
+                </form>
+
+                
             </div>
         </>
     );

@@ -5,28 +5,28 @@ import Button from "../../components/UIUX/Button";
 import RecipeList from '@/components/service/RecipeList';
 import "@/components/style/home.scss";
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-function page({ selName }: any) {
+import Topbutton from '@/components/UIUX/Topbutton';
+function Page() {
 
-    const {data,cateName,category} = useStore()
-    
+    const { data, cateName, category } = useStore()
+
     const idx = "가로"
     let [cateName2, setCateName2] = useState('');
     let [selectName, setSelectName] = useState('latest');
-    let [fameImg,setFameImg] = useState<any>();
+    let [fameImg, setFameImg] = useState<any>();
+
     
-    useEffect(()=>{
-        if(data.length){
+    useEffect(() => {
+        if (data.length) {
             const maxLike = data.reduce((max: number, obj: any) => {
-                const like = parseFloat(obj.like); 
+                const like = parseFloat(obj.like);
                 return like > max ? like : max;
             }, 0);
-            const maxData = data.filter((obj:any)=>obj.like==maxLike)
-            console.log(maxData[0].m_thumb);
-                setFameImg(maxData[0].m_thumb);
+            const maxData = data.filter((obj: any) => obj.like == maxLike)
+            setFameImg(maxData[0].m_thumb);
         }
-    },[data])
-
+    }, [data])
+    
 
     useEffect(() => {
         if (cateName == "밥") {
@@ -47,9 +47,7 @@ function page({ selName }: any) {
     const handleSelect = (e: any) => {
         setSelectName(e.target.value);
     };
-    const topMove = ()=>{
-        window.scrollTo({top:0,behavior:'smooth'})
-    }
+
     return (
         <div className='home_main_backcolor'>
             <Link href='/search'>
@@ -58,7 +56,7 @@ function page({ selName }: any) {
                     <p>오늘 뭐 먹지??</p>
                 </div>
             </Link>
-            <Button  />
+            <Button />
             <div className='fame'>
                 <p>명예의 전당</p>
                 <img src={fameImg} alt="" />
@@ -71,12 +69,10 @@ function page({ selName }: any) {
                     <option value="star">별점순</option>
                 </select>
             </div>
-            <RecipeList  selectName={selectName} idx={idx} />
-            <div className='arrow_btn' onClick={topMove}>
-                <img src="/images/top.png" alt="" />
-            </div>
+            <RecipeList selectName={selectName} idx={idx} />
+            <Topbutton/>
         </div>
     );
 }
 
-export default page;
+export default Page;

@@ -11,10 +11,51 @@ export type initTy = {
     s_thumb?: string;
     m_thumb?: string;
     like?: number;
-    user?:string;
+    user_id?:string;
+    user_name?:string;
+    user_email?:string;
+    open?:string;
 }
 
-export type initTy1 = {
-    user?:string;
-    email?:string
+export type initTy2 = {
+    id?:string;
+    seq?:number;
+    name?:string;
+    user_name?:string;
+    user_email?:string;
+    user_id?:string;
+    m_thumb?:string;
+    top?:string;
+    like?:number;
+
+
+}
+export type initTy3 = {
+    id?:string;
+    seq?:number;
+    name?:string;
+    data?:string;
+    commnt?:string;
+    user_id?:string;
+    user_email?:string;
+    user_name?:string;
+    m_thumb?:string;
+    top?:string;
+    like?:number;
+
+
+}
+export type initTy4 = {
+    id?:string;
+    seq?:number;
+    name?:string;
+    data?:string;
+    user_id?:string;
+    user_email?:string;
+    user_name?:string;
+    m_thumb?:string;
+    top?:string;
+    like?:number;
+
+
 }

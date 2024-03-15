@@ -11,12 +11,13 @@ function FuncScrap({ obj }: any) {
 
     const { data: session, status }: any = useSession();
     let [b_click, setB_click] = useState(false);
+
+
     const bookmarkClick = (aa: any) => {
 
         let Dateid = Date.now()
         let bookmarkOne = obj;
-        let aaa = data2.filter((obj:any)=> aa.name==obj.name)
-        // console.log('삭제 = ', aaa[0].id)
+        let aaa = data2.filter((obj:any)=> aa.seq==obj.seq)
         
 
         if (!b_click) {
@@ -26,40 +27,45 @@ function FuncScrap({ obj }: any) {
                 "seq": `${bookmarkOne.seq}`,
                 "name": `${bookmarkOne.name}`,
                 "user_name": `${session.user.name}`,
-                "user_email": `${session.user.id}`,
+                "user_email": `${session.user.email}`,
+                "user_id": `${session.user.id}`,
                 "m_thumb": `${bookmarkOne.m_thumb}`,
                 "tip": `${bookmarkOne.tip}`,
-                "like": `${bookmarkOne.like}`
+                "like": bookmarkOne.like
             }
 
             dataCrl2('insert', '', bookmarkData)
         }else {
             dataCrl2('delete', aaa[0].id, '')
         }
-        console.log('b_click = ',b_click)
 
         setB_click(!b_click)
 
     }
-    
+
+    // useEffect(()=>{
+    //     if(session ){
+    //         setB_click(true)
+    //     }else{
+    //         setB_click(false)
+    //     }
+    // },[session])
+
+  
     useEffect(()=>{
-        if(!session){
-            setB_click(false);
-        }
+        const checkBook = data2.filter(book=>(book.seq == obj.seq) && (book.user_id == session?.user.id))
+        // if(session.user.email){
+        // let aaaa = (checkBook[0].user_email == session.user.email)
         
-    },[session])
-    useEffect(()=>{
-        
-        const checkBook = data2.filter(book=> (book.seq == obj.seq) && (book.user_email == session?.user.id))
-        if(checkBook.length){
+        if(checkBook.length && session){
             setB_click(true)
         }else{
             setB_click(false)
         }
+    // }
     },[obj])
 
     // let bbbb = data2.filter((obj:any)=>obj.seq == dataID.seq)
-    // console.log("bbbb = ",bbbb)
 
     return (
 

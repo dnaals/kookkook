@@ -8,25 +8,35 @@ body {
             padding-top: 100px;
             position: relative;
 
-            .arrow_btn {
-                width: 20px;
-                height: 20px;
+            .scrollToTopButton {
+                cursor: pointer;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                width: 15px;
+                height: 15px;
                 position: fixed;
-                bottom: 100px;
-                right: calc(50% - 300px);
+                bottom: 120px;
+                right: calc(50%);
 
                 img {
                     width: 50px;
                 }
             }
 
+            .scrollToTopButton.visible {
+                opacity: 1;
+                z-index: 1;
+            }
+
+
+
             .fame {
                 margin: 50px 0;
 
                 p {
                     margin: 20px 0;
-                    font-size: 20px;
-                    font-weight: bold;
+                    font-size: 1.8rem;
+
                 }
 
                 img {
@@ -64,8 +74,7 @@ body {
                 margin: 50px 0 0 0;
 
                 >p {
-                    font-size: 20px;
-                    font-weight: bold;
+                    font-size: 1.8rem;
                 }
 
                 select {
@@ -79,7 +88,9 @@ body {
                 padding-top: 70px;
                 display: flex;
                 justify-content: space-evenly;
-
+                button:hover{
+                    cursor: pointer;
+                }
                 button {
                     background-color: $color-yellow;
                     border: 1px solid #FFC700;
@@ -109,9 +120,18 @@ body {
         main {
 
             .home_main_backcolor {
-                .home_btn::-webkit-scrollbar{
-                    display:none;
-                  }
+                .home_btn::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .sub_category>p {
+                    font-size: 1.3rem;
+                }
+
+                .fame p {
+                    font-size: 1.3rem;
+                }
+
                 .home_btn {
                     justify-content: space-between;
                     gap: 1%;
@@ -136,25 +156,25 @@ body {
 
 
 }
-    
+
 @include pad {
-    body{
-        main{
-            .home_main_backcolor{
+    body {
+        main {
+            .home_main_backcolor {
                 .home_btn {
-    
+
 
                     button {
-                        height:13vw;
+                        height: 13vw;
                         font-size: 12px;
+
                         img {
-                            width:50%;
+                            width: 50%;
                         }
                     }
                 }
             }
         }
     }
-    
-}
 
+}

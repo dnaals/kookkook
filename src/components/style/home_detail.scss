@@ -80,21 +80,22 @@ main{
                 }
                 
             }
-            form{
-                display:flex;
-                align-items: center;
-                justify-content: space-between;
-                input{
-                    border:1px solid #d8dde6;
-                    border-radius: 10px;
-                    height:30px;
-                }
-                input:nth-of-type(1){
-                    width:80%;
-                }
-                input:nth-of-type(2){
-                    width:15%;
-                }
+            
+        }
+        form{
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+            input{
+                border:1px solid #d8dde6;
+                border-radius: 10px;
+                height:30px;
+            }
+            input:nth-of-type(1){
+                width:80%;
+            }
+            input:nth-of-type(2){
+                width:15%;
             }
         }
         .detail_menual{
@@ -124,6 +125,36 @@ main{
         h2{
             margin:40px 0;
             font-size: 36px;
+        }
+        .delete_pop2 {
+            width: 50%;
+            border: none;
+            background-color: #FCEEA7;
+            border-radius: 20px;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            
+            button {
+                width: 20%;
+                height: 25px;
+                margin: 0 8px;
+                border: none;
+                border-radius: 5px;
+                background-color: yellow;
+                color: black;
+                font-weight: 600;
+    
+                &:hover {
+                    color: white;
+                }
+            }
+            &.active {
+                opacity: 1;
+            }
+            
         }
         p{
             text-align: center;

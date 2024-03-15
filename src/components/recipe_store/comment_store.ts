@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 const request = axios.create({
     baseURL: 'http://localhost:3000/',
-    timeout: 2000
+    timeout: 3000
 })
 
 interface Ty {
@@ -17,9 +17,6 @@ export const useStore4 = create<Ty>((set) => {
     return {
         data4: [],
         dataCrl4: async function (type4, id4, overData4) {
-            // console.log('type3 =', type3)
-            // console.log('id3 = ', id3)
-            // console.log('overData3 = ', overData3)
             let res: any;
             switch (type4) {
                 case 'all': res = await request.get('/api/comment/')
@@ -37,7 +34,6 @@ export const useStore4 = create<Ty>((set) => {
                 case 'put': res = await axios.put(`/api/comment/${id4}`, overData4)
                     break;
             }
-            // console.log('res = ', res.data)
             set({ data4: res.data });
 
 

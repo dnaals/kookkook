@@ -7,7 +7,7 @@ import { useStore } from '@/components/recipe_store/all_store';
 import '../../components/style/search.scss';
 
 
-function page() {
+function Page() {
 
     const idx = "정사각형";
     const index = "가로";
@@ -24,15 +24,15 @@ function page() {
 
         <div className='search-page'>
             <Search defaultValue={searchQuery} />
-            <h2>Most Liked</h2>
+            <h2>Recommended</h2>
             
             <RecipeList idx={idx} />
             
-            <h2>Recommended</h2>
+            <h2>Most Liked</h2>
             <RecipeList idx={index}/>
             
         </div>
     );
 }
 
-export default page;
+export default Page;

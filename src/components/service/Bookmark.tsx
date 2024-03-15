@@ -19,14 +19,13 @@ function Bookmark({idx}:any) {
             <NaverLogin/>
             </div>
     }
-    const userbook = data2.filter((user:any) => user.user_email == session.user.id)
+    const userbook = data2.filter((user:any) => user.user_id == session.user.id)
     
-    // console.l(userbook, '유저북')
-    // console.log(session , ' 유저')
 
 
 
-    if(!userbook) return <div>loading...</div>
+
+    if(!userbook) return 
 
     let comp;
     switch (idx) {

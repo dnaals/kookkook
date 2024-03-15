@@ -10,12 +10,15 @@
         align-items: center;
         justify-content: center;
         width: 70px;
-
+    
         img {
             width: 17px;
             height: auto;
             margin-right: 5px;
         }
+    }
+    button:hover{
+        cursor: pointer;
     }
 }
 

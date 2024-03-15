@@ -11,8 +11,6 @@ function Bugger({setOn,setSelName}:any) {
     
     const { data: session, status }: any = useSession();
     const {category} = useStore()
-    console.log(status)
-    console.log(session)
     const close_btn = (name:string)=>{
         setOn(false);
     }

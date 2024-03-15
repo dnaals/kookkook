@@ -9,7 +9,6 @@ export const test3 = async (type?: string, body?: initTy3) => {
     let db, collection, data3
     db = client.db('Kook')
     collection = db.collection('comment')
-    // console.log(body)
 
 
     switch (type) {
@@ -27,7 +26,6 @@ export const test3 = async (type?: string, body?: initTy3) => {
 
         case 'put':
             await collection.updateOne({ seq: body?.seq }, { $set: body });
-            // console.log(typeof body?.seq,'sdfsdfsdsfdsdf')
 
             break;
     }

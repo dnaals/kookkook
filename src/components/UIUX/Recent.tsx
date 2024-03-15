@@ -10,8 +10,8 @@ interface keyInterface {
 function Recent({ setValue, handleSearch2 }: any) {
 
     const [keywords, setKeywords] = useState<keyInterface[]>([])
-    
-    
+
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const result = localStorage.getItem('keywords') || '[]';
@@ -20,7 +20,9 @@ function Recent({ setValue, handleSearch2 }: any) {
     }, [])
 
     useEffect(() => {
-        localStorage.setItem('keywords', JSON.stringify(keywords));
+        if (keywords.length) {
+            localStorage.setItem('keywords', JSON.stringify(keywords));
+        }
     }, [keywords])
 
 
