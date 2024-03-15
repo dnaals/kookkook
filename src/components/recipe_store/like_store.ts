@@ -2,7 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 
 const request1 = axios.create({
-    baseURL: 'https://kookkook-xi.vercel.app/',
+    baseURL: '/',
     timeout: 5000
 })
 interface Ty5 {
