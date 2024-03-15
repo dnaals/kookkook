@@ -2,7 +2,7 @@ import axios from "axios";
 import { create } from "zustand";
 
 const request3 = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: '/',
     timeout: 2000
 })
 
