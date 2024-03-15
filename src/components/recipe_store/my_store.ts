@@ -31,8 +31,9 @@ export const useStore2 = create<Ty2>((set) => {
                 case "put": res2 = await axios.put(`/api/my_recipe/${id}`, overData);
                     break;
             }
-            console.log(res2.data);
-            set({ data2: res2.data });
-        },
-    };
-});
+            set({ data2: res2.data, status1: true });
+
+
+        }
+    }
+})

@@ -3,12 +3,15 @@ import { create } from "zustand";
 
 const request = axios.create({
     baseURL: 'http://localhost:3000/',
-    timeout: 2000
+    timeout: 3000
 })
 
 interface Ty {
     data: any[];
-    dataCrl: (type: string, id: string, overData: string) => void;
+    dataCrl: (type: string, id: string, overData: any) => void;
+    category:(cateName: string, index: number) => void;
+    cateName:string;
+    cateIdx:number;
 
 }
 
@@ -16,10 +19,10 @@ export const useStore = create<Ty>((set) => {
 
     return {
         data: [],
+        data2: [],
+        cateName:'밥',
+        cateIdx:0,
         dataCrl: async function (type, id, overData) {
-            console.log('type =', type)
-            console.log('id = ', id)
-            console.log('overData = ', overData)
             let res: any;
             switch (type) {
                 case 'all': res = await request.get('/api/all_recipe/')
@@ -37,17 +40,29 @@ export const useStore = create<Ty>((set) => {
                 case 'insert': res = await request.post('/api/all_recipe/', overData)
                     break;
 
-                case 'delete': res = await request.delete('/api/all_recipe/1')
+                case 'delete': res = await request.delete(`/api/all_recipe/${id}`)
                     break;
 
-                case 'put': res = await axios.put(`/api/my_recipe/${id}`, overData)
+                case 'put': res = await axios.put(`/api/all_recipe/${id}`, overData)
                     break;
             }
-            console.log(res.data)
             set({ data: res.data });
 
 
+        },
+
+        category:function(cateName,index){
+
+            set((state:any)=>{
+                return state.dataCrl("카테고리",cateName)
+            })
+
+            set((state)=>{
+                return {cateName, cateIdx:index}
+            })
+            
         }
+
 
     }
 })

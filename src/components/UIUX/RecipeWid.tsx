@@ -1,50 +1,67 @@
-//레시피 직사각형(길게) 모양
 'use client';
-
-import { useStore2 } from '@/components/recipe_store/my_store';
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FuncScrap from '@/components/UIUX/FuncScrap';
-import { useStore } from '../recipe_store/all_store';
-import { useEffect } from 'react';
-
-
 import FuncLike from './FuncLike';
-
-import "../style/recipe_wid.scss";
 import "../style/scrap.scss";
+import "../style/recipe_wid.scss";
+import { useEffect } from "react";
 
-
-function RecipeWid({ dataID, dataCrl }: any) {
-    const idx = "가로"
-    console.log(dataID, "asdasd");
+function RecipeWid({ dataID,selectName }: any) {
     const router: any = useRouter();
-
-    const link = (a: any) => {
-        let aa = dataID.filter((obj: any) => a == obj.name);
-        let url: any = aa[0].seq;
+    const url = usePathname();
+    const link = (name: any) => {
+        let urlname = dataID.filter((obj: any) => name == obj.name);
+        let url: any = urlname[0].seq;
         router.push(`/home/${url}`);
     }
+
+    const sortRecipesBySeq = (recipes: any[]) => {
+        return recipes.slice().sort((a, b) => a.seq - b.seq);
+    }
+
+    
+
+    const sortRecipesByLike = (recipes: any[]) => {
+        return recipes.slice().sort((a, b) => b.like - a.like );
+    }
+
+
+    let sortedRecipes = [...dataID];
+
+    if(selectName=='latest'){
+        sortedRecipes = sortRecipesBySeq(dataID);
+    } else if (selectName=='comment'){
+
+    } else if (selectName=='star'){
+        sortedRecipes = sortRecipesByLike(dataID);
+    }
+
+    const recipeList= sortedRecipes.filter((obj:any) => obj.m_thumb !="")
 
     return (
         <>
             <div className="recipeWid_box">
                 <div className="recipeWid">
-                    {dataID.map((obj: any, k: number) => (
+                    {recipeList.map((obj: any, k: number) => (
                         <div key={k}>
-                            <p onClick={() => { link(obj.name) }}>
+                            <div>
                                 <figure>
-                                    <img src={obj.m_thumb} />
-
+                                    <div className='scrap_position'><img className='menu_img' src={obj.m_thumb} /><FuncScrap obj ={obj} /></div>   
                                     <figcaption>
                                         <div className='flex'>
-                                            <p>{obj.name}</p>
-                                            <FuncScrap />
+                                            <h2 onClick={() => { link(obj.name) }}>{obj.name}</h2>
                                         </div>
+                                        
                                         <p>{obj.tip}</p>
-                                        <FuncLike />
+                                        <div className="recipeWidBtn">
+                                            <div onClick={() => { link(obj.name) }}>0</div>
+                                            <FuncLike obj={obj} />
+                                            <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>수정</div>
+                                            <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>삭제</div>
+                                        </div>
                                     </figcaption>
                                 </figure>
-                            </p>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -52,5 +69,6 @@ function RecipeWid({ dataID, dataCrl }: any) {
         </>
     );
 }
+
 
 export default RecipeWid;

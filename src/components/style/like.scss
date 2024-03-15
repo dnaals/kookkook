@@ -1,3 +1,5 @@
+@import "../style/mixin.scss";
+
 .like {
     button {
         border: 1px solid rgba(0, 0, 0, 0.2);
@@ -7,11 +9,25 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-
-
+        width: 70px;
+    
         img {
             width: 17px;
             height: auto;
+            margin-right: 5px;
+        }
+    }
+    button:hover{
+        cursor: pointer;
+    }
+}
+
+@include mobile {
+    .like button {
+        width: 50px;
+        font-size: 0.7rem;
+        img{
+            width:12px;
         }
     }
 }

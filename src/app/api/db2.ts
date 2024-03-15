@@ -1,15 +1,14 @@
-import { initTy } from '../../components/datatype/type';
+import { initTy2 } from '../../components/datatype/type';
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://jsg8579:wjdtmd123!@cluster0.opld0gm.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri)
 
-export const test2 = async (type?: string, body?: initTy) => {
+export const test2 = async (type?: string, body?: initTy2) => {
     await client.connect();
     
     let db, collection, data2
     db = client.db('Kook')
-    collection = db.collection('kooktest')
-    console.log(body)
+    collection = db.collection('bookmark')
     
     
     switch (type) {
@@ -27,7 +26,6 @@ export const test2 = async (type?: string, body?: initTy) => {
                     
             case 'put':
                 await collection.updateOne({seq:body?.seq}, {$set:body});
-                // console.log(typeof body?.seq,'sdfsdfsdsfdsdf')
 
             break;
         }
