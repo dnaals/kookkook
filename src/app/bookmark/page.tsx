@@ -1,14 +1,18 @@
+"use client";
+import Bookmark from '@/components/service/Bookmark';
 import RecipeList from '@/components/service/RecipeList';
 import React from 'react';
-
-function page() {
-    const idx = "정사각형";
+import '../../components/style/bookmark.scss';
+import Topbutton from '@/components/UIUX/Topbutton';
+function Page() {
+    const idx = "북마크";
     return (
         
-        <div>
-            <RecipeList idx={idx}/>
+        <div className='bookmark_page'>
+            <Bookmark idx={idx}/>
+            <Topbutton/>
         </div>
     );
 }
 
-export default page;
+export default Page;

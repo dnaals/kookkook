@@ -4,23 +4,29 @@ import Head from "@/components/UIUX/Head";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import '@/components/style/common.scss'
+import React, { useState } from "react";
+import { Suspense } from 'react'
+import Loading from "./loading";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   const url = usePathname();
   const isHomePage = url === '/';
   const isVariablePage = url.startsWith('/home/') && url.split('/').length > 2;
+  let [selName, setSelName] = useState('');
+
   return (
     <html lang="en">
       <body>
-        <header>
-        {!isHomePage && !isVariablePage && <Head />}
-        </header>
         <SessionProvider>
-          <main>{children}</main>  
+          <header>
+            {!isHomePage && !isVariablePage && <Head setSelName={setSelName} />}
+          </header>
+          <main>
+            <Suspense fallback={<Loading />}>{children}</Suspense></main>
+          <footer>
+            {!isHomePage && !isVariablePage && <Foot />}
+          </footer>
         </SessionProvider>
-        <footer>
-        {!isHomePage && !isVariablePage && <Foot />}
-        </footer>
 
       </body>
     </html>

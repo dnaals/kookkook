@@ -1,11 +1,7 @@
 @import "reset.css";
+@import "../style/color.scss";
 @import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
-$color-black: #333333;
-$color-gray: #666666;
-$color-yellow: #FFC700;
-$color-orange: #FF8934;
-$color-white: #ffffff;
-$color-beige: #FFFEF9;
+@import "../style/mixin.scss";
 
 
 
@@ -22,9 +18,11 @@ body {
         width: 768px;
         height: 60px;
         position: fixed;
-        h1{
+
+        h1 {
             font-family: "Nerko One", cursive;
         }
+
         font-size: 35px;
         text-align: center;
         background-color: $color-white;
@@ -37,35 +35,42 @@ body {
         align-items: center;
         justify-content: center;
         border: none;
+
         h1 {
-           a{ color: $color-yellow;}
+            a {
+                color: $color-yellow;
+            }
         }
-        .bugger_menu{
-            width:40px;
-            height:40px;
-            
-            position:absolute;
-            top:25%;
-            right:5%;
-            p{
-                width:100%;
+
+        .bugger_menu {
+            width: 40px;
+            height: 40px;
+
+            position: absolute;
+            top: 25%;
+            right: 5%;
+
+            p {
+                width: 100%;
                 position: absolute;
                 font-size: 30px;
-                display:flex;
+                display: flex;
                 align-items: center;
                 justify-content: center;
-                color:$color-yellow
-                
+                color: $color-yellow
             }
-            p:hover{
+
+            p:hover {
                 cursor: pointer;
             }
-            p:nth-of-type(1){
-                transform: translateY(-10px);
+
+            p:nth-of-type(1) {
+                transform: translateY(-6px);
                 pointer-events: none;
             }
-            p:nth-of-type(3){
-                transform: translateY(10px);
+
+            p:nth-of-type(3) {
+                transform: translateY(6px);
                 pointer-events: none;
             }
         }
@@ -93,4 +98,29 @@ body {
     }
 
 
+}
+
+@include mobile {
+    body .head {
+        width: 100%;
+    }
+
+    body .foot {
+        width: 100%;
+
+        img {
+            width: 30px;
+        }
+    }
+}
+
+@include pad {
+    body{
+        .head{
+            width:100%;
+        }
+        .foot{
+            width:100%;
+        }
+    }
 }

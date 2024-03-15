@@ -23,7 +23,6 @@ export const useStore2 = create<Ty2>((set) => {
                 case 'all': res2 = await request1.get('/api/my_recipe')
                     break;
             }
-            console.log(res2.data)
             set({ data2: res2.data, status1: true });
 
 

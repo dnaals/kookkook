@@ -1,23 +1,46 @@
 import React from 'react';
 import "@/components/style/comment.scss";
+import Link from 'next/link';
+import FuncLike from './FuncLike';
+import FuncScrap from './FuncScrap';
+import { useRouter } from 'next/navigation';
 
-function Comment() {
+function Comment({ myComment }: any) {
+
+
+    const router: any = useRouter();
+    const link = (name: any) => {
+        let urlname = myComment.filter((obj: any) => name == obj.seq);
+        let url: any = urlname[0].seq;
+        router.push(`/home/${url}`);
+    }
+    if (myComment.length == 0) return
     return (
-        <div className='comment_box'>
-            <div className='comment'>
-                <p>레시피 참고해서 따라 만들었더니 쉽고 맛있어요!!!
-                    레시피 참고해서 따라 만들었더니 쉽고 맛있어요!!!
-                    레시피 참고해서 따라 만들었더니 쉽고 맛있어요!!!
-                    레시피 참고해서 따라 만들었더니 쉽고 맛있어요!!!
-                    레시피 참고해서 따라 만들었더니 쉽고 맛있어요!!!
-                </p>
-            </div>
-            <figure>
-                <img></img>
-                <figcaption>새우 두부 계란 찜</figcaption>
-            </figure>
+        <>
 
-        </div>
+            <div className="recipeCommentWid_box">
+                <div className="recipeCommentWid">
+                    {myComment.map((obj: any, k: number) => (
+                        <div key={k}>
+                            <div>
+                                <figure>
+                                    <div className='scrap_position'><img className='menu_img' src={obj.m_thumb} /><FuncScrap obj={obj} /></div>
+                                    <figcaption>
+                                        <div className='flex'>
+                                            <h2 onClick={() => { Link(obj.seq) }}>{obj.name}</h2>
+                                        </div>
+
+                                        <p>{obj.comment}</p>
+                                        <p>{obj.date}</p>
+                                        <FuncLike obj={obj} />
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </>
     );
 }
 
