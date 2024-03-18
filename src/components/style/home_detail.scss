@@ -136,6 +136,7 @@ main{
             font-size: 0.9rem;
             font-weight: 600;
             display:none;
+            margin: 50px auto;
             
             button {
                 width: 20%;
@@ -183,6 +184,11 @@ main{
             }
         }
         .detail_contents{
+            .delete_pop2{
+                &.active{
+                    width:100%;
+                }
+            }
             h2{
                 font-size: 24px;
             }

@@ -53,7 +53,7 @@ function RecipeWid({ dataID,selectName,commetnum }: any) {
                                         
                                         <p>{obj.tip}</p>
                                         <div className="recipeWidBtn">
-                                            <div onClick={() => { link(obj.name) }}><FuncComment obj={obj} commetnum={commetnum}/></div>
+                                            <div className="commentBox" onClick={() => { link(obj.name) }}><FuncComment obj={obj} commetnum={commetnum}/></div>
                                             <FuncLike obj={obj} />
                                             <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>수정</div>
                                             <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>삭제</div>

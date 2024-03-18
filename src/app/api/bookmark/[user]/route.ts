@@ -14,7 +14,7 @@ export async function DELETE(req:Request, {params}:any){
     return NextResponse.json(data2);
 }
 
-export async function PUT(req:Request){
+export async function PUT(req:Request, {params}:any){
     const data2 = await test2('put', await req.json())
-    return NextResponse.json(data2);
+    return NextResponse.json( await test2('put', {...data2,seq:params.seq}));
 }
