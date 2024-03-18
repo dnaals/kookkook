@@ -135,7 +135,7 @@ main{
             padding: 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            opacity: 0;
+            display:none;
             
             button {
                 width: 20%;
@@ -152,7 +152,7 @@ main{
                 }
             }
             &.active {
-                opacity: 1;
+                display:block;
             }
             
         }
