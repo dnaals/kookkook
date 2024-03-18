@@ -4,6 +4,13 @@ import React, { useState } from 'react';
 import "../style/header_footer.scss";
 import Bugger from './Bugger';
 import Link from 'next/link';
+import {Nerko_One} from "next/font/google"; 
+
+const nerko = Nerko_One({
+    preload: false,
+    subsets: ['latin'],
+    weight: ["400"]
+})
 
 function Head({setSelName}:any) {
     let [on,setOn] = useState(false);
@@ -14,7 +21,7 @@ function Head({setSelName}:any) {
     return (
 
         <div className='head'>
-            <h1><Link href="/home" >KooK KooK</Link></h1>
+            <h1 className={nerko.className}><Link href="/home" >KooK KooK</Link></h1>
             <div className='bugger_menu' onClick={on_btn}>
                 <p>ㅡ</p>
                 <p>ㅡ</p>
