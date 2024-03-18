@@ -1,6 +1,6 @@
 import { initTy } from '@/components/datatype/type';
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://swm8793:dnals153@cluster0.ehex7cl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGO_DB;
 const client = new MongoClient(uri)
 
 
