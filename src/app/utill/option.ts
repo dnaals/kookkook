@@ -14,6 +14,7 @@ export const option = {
             clientSecret: process.env.NAVER_CLIENT_SECRET as string,
         }),
     ],
+    secret:  process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, user }: any) {
             return { ...token, ...user };
