@@ -1,4 +1,4 @@
-import { initTy } from '../../components/datatype/type';
+import { initTy } from '@/components/datatype/type';
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://swm8793:dnals153@cluster0.ehex7cl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri)
@@ -11,7 +11,6 @@ export const test = async (type?: string, body?: initTy) => {
     let db, collection, data
     db = client.db('kookkook')
     collection = db.collection('recipe')
-    
 
     switch (type) {
         case 'post': await collection.insertOne(body);

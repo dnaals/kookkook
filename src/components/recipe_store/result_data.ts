@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 const request3 = axios.create({
     baseURL: '/',
-    timeout: 50000
+    timeout: 5000
 })
 
 interface Ty3 {
