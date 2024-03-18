@@ -42,8 +42,8 @@ function Bugger({setOn,setSelName}:any) {
                 </div>
                 </Link>
             </div>
-            <div onClick={()=>close_btn('')} className='login_button'>
-                <GoogleLogin/>
+            <div className='login_button'>
+                <GoogleLogin close={close_btn}/>
             </div>
             <div  style={session?{display:"none"} : {}}  onClick={()=>close_btn('')} className='login_button'>
             <NaverLogin/>
