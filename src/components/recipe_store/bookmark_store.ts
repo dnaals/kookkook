@@ -2,8 +2,8 @@ import axios from "axios";
 import { create } from "zustand";
 
 const request1 = axios.create({
-    baseURL: 'https://kookkook-xi.vercel.app/',
-    timeout: 5000,
+    baseURL: '/',
+    timeout: 1000,
 });
 interface Ty2 {
     data2: any[];
