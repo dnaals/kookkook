@@ -14,7 +14,7 @@ function FuncLike({ obj }: any) {
     const { data: session, status }: any = useSession();
 
     const [isLike, setIsLike] = useState(false);
-    const [pluslike, setPluslike] = useState(num + 1);
+    const [pluslike, setPluslike] = useState(num);
     const { dataCrl, data } = useStore()
 
     const changeLike = (aa:any) => {
@@ -40,16 +40,18 @@ function FuncLike({ obj }: any) {
             }
  
             let putupLike = {
-                "like": obj.like +1
+                "like": Number(likeOne.like) +1
             }
 
             dataCrl5("insert",'', bookmarkData)
+            dataCrl("put",likeOne.seq, putupLike)
         } else {
 
             let putdownLike = {
-                "like": obj.like - 1
+                "like": Number(likeOne.like) - 1
             }
-            dataCrl5("delete", obj.seq, '')
+            dataCrl5("delete", likeOne.seq, '')
+            dataCrl("put", likeOne.seq, putdownLike)
         }
 
         setIsLike(!isLike);
@@ -69,9 +71,9 @@ function FuncLike({ obj }: any) {
         setPluslike(like);
     }, [obj])
 
-    useEffect(() => {
-        isLike ? setPluslike(pluslike + 1) : setPluslike(pluslike - 1);
-    }, [isLike])
+    // useEffect(() => {
+    //     isLike ? setPluslike(pluslike + 1) : setPluslike(pluslike - 1);
+    // }, [isLike])
 
 
     return (
