@@ -11,7 +11,6 @@ import Mypageview from '@/components/service/Mypageview';
 import GoogleLogin from '@/components/service/GoogleLogin';
 import '../../components/style/bookmark.scss';
 import NaverLogin from '@/components/service/NaverLogin';
-import { useStore5 } from '@/components/recipe_store/like_store';
 
 
 
@@ -19,7 +18,6 @@ function Page() {
 
     let { data, dataCrl } = useStore();
     let { data4, dataCrl4 } = useStore4();
-    let {data5,dataCrl5 } = useStore5();
     const { data: session, status }: any = useSession();
     const [idx, setIdx] = useState('내 레시피');
 
@@ -38,11 +36,7 @@ function Page() {
         setIdx(a)
     }
 
-    useEffect(()=>{
-        dataCrl('all', '', '')
-        dataCrl4('all', '', '')
-        dataCrl5('all', '', '')
-    },[])
+    
 
 
 
@@ -52,7 +46,7 @@ function Page() {
     return (
         <div>
             <Profile session={session} />
-            <MypageButton idxdata={idxdata} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4} dataCrl5={dataCrl5} />
+            <MypageButton idxdata={idxdata} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4} />
             <Mypageview idx={idx} session={session} dataCrl={dataCrl} dataCrl4={dataCrl4} />
         </div>
     );
