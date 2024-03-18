@@ -3,7 +3,7 @@ import { signIn,signOut,useSession } from "next-auth/react";
 import React from 'react';
 import '@/components/style/loginpage.scss'
 
-function GoogleLogin() {
+function GoogleLogin( {close}:any) {
     const { data: session, status }:any = useSession();
     
     if (status === 'authenticated') {
@@ -24,7 +24,7 @@ function GoogleLogin() {
     return (
         <div>
             <img src="/images/google.png" alt="" />
-            <p onClick={login}>Login</p>
+            <p onClick={()=>{login(); close() }}>Login</p>
         </div>       
     );
 }    

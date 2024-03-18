@@ -10,6 +10,7 @@
     background: linear-gradient(180deg, #FFD600 0%, #FF9F00 86.2%, #FF9900 100%);
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
+    
 
     .close_btn {
         color: white;
@@ -121,19 +122,21 @@
 
         >div {
             display: flex;
+            img {
+                width: 30px;
+                height: 30px;
+            }
+            p {
+                font-size: 24px;
+                color: #FF8A00;
+                font-weight: bolder;
+    
+            }
         }
 
-        img {
-            width: 30px;
-            height: 30px;
-        }
+        
 
-        p {
-            font-size: 24px;
-            color: #FF8A00;
-            font-weight: bolder;
-
-        }
+        
 
         p:hover {
             cursor: pointer;
@@ -186,22 +189,24 @@
         }
 
         .login_button {
-            width: 40%;
-            height: 4%;
+            width: 150px;
+            height: 30px;
 
-            div {
+            >div {
                 align-items: center;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                p {
+                    font-size: 0.9rem;
+                    margin-left: 5px;
+                }
+    
             }
 
-            img {
-                width: 25px;
-                height: 25px;
-            }
-
-            p {
-                font-size: 0.9rem;
-                margin-left: 5px;
-            }
+            
+        
         }
     }
 }
