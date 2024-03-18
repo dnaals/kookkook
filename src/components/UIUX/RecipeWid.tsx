@@ -4,9 +4,12 @@ import FuncScrap from '@/components/UIUX/FuncScrap';
 import FuncLike from './FuncLike';
 import "../style/scrap.scss";
 import "../style/recipe_wid.scss";
-import { useEffect } from "react";
+import FuncComment from "./FuncComment";
 
-function RecipeWid({ dataID,selectName }: any) {
+
+
+function RecipeWid({ dataID,selectName,commetnum }: any) {
+    
     const router: any = useRouter();
     const url = usePathname();
     const link = (name: any) => {
@@ -19,8 +22,6 @@ function RecipeWid({ dataID,selectName }: any) {
         return recipes.slice().sort((a, b) => a.seq - b.seq);
     }
 
-    
-
     const sortRecipesByLike = (recipes: any[]) => {
         return recipes.slice().sort((a, b) => b.like - a.like );
     }
@@ -30,8 +31,6 @@ function RecipeWid({ dataID,selectName }: any) {
 
     if(selectName=='latest'){
         sortedRecipes = sortRecipesBySeq(dataID);
-    } else if (selectName=='comment'){
-
     } else if (selectName=='star'){
         sortedRecipes = sortRecipesByLike(dataID);
     }
@@ -54,7 +53,7 @@ function RecipeWid({ dataID,selectName }: any) {
                                         
                                         <p>{obj.tip}</p>
                                         <div className="recipeWidBtn">
-                                            <div onClick={() => { link(obj.name) }}>0</div>
+                                            <div onClick={() => { link(obj.name) }}><FuncComment obj={obj} commetnum={commetnum}/></div>
                                             <FuncLike obj={obj} />
                                             <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>수정</div>
                                             <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>삭제</div>
