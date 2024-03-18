@@ -21,10 +21,11 @@ export async function DELETE(req: Request, { params }: any) {
     return NextResponse.json(data);
 }
 
-export async function PUT(req: Request) {
-    // let a = await req.json()
-    const data = await test('put', await req.json())
-    return NextResponse.json(data);
+export async function PUT(req: Request,{params}:any) {
+ 
+ 
+    const data = await req.json();
+    
+    return NextResponse.json( await test('put', {...data,seq:params.seq}));
 }
-
 
