@@ -65,7 +65,6 @@ function Page() {
                 <p>{cateName2}</p>
                 <select name="search_cate" onChange={handleSelect} id="search_cate">
                     <option value="latest">최신순</option>
-                    <option value="comment">댓글순</option>
                     <option value="star">별점순</option>
                 </select>
             </div>

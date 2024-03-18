@@ -17,7 +17,7 @@ function Bookmarkview({ data2, dataCrl2 }: any) {
         dataCrl2('all', '', '')
     }, [])
 
-    if (data2.length == 0) return;
+    if (data2.length == 0) return <p className='noBookmark'>북마크가 없습니다.</p>
     return (
         <>
             <div className="recipeWid_box1">

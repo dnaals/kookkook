@@ -19,6 +19,7 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     const { data: session, status }: any = useSession();
 
     // const userbook = data2.filter((user:any) => user.user_email == session.user.email)
+    let commetnum = data4.filter((obj:any)=>obj.user_id == session?.user.id)
     
     useEffect(() => {
         dataCrl('all', '', '');
@@ -32,7 +33,7 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     let comp;
     switch (idx) {
         case "가로":
-            comp=<RecipeWid selectName={selectName} dataID={data} dataCrl={dataCrl}/>
+            comp=<RecipeWid selectName={selectName} dataID={data} dataCrl={dataCrl} commetnum={commetnum}/>
             break;
         case "정사각형":
             comp=<RecipeSq dataID={data} dataCrl={dataCrl} />

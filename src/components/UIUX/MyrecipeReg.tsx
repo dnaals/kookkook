@@ -148,7 +148,7 @@ function MyrecipeReg({ myRecipe,session,dataCrl }: any) {
     //     }) */
     //   }
 
-    if (myRecipe.length == 0) return;
+    if (myRecipe.length == 0) return <p className='noMyrecipe'>등록한 레시피가 없습니다.</p>;
 
     return (
 
