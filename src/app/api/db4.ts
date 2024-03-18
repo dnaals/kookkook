@@ -1,13 +1,13 @@
 import { initTy4 } from '@/components/datatype/type';
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://jsg8579:wjdtmd123!@cluster0.opld0gm.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGO_DB;
 const client = new MongoClient(uri)
 
 export const test4 = async (type?: string, body?: initTy4) => {
     await client.connect();
     
     let db, collection, data4
-    db = client.db('Kook')
+    db = client.db('kookkook')
     collection = db.collection('like')
 
     
