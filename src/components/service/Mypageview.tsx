@@ -11,11 +11,17 @@ import Loading from '@/app/loading';
 function Mypageview({ idx, session, dataCrl}: any) {
 
     let {data} = useStore();
-    let {data4} = useStore4();
-    let {data5} = useStore5();
+    let {data4, dataCrl4} = useStore4();
+    let {data5, dataCrl5} = useStore5();
 
     let myRecipe = data.filter((obj:any) => obj?.user_id == session.user.id)
     let myComment = data4.filter((obj:any) => obj?.user_id == session.user.id)
+
+    useEffect(()=>{
+        dataCrl('all', '', '')
+        dataCrl4('all', '', '')
+        dataCrl5('all', '', '')
+    },[])
 
 
     if (!data) return <Loading/>
