@@ -52,6 +52,7 @@
         width: 132px;
         height: 132px;
         display: inline-flex;
+        flex-shrink: 0;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -360,9 +361,9 @@ img {
             width:80px;
         }
         button {
-            width: 80px;
-            height: 80px;
-            font-size: 0.7rem;
+            width: 65px;
+            height: 70px;
+            font-size: 11px;
 
 
             img {

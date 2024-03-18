@@ -26,7 +26,7 @@ export const test4 = async (type?: string, body?: initTy4) => {
                     break;
                     
             case 'put':
-                await collection.updateOne({seq:body?.seq}, {$set:body});
+                await collection.updateMany({seq:body?.seq}, {$set:body});
 
             break;
         }

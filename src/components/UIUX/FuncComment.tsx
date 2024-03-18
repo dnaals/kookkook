@@ -5,7 +5,8 @@ function FuncComment({obj, commetnum}:any) {
 
     return (
         <>
-            {oneComment.length}
+            <img src="/images/pencil.png" alt="" />
+            <p>{oneComment.length}</p>
         </>
     );
 }

@@ -40,7 +40,7 @@
         border-radius: 30px;
         background-color: #FFC700;
         width: 70%;
-        height: 20%;
+        height: 50px;
         margin: 20px auto;
 
         img {
@@ -134,10 +134,24 @@
 
 //mobile
 @include mobile {
+    .noBookmark{
+        font-size: 1.1rem;
+    }
     .noLike {
         font-size: 0.95rem;
     }
-
+    .isLogin{
+        padding: 200px 0;
+        >div{
+            width:200px;
+            height:40px;
+            img{
+                width:25px;
+                
+            }
+            p{}
+        }
+    }
     .recipeWid_box1 {
         height: auto;
 

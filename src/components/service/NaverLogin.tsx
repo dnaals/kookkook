@@ -2,7 +2,7 @@
 import { signIn,signOut,useSession } from "next-auth/react";
 import React from 'react';
 
-function NaverLogin() {
+function NaverLogin({close}:any) {
     const { data: session, status }:any = useSession();
     
     if (status === 'authenticated') {
@@ -23,7 +23,7 @@ function NaverLogin() {
     return (
         <div>
             <img src="/images/naver.png" alt="" />
-            <p onClick={login}>Login</p>
+            <p onClick={()=>{login(); close()}}>Login</p>
         </div>       
     );
 }    

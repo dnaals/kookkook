@@ -92,7 +92,11 @@ main{
                     flex-wrap: wrap;
                     width:100%;
                     margin-bottom: 20px;
-                    
+                    @include mobile{
+                        >div{
+                            font-size: 0.8rem;
+                        }
+                    }
                     >li {
                         width: max-content;
                         border: 1px solid rgba(0,0,0,0.2);
@@ -158,3 +162,4 @@ main{
         // display: none;
     }
 }
+

@@ -42,12 +42,25 @@
             figcaption {
                 .recipeWidBtn{
                     display:flex;
-                    div{
+                    .commentBox{
+                        
                         border: 1px solid rgba(0, 0, 0, 0.2);
                         border-radius: 50px;
                         width: 70px;
-                        text-align: center;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        font-size: 15px;
+                        >p{
+                            transform: translateY(-1px);
+                        }
+                        display:flex;
+                        img{
+                            width:17px;
+                            
+                        }
                     }
+                    
                 }
                 .flex{
                     h2{
@@ -62,7 +75,7 @@
                     
                 }
                 
-                p{
+                >p{
                     font-size: 16px;
                     margin:20px 0;
                     text-overflow: ellipsis;
@@ -92,12 +105,23 @@
                             .flex{
                                 h2{
                                     font-size: 1.0rem;
+                                    overflow: hidden;
+                                    display: -webkit-box;
+                                -webkit-line-clamp: 1; 
+                                -webkit-box-orient: vertical;
                                 }
                             }
                             p{
                                 margin:10px 0;
                             }
                             .recipeWidBtn{
+                                .commentBox{
+                                    width:50px;
+                                    height:18px;
+                                    img{
+                                        width:12px;
+                                    }
+                                }
                                 div{
                                     display:flex;
                                     align-items: center;

@@ -44,6 +44,7 @@ function FuncLike({ obj }: any) {
             }
 
             dataCrl5("insert",'', bookmarkData)
+            dataCrl5("put",likeOne.seq, putupLike)
             dataCrl("put",likeOne.seq, putupLike)
         } else {
 
@@ -52,6 +53,7 @@ function FuncLike({ obj }: any) {
             }
             dataCrl5("delete", likeOne.seq, '')
             dataCrl("put", likeOne.seq, putdownLike)
+            dataCrl5("put", likeOne.seq, putdownLike)
         }
 
         setIsLike(!isLike);

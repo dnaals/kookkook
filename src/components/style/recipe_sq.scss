@@ -14,13 +14,16 @@
     height:260px;
     @include mobile {
         gap: 30px;
+        height:180px;
     }
     .sq_contents {
+
         >p:hover{
             cursor: pointer;
         }
         @include mobile {
             width: 40%;
+            
         }
         >div {
             .scrap{
@@ -52,7 +55,7 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             @include mobile {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
         }
     }

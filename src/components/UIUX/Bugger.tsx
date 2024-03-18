@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useStore } from '@/components/recipe_store/all_store';
 import "../style/bugger.scss";
 import Link from 'next/link';
@@ -14,9 +14,12 @@ function Bugger({setOn,setSelName}:any) {
     const close_btn = (name:string)=>{
         setOn(false);
     }
-
+    const searchRef = useRef(null);
+    const a = (e:any)=>{
+        console.log(searchRef);
+    }
     return (
-        <div className='bugger_menu_on' >
+        <div ref={searchRef} className='bugger_menu_on' >
             <p className='close_btn' onClick={()=>close_btn('')}>×</p>
             <div className='member'>
                 <div className='memberImg'>
@@ -46,7 +49,7 @@ function Bugger({setOn,setSelName}:any) {
                 <GoogleLogin close={close_btn}/>
             </div>
             <div  style={session?{display:"none"} : {}}  onClick={()=>close_btn('')} className='login_button'>
-            <NaverLogin/>
+            <NaverLogin close={close_btn}/>
             </div>
         </div>
 
