@@ -356,10 +356,10 @@ function RecipeReg({}:any) {
 
 
                 <article className='open_btn'>
-                    {/* <select name="open">
+                    <select name="open">    
                         <option value="공개">공개</option>
                         <option value="비공개">비공개</option>
-                    </select> */}
+                    </select>
                     <input type="submit" value='등록하기' />
                     {/* <input type="submit" value='수정하기' /> */}
                 </article>
