@@ -17,6 +17,7 @@ function Mypageview({ idx, session, dataCrl}: any) {
     let myRecipe = data.filter((obj:any) => obj?.user_id == session.user.id)
     let myComment = data4.filter((obj:any) => obj?.user_id == session.user.id)
     let myLike = data5.filter((obj:any) => obj?.user_id == session.user.id)
+    
 
     useEffect(()=>{
         dataCrl('all', '', '')
@@ -42,7 +43,7 @@ function Mypageview({ idx, session, dataCrl}: any) {
             break;
 
         case "내가 본 레시피":
-            comp = <Viewrecipe myLike={myLike}/>
+            comp = <Viewrecipe myLike={myLike} data={data}/>
             break;
 
 
