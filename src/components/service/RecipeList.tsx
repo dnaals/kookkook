@@ -21,12 +21,11 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     // const userbook = data2.filter((user:any) => user.user_email == session.user.email)
     
     useEffect(() => {
+        dataCrl2('all','','')
+    }, [data2])
+    useEffect(() => {
         dataCrl4('all','','')
-        setTimeout(function(){
-            dataCrl2('all','','')
-        }, 1000);
-        
-    }, [])
+    }, [data4])
 
     if (!data.length) return <Loading/>; 
 
