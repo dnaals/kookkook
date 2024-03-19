@@ -1,10 +1,10 @@
 import React from 'react';
 
 function FuncComment({obj, commetnum}:any) {
-    if(!commetnum){
+    let oneComment = commetnum.filter((comment:any)=>comment.seq == obj.seq)
+    if(oneComment.length==0){
         return 0;
     }
-    let oneComment = commetnum.filter((comment:any)=>comment.seq == obj.seq)
 
     return (
         <>
