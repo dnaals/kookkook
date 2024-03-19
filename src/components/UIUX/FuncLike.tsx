@@ -52,8 +52,9 @@ function FuncLike({ obj }: any) {
                 "like": Number(likeOne.like) - 1
             }
             dataCrl5("delete", likeOne.seq, '')
-            dataCrl("put", likeOne.seq, putdownLike)
             dataCrl5("put", likeOne.seq, putdownLike)
+            dataCrl("put", likeOne.seq, putdownLike)
+            
         }
 
         setIsLike(!isLike);
