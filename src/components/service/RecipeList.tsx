@@ -8,6 +8,7 @@ import { useStore2 } from '../recipe_store/bookmark_store';
 import { useStore4 } from '../recipe_store/comment_store';
 import { useSession } from 'next-auth/react';
 import Loading from '@/app/loading';
+import { useStore5 } from '../recipe_store/like_store';
 
 
 function RecipeList({idx,detailUrl,selectName}:any) {
@@ -16,6 +17,7 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     let { data, dataCrl } = useStore();
     let { data2, dataCrl2 } = useStore2();
     let { data4, dataCrl4 } = useStore4();
+    let { data5, dataCrl5 } = useStore5();
     const { data: session, status }: any = useSession();
 
     // const userbook = data2.filter((user:any) => user.user_email == session.user.email)
@@ -26,6 +28,9 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     useEffect(() => {
         dataCrl4('all','','')
     }, [data4])
+    useEffect(() => {
+        dataCrl5('all','','')
+    }, [data5])
 
     if (!data.length) return <Loading/>; 
 
