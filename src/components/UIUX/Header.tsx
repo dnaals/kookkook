@@ -12,7 +12,7 @@ const nerko = Nerko_One({
     weight: ["400"]
 })
 
-function Head({setSelName}:any) {
+function Header({setSelName}:any) {
     let [on,setOn] = useState(false);
     const on_btn = ()=>{
         setOn(true);
@@ -34,4 +34,4 @@ function Head({setSelName}:any) {
     );
 }
 
-export default Head;
+export default Header;
