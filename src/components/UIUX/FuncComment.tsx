@@ -1,14 +1,14 @@
 import React from 'react';
 
-function FuncComment({obj, commetnum}:any) {
+function FuncComment({obj, data4}:any) {
 
-    if(!commetnum){
+    if(!data4){
         return <>
         <img src="/images/pencil.png" alt="" />
-        <p>0</p>
+        <p></p>
     </>;
     }
-    let oneComment = commetnum.filter((comment:any)=>comment.seq == obj.seq)
+    let oneComment = data4.filter((comment:any)=>comment.seq == obj.seq)
     
 
     return (

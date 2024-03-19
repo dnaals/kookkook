@@ -147,7 +147,7 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
 
                 </div>
                 {
-                    session && myComment.map((obj: any, k: any) => (
+                    myComment.map((obj: any, k: any) => (
 
                         <div key={k} className='detail_comment'>
                             <div className='comment_box'>
