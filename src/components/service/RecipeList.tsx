@@ -22,7 +22,6 @@ function RecipeList({idx,detailUrl,selectName}:any) {
     let commetnum = data4.filter((obj:any)=>obj.user_id == session?.user.id)
     
     useEffect(() => {
-        dataCrl('all', '', '');
         dataCrl2('all', '','');
         dataCrl4('all','','')
     }, [])

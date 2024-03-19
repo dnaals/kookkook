@@ -2,8 +2,8 @@ import axios from "axios";
 import { create } from "zustand";
 
 const request = axios.create({
-    baseURL: process.env.VERCEL_URL,
-    timeout: 7000   
+    baseURL: "/",
+    timeout: 5000   
 })
 
 interface Ty {

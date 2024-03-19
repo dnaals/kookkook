@@ -6,11 +6,10 @@ const client = new MongoClient(uri)
 
 export const test = async (type?: string, body?: initTy) => {
     await client.connect();
-    
 
     let db, collection, data
-    db = client.db('kookkook')
-    collection = db.collection('recipe')
+    db = client.db('Kookproject')
+    collection = db.collection('recipeall')
 
     switch (type) {
         case 'post': await collection.insertOne(body);
