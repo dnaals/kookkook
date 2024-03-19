@@ -7,6 +7,7 @@ import '@/components/style/common.scss'
 import React, { useState } from "react";
 import { Suspense } from 'react'
 import Loading from "./loading";
+import Home from "./page";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   const url = usePathname();
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
   return (
     <html lang="en">
+    
       <body>
 
         <SessionProvider>
