@@ -36,7 +36,7 @@ function FuncLike({ obj }: any) {
                 "user_id": `${session.user.id}`,
                 "m_thumb": `${likeOne.m_thumb}`,
                 "tip": `${likeOne.tip}`,
-                "like": likeOne.like
+                "like": likeOne.like+1
             }
  
             let putupLike = {
