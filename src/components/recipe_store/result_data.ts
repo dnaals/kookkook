@@ -3,7 +3,7 @@ import { create } from "zustand";
 
 const request3 = axios.create({
     baseURL:  process.env.VERCEL_URL,
-    timeout: 3000
+    timeout: 4000
 })
 
 interface Ty3 {
