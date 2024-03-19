@@ -38,6 +38,7 @@ function FuncLike({ obj }: any) {
                 "tip": `${likeOne.tip}`,
                 "like": likeOne.like+1
             }
+
  
             let putupLike = {
                 "like": Number(likeOne.like) +1
