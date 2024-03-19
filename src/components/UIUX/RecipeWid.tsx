@@ -8,7 +8,7 @@ import FuncComment from "./FuncComment";
 
 
 
-function RecipeWid({ dataID,selectName,commetnum }: any) {
+function RecipeWid({ dataID,selectName,data4 }: any) {
     
     const router: any = useRouter();
     const url = usePathname();
@@ -53,7 +53,7 @@ function RecipeWid({ dataID,selectName,commetnum }: any) {
                                         
                                         <p>{obj.tip}</p>
                                         <div className="recipeWidBtn">
-                                            <div className="commentBox" onClick={() => { link(obj.name) }}><FuncComment obj={obj} commetnum={commetnum}/></div>
+                                            <div className="commentBox" onClick={() => { link(obj.name) }}><FuncComment obj={obj} data4={data4}/></div>
                                             <FuncLike obj={obj} />
                                             <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>수정</div>
                                             <div style={url=="/mypage"?{display:"block"}:{display:"none"}}>삭제</div>
