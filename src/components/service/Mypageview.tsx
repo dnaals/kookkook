@@ -20,9 +20,13 @@ function Mypageview({ idx, session, dataCrl}: any) {
 
     useEffect(()=>{
         dataCrl('all', '', '')
+    },[data])
+    useEffect(()=>{
         dataCrl4('all', '', '')
+    },[data4])
+    useEffect(()=>{
         dataCrl5('all', '', '')
-    },[])
+    },[data5])
 
 
     if (!data) return <Loading/>
