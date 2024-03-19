@@ -39,11 +39,6 @@ function FuncLike({ obj }: any) {
                 "like": likeOne.like+1
             }
 
-            let seq_session = {
-                "seq" : `${likeOne.seq}`,
-                "user_id": `${session.user.id}`
-            }
-
  
             let putupLike = {
                 "like": Number(likeOne.like) +1
