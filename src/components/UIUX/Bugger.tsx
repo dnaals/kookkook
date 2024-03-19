@@ -14,12 +14,9 @@ function Bugger({setOn,setSelName}:any) {
     const close_btn = (name:string)=>{
         setOn(false);
     }
-    const searchRef = useRef(null);
-    const a = (e:any)=>{
-        console.log(searchRef);
-    }
+
     return (
-        <div ref={searchRef} className='bugger_menu_on' >
+        <div  className='bugger_menu_on' >
             <p className='close_btn' onClick={()=>close_btn('')}>×</p>
             <div className='member'>
                 <div className='memberImg'>

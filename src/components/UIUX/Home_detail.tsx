@@ -2,13 +2,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "@/components/style/home_detail.scss";
 import axios from 'axios';
-import FuncScrap from './FuncScrap';
 import Link from 'next/link';
 
 function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
     let detailData = dataID.filter((obj: any) => obj.seq == detailUrl)
     let menual = []
-
 
 
     for (let i = 1; i < 21; i++) {
@@ -35,8 +33,6 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
 
     let myComment = data4.filter((obj:any)=> obj.seq == detailUrl)
 
-
-
         let [youtubeID,setYoutubeID] = useState();
         useEffect(() => {
         axios.get(
@@ -60,7 +56,10 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
             let year = today.getFullYear(); // 년도
             let month = today.getMonth() + 1;  // 월
             let date = today.getDate();  // 날짜
-
+            if(!session){
+                alert('로그인이 필요합니다.');
+                return;
+            }
 
             const c = {
                 'id': `${Date.now()}`,
@@ -98,7 +97,9 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
     let notdelComment = () => {
         setDelComPop(false)
     }
-
+    if(!session) {
+        
+    }
 
 
     return (
@@ -145,7 +146,7 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
 
                 </div>
                 {
-                    myComment.map((obj: any, k: any) => (
+                    session && myComment.map((obj: any, k: any) => (
 
                         <div key={k} className='detail_comment'>
                             <div className='comment_box'>
