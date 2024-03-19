@@ -70,6 +70,7 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
                 'user_id': `${session.user.id}`,
                 'user_email': `${session.user.email}`,
                 'user_name': `${session.user.name}`,
+                'user_image': `${session.user.image}`,
                 'm_thumb': `${detailData[0].m_thumb}`,
                 'tip': `${detailData[0].tip}`,
                 'like': `${detailData[0].like}`
@@ -151,9 +152,9 @@ function Home_detail({ dataID, detailUrl, dataCrl4, data4, session }: any) {
                         <div key={k} className='detail_comment'>
                             <div className='comment_box'>
                                 <div>
-                                    <p><img src={`${session.user.image}`} alt="" /></p>
+                                    <p><img src={`${obj.user_image}`} alt="" /></p>
                                     <div>
-                                        <p>{session.user.name}  /  {obj.comment}</p>
+                                        <p>{obj.user_name}  /  {obj.comment}</p>
                                         <p>{obj.date}</p>
                                     </div>
                                 </div>
