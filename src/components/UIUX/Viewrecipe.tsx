@@ -5,7 +5,7 @@ import FuncLike from './FuncLike';
 import { useRouter } from 'next/navigation';
 
 
-function Viewrecipe({ myLike}:any) {
+function Viewrecipe({ myLike, data}:any) {
 
 
     const router: any = useRouter();
