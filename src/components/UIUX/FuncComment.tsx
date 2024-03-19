@@ -1,10 +1,15 @@
 import React from 'react';
 
 function FuncComment({obj, commetnum}:any) {
-    let oneComment = commetnum.filter((comment:any)=>comment.seq == obj.seq)
-    if(oneComment.length==0){
-        return 0;
+
+    if(!commetnum){
+        return <>
+        <img src="/images/pencil.png" alt="" />
+        <p>0</p>
+    </>;
     }
+    let oneComment = commetnum.filter((comment:any)=>comment.seq == obj.seq)
+    
 
     return (
         <>
