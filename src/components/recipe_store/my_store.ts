@@ -24,8 +24,6 @@ export const useStore2 = create<Ty2>((set) => {
                     break;
             }
             set({ data2: res2.data, status1: true });
-
-
         }
     }
 })

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useStore } from '../recipe_store/all_store';
 
-function Button() {
+function Button({setCateName2,setSortCate}:any) {
     const [clickedIndex, setClickedIndex] = useState(0);
     const {cateName,cateIdx,category} = useStore()
+
 
     const buttons = [
         { label: 'RICE', category: '밥', image: '/images/rice_black.png' },
@@ -15,15 +16,17 @@ function Button() {
     ];
 
 
-    useEffect(() => {
-        category(cateName,cateIdx);
-    }, []);
+    const buttonClick = (category:string,index:number,label:string)=>{
+        setSortCate(category);
+        setClickedIndex(index);
+        setCateName2(label);
+    }
 
     return (
         
         <div className="home_btn">
             {buttons.map((obj, index) => (
-                <button key={index} onClick={() => category(obj.category, index)} style={{ backgroundColor: cateIdx === index ? '#FFC700' : 'white' }}>
+                <button key={index} onClick={()=>buttonClick(obj.category,index,obj.label)} style={{ backgroundColor: clickedIndex === index ? '#FFC700' : 'white' }}>
                     <img src={obj.image} alt={obj.label} /> {obj.label}
                 </button>
             ))}

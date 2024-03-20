@@ -23,8 +23,8 @@ export const option = {
             return session;
         },
     },
-    pages:{
-        signIn : '/',
-        signOut : '/'
-    }
+    // pages:{
+    //     signIn : '/',
+    //     signOut : '/'
+    // }
 }
