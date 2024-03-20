@@ -23,13 +23,14 @@ function RecipeList({idx,detailUrl,selectName,sortCate,setFameImg}:any) {
     const recipeSort = recipe.filter((obj:any)=>obj.m_cate==sortCate);
 
       useEffect(() => {
+        if (recipeSort.length) {
             const maxLike = recipeSort.reduce((max: number, obj: any) => {
                 const like = parseFloat(obj.like);
                 return like > max ? like : max;
             }, 0);
             const maxData = recipeSort.filter((obj: any) => obj.like == maxLike)
             setFameImg(maxData[0].m_thumb);
-            
+        }
     }, [recipeSort])
 
     // const userbook = data2.filter((user:any) => user.user_email == session.user.email)
