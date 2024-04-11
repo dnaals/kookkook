@@ -1,22 +1,19 @@
 "use client";
 import React, { useEffect } from 'react';
-import { useStore } from '../recipe_store/all_store';
 import RecipeWid from '../UIUX/RecipeWid';
 import RecipeSq from '../UIUX/RecipeSq';
 import Home_detail from '../UIUX/Home_detail';
-import { useStore2 } from '../recipe_store/bookmark_store';
 import { useStore4 } from '../recipe_store/comment_store';
 import { useSession } from 'next-auth/react';
-import { useStore5 } from '../recipe_store/like_store';
 import recipe from "@/lib/recipe.json";
 
 
 function RecipeList({idx,detailUrl,selectName,sortCate,setFameImg}:any) {
 
 
-    let { data2, dataCrl2 } = useStore2();
+    // let { data2, dataCrl2 } = useStore2();
     let { data4, dataCrl4 } = useStore4();
-    let { data5, dataCrl5 } = useStore5();
+    // let { data5, dataCrl5 } = useStore5();
 
 
     const { data: session, status }: any = useSession();
