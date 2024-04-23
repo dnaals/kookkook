@@ -24,12 +24,6 @@ function Page() {
 
         <div className='search-page'>
             <Search defaultValue={searchQuery} />
-            <h2>Recommended</h2>
-            
-            <RecipeList idx={idx} />
-            
-            <h2>Most Liked</h2>
-            <RecipeList idx={index}/>
             
         </div>
     );
