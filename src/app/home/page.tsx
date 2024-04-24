@@ -6,7 +6,7 @@ import RecipeList from '@/components/service/RecipeList';
 import "@/components/style/home.scss";
 import Link from 'next/link';
 import Topbutton from '@/components/UIUX/Topbutton';
-import recipe from "@/lib/recipe.json";
+
 
 
 function Page() {
@@ -19,21 +19,13 @@ function Page() {
     let [fameImg, setFameImg] = useState<any>();
 
     
-    // useEffect(() => {
-    //     if (recipe.length) {
-    //         const maxLike = recipe.reduce((max: number, obj: any) => {
-    //             const like = parseFloat(obj.like);
-    //             return like > max ? like : max;
-    //         }, 0);
-    //         const maxData = recipe.filter((obj: any) => obj.like == maxLike)
-    //         setFameImg(maxData[0].m_thumb);
-    //     }
-    // }, [])
-
-
     const handleSelect = (e: any) => {
         setSelectName(e.target.value);
     };
+
+
+
+    
 
     return (
         <div className='home_main_backcolor'>
@@ -43,7 +35,7 @@ function Page() {
                     <p>오늘 뭐 먹지??</p>
                 </div>
             </Link>
-            <Button setSortCate={setSortCate} setCateName2={setCateName2} />
+            <Button setSortCate={setSortCate} setCateName2={setCateName2} setFameImg={setFameImg} />
             <div className='fame'>
                 <p>명예의 전당</p>
                 <img src={fameImg} alt="오류" />
